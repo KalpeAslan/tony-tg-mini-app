@@ -1,21 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { PurpleLayout } from '@/components/layouts/purple-layout';
-import { Navigation } from '@/components/navigation';
-import { Logo } from '@/components/logo';
+import { AppLayout } from '@/components/layouts/AppLayout';
 import { Card } from '@/components/card';
 import { Character } from '@/components/character';
-import { Button } from '@/components/button';
+import { WalletButton } from '@/components/wallet/WalletButton';
 
 export default function AirdropPage() {
-  const router = useRouter();
-
   return (
-    <PurpleLayout>
-      {/* Logo */}
-      <Logo />
-
+    <AppLayout activeTab="airdrop">
       {/* Main card */}
       <Card>
         <h2 className="text-white text-4xl font-bold leading-tight mb-2">CONNECT A WALLET</h2>
@@ -31,23 +23,13 @@ export default function AirdropPage() {
           airdrop by inviting more friends to join!
         </p>
 
-        {/* Button */}
-        <Button variant="primary" size="lg" fullWidth className="mb-4">
-          LINK $TON WALLET
-        </Button>
-
-        <p className="text-[#a67fc2]">Wallet Not Connected</p>
+        {/* Wallet Button */}
+        <WalletButton 
+          variant="primary" 
+          connectText="LINK $TON WALLET"
+          disconnectText="UNLINK $TON WALLET"
+        />
       </Card>
-
-      {/* Bottom navigation */}
-      <Navigation
-        activeTab="airdrop"
-        onTabChange={tab => {
-          if (tab !== 'airdrop') {
-            router.push(tab === 'shack' ? '/' : `/${tab}`);
-          }
-        }}
-      />
-    </PurpleLayout>
+    </AppLayout>
   );
 }

@@ -1,20 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { PurpleLayout } from '@/components/layouts/purple-layout';
-import { Navigation } from '@/components/navigation';
-import { Logo } from '@/components/logo';
+import { AppLayout } from '@/components/layouts/AppLayout';
 import { Card } from '@/components/card';
-import { Button } from '@/components/button';
+import { WalletButton } from '@/components/wallet/WalletButton';
 
 export default function ShackPage() {
-  const router = useRouter();
-
   return (
-    <PurpleLayout>
-      {/* Logo */}
-      <Logo />
-
+    <AppLayout activeTab="shack">
       {/* Main card */}
       <Card>
         <h2 className="text-white text-4xl font-bold leading-tight mb-6">WELCOME TO TONY</h2>
@@ -25,23 +17,9 @@ export default function ShackPage() {
           Connect your wallet to get started.
         </p>
 
-        {/* Button */}
-        <Button variant="primary" size="lg" fullWidth className="mb-4">
-          CONNECT WALLET
-        </Button>
-
-        <p className="text-[#a67fc2]">Wallet Not Connected</p>
+        {/* Wallet Button */}
+        <WalletButton />
       </Card>
-
-      {/* Bottom navigation */}
-      <Navigation
-        activeTab="shack"
-        onTabChange={tab => {
-          if (tab !== 'shack') {
-            router.push(`/${tab}`);
-          }
-        }}
-      />
-    </PurpleLayout>
+    </AppLayout>
   );
 }

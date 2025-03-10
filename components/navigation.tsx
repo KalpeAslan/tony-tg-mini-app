@@ -1,11 +1,11 @@
 'use client';
 
 import type React from 'react';
-
 import { Home, Users, Package, Gift } from 'lucide-react';
+import { TabName } from '@/lib/types';
 
 interface NavigationProps {
-  activeTab: string;
+  activeTab: TabName;
   onTabChange?: (tab: string) => void;
 }
 
