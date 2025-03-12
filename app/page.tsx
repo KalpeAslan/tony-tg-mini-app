@@ -9,9 +9,9 @@ export default function ShackPage() {
     <AppLayout activeTab="shack">
       {/* Main card */}
       <Card>
-        <h2 className="text-white text-4xl font-bold leading-tight mb-6">WELCOME TO TONY</h2>
+        <h2 className="text-tony-heading text-4xl leading-tight mb-6">WELCOME TO TONY</h2>
 
-        <p className="text-white text-lg mb-8">
+        <p className="text-tony-body text-lg mb-8">
           Your gateway to the Tony ecosystem.
           <br />
           Connect your wallet to get started.

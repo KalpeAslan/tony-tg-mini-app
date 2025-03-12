@@ -1,0 +1,40 @@
+:root {
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #f8f9fa;
+  --text-muted: #a67fc2;
+  --text-error: #ef4444;
+  
+  /* Background colors */
+  --bg-primary: #501d7c;
+  --bg-secondary: #6d3e95;
+  --bg-accent: #33b1fc;
+  --bg-highlight: #e07a19;
+  
+  /* Button colors */
+  --btn-primary: #33b1fc;
+  --btn-primary-hover: #2aa0e5;
+  --btn-secondary: #6d3e95;
+  --btn-secondary-hover: #5d2e85;
+  
+  /* Theme colors */
+  --theme-purple: #501d7c;
+  --theme-yellow: #f8c52c;
+  --theme-orange: #e07a19;
+  --theme-orange-light: #f5a623;
+  --theme-dark: #002a3a;
+  
+  /* Border colors */
+  --border-white-light: rgba(255, 255, 255, 0.25);
+  --border-white-medium: rgba(255, 255, 255, 0.4);
+  --border-white-strong: rgba(255, 255, 255, 0.6);
+
+
+  --navigation-height: 70px;
+  --navigation-width: 100%;
+}
+
+/* Dark mode overrides if needed */
+.dark {
+  /* Add dark mode specific variables here */
+} 

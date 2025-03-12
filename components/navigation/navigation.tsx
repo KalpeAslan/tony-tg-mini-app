@@ -3,6 +3,7 @@
 import type React from 'react';
 import { Home, Users, Package, Gift } from 'lucide-react';
 import { TabName } from '@/lib/types';
+import styles from './navigation.module.css';
 
 interface NavigationProps {
   activeTab: TabName;
@@ -17,7 +18,8 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
   };
 
   return (
-    <div className="bg-[#e07a19] rounded-full p-4 w-full max-w-md flex justify-around items-center shadow-lg">
+    <div 
+      className={`bg-tony-orange border-white-translucent rounded-full p-4 flex justify-around items-center shadow-lg ${styles.container}`}>
       <NavItem
         icon={<Home className="w-6 h-6 text-white" />}
         label="SHACK"
@@ -58,13 +60,13 @@ function NavItem({
   icon,
   label,
   isActive,
-  highlightColor = 'bg-[#f8c52c]',
+  highlightColor = 'bg-tony-yellow',
   onClick,
 }: NavItemProps) {
   return (
     <div className="flex flex-col items-center cursor-pointer" onClick={onClick}>
-      <div className={`p-3 rounded-xl ${isActive ? highlightColor : ''}`}>{icon}</div>
-      <span className="text-white text-xs mt-1">{label}</span>
+      <div className={`p-3 rounded-xl ${isActive ? `${highlightColor} border-white-translucent` : ''}`}>{icon}</div>
+      <span className="text-tony-body text-xs mt-1">{label}</span>
     </div>
   );
 }

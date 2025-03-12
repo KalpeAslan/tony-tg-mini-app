@@ -46,6 +46,27 @@ The codebase has been refactored to improve:
 6. **Error Handling**: Added error boundaries and error states in context
 7. **Loading States**: Added loading indicators and spinner component
 8. **Theme Management**: Implemented theme switching with localStorage persistence
+9. **Color System**: Replaced hardcoded colors with Tailwind theme colors for better maintainability
+
+## Color System
+
+The application now uses a consistent color system:
+
+- All colors are defined in `tailwind.config.js` under the `tony` namespace
+- CSS variables are defined in `styles/theme.css` for use with CSS properties
+- Utility classes are provided in `globals.css` for common text styles
+
+### Border Styles
+
+The application includes several border styles for consistent UI elements:
+
+- `border-white-translucent`: A 2.5px semi-transparent white border (40% opacity)
+- Individual border classes:
+  - `border-tony-whiteBorder`: Light white border (25% opacity)
+  - `border-tony-whiteBorderMedium`: Medium white border (40% opacity)
+  - `border-tony-whiteBorderStrong`: Strong white border (60% opacity)
+
+See `REFACTORING_GUIDE.md` for details on how to use the color system.
 
 ## Getting Started
 
@@ -71,3 +92,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Enhance mobile responsiveness
 - Add internationalization support
 - Implement analytics tracking 
+
+
+## TODO: 
+
+ - example of TON - https://github.com/Telegram-Mini-Apps/nextjs-template/

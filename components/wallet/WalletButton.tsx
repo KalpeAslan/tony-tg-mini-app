@@ -73,9 +73,9 @@ export function WalletButton({
       </Button>
       
       {error ? (
-        <p className="text-red-500 text-sm mb-2">{error}</p>
+        <p className="text-tony-error text-sm mb-2">{error}</p>
       ) : (
-        <p className="text-[#a67fc2]">
+        <p className="text-tony-status">
           {isConnected 
             ? `Connected: ${walletAddress?.slice(0, 6)}...${walletAddress?.slice(-4)}` 
             : 'Wallet Not Connected'}

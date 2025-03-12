@@ -46,25 +46,43 @@ module.exports = {
         },
         tony: {
           // Purple theme
-          primary: '#501d7c',
-          secondary: '#6d3e95',
-          accent: '#33b1fc',
-          highlight: '#e07a19',
+          primary: 'var(--bg-primary)',
+          primaryHover: '#401d6c',
+          secondary: 'var(--bg-secondary)',
+          secondaryHover: '#5d2e85',
+          accent: 'var(--bg-accent)',
+          accentHover: 'var(--btn-primary-hover)',
+          highlight: 'var(--bg-highlight)',
           light: '#c295fa',
-          dark: '#002a3a',
-          muted: '#a67fc2',
+          dark: 'var(--theme-dark)',
+          muted: 'var(--text-muted)',
 
           // Yellow/orange theme
-          yellow: '#f8c52c',
-          orange: '#e07a19',
-          orangeLight: '#f5a623',
-          orangeDark: '#b85700',
+          yellow: 'var(--theme-yellow)',
+          orange: 'var(--theme-orange)',
+          orangeLight: 'var(--theme-orange-light)',
+          orangeDark: '#d06a09',
+          orangeHover: '#e59613',
 
           // Currency colors
           gray: '#9e9e9e',
-          blue: '#33b1fc',
+          grayHover: '#8e8e8e',
+          blue: 'var(--bg-accent)',
+          blueHover: 'var(--btn-primary-hover)',
           green: '#55fc33',
+          greenHover: '#45ec23',
+          
+          // Status colors
+          error: 'var(--text-error)',
+          
+          // Border colors
+          whiteBorder: 'var(--border-white-light)',
+          whiteBorderMedium: 'var(--border-white-medium)',
+          whiteBorderStrong: 'var(--border-white-strong)',
         },
+      },
+      borderWidth: {
+        '2.5': '2.5px',
       },
       borderRadius: {
         lg: 'var(--radius)',

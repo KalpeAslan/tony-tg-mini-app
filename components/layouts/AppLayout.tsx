@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/logo';
-import { Navigation } from '@/components/navigation';
+import { Navigation } from '@/components/navigation/navigation';
 import { PurpleLayout } from './purple-layout';
 import { YellowLayout } from './yellow-layout';
 import { TabName } from '@/lib/types';

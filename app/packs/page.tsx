@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { YellowLayout } from '@/components/layouts/yellow-layout';
-import { Navigation } from '@/components/navigation';
+import { Navigation } from '@/components/navigation/navigation';
 import { Button } from '@/components/button';
 import { BalanceContainer } from '@/components/containers/balance-container';
 import { CurrencyContainer } from '@/components/containers/currency-container';

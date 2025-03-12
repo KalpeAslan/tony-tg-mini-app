@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { PurpleLayout } from '@/components/layouts/purple-layout';
-import { Navigation } from '@/components/navigation';
+import { Navigation } from '@/components/navigation/navigation';
 import { Button } from '@/components/button';
 import { ParachuteIcon } from '@/components/parachute-icon';
 import { CharacterIcon } from '@/components/character-icon';

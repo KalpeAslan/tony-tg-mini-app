@@ -1,0 +1,4 @@
+.container {
+  height: var(--navigation-height);
+  width: var(--navigation-width);
+} 
