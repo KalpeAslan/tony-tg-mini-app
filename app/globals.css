@@ -14,7 +14,27 @@
 }
 
 body {
-  font-family: 'CheekyChic', Arial, Helvetica, sans-serif;
+  font-family: 'CheekyChic', 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+/* Font utility classes */
+.font-cheeky {
+  font-family: 'CheekyChic', cursive;
+}
+
+.font-roboto {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+a {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: white;
+  text-decoration: underline;
+  opacity: 0.5;
+}
+
+.border-white-translucent {
+  border: 2px solid #FFFFFF40;
 }
 
 @layer utilities {

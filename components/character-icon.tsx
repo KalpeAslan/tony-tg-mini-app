@@ -4,7 +4,7 @@ interface CharacterIconProps {
 }
 
 export function CharacterIcon({ variant = 'blue', className = '' }: CharacterIconProps) {
-  const headColor = variant === 'blue' ? 'bg-[#33b1fc]' : 'bg-[#55fc33]';
+  const headColor = variant === 'blue' ? 'bg-[var(--bg-accent)]' : 'bg-[#55fc33]';
 
   return (
     <div className={`relative w-16 h-16 ${className}`}>

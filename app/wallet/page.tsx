@@ -1,4 +1,4 @@
-import { WalletConnectButton } from '@/components/WalletConnectButton';
+import { WalletConnectButton } from '@/modules/airdrop/components/WalletConnectButton';
 import { WalletStatus } from '@/components/WalletStatus';
 
 export default function WalletPage() {

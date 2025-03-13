@@ -7,7 +7,7 @@ interface CurrencyItemProps {
 export function CurrencyItem({ amount, label, variant }: CurrencyItemProps) {
   const bgColors = {
     gray: 'bg-[#9e9e9e]',
-    blue: 'bg-[#33b1fc]',
+    blue: 'bg-[var(--bg-accent)]',
     green: 'bg-[#55fc33]',
   };
 

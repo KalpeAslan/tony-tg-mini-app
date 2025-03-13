@@ -11,8 +11,6 @@ interface WalletButtonProps {
   size?: ButtonSize;
   fullWidth?: boolean;
   className?: string;
-  connectText?: string;
-  disconnectText?: string;
   onClick?: () => void;
 }
 
@@ -20,9 +18,7 @@ export function WalletButton({
   variant = 'primary',
   size = 'lg',
   fullWidth = true,
-  className = 'mb-4',
-  connectText = 'CONNECT WALLET',
-  disconnectText = 'DISCONNECT WALLET',
+  className,
   onClick,
 }: WalletButtonProps) {
   const { isConnected, walletAddress, connect, disconnect } = useWalletStore();
@@ -88,19 +84,17 @@ export function WalletButton({
             <span>CONNECTING...</span>
           </div>
         ) : isConnected ? (
-          disconnectText
+          'connected'
         ) : (
-          connectText
+          'link $ton wallet'
         )}
       </Button>
 
       {error ? (
-        <p className="text-tony-error text-sm mb-2">{error}</p>
+        <p className="text-sm font-bold text-error font-roboto mt-3">{error}</p>
       ) : (
-        <p className="text-tony-status">
-          {isConnected && walletAddress
-            ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-            : 'Wallet Not Connected'}
+        <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
+          {isConnected ? `Log Out` : 'Wallet Not Connected'}
         </p>
       )}
     </div>

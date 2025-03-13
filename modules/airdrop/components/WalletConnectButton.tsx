@@ -1,4 +1,4 @@
-import { Button } from './ui/button';
+import { Button } from '../../../components/ui/button';
 import { useWalletStore } from '@/lib/store';
 
 export function WalletConnectButton() {
@@ -6,7 +6,13 @@ export function WalletConnectButton() {
 
   return (
     <Button
-      onClick={isConnected ? disconnect : connect}
+      onClick={() => {
+        if (isConnected) {
+          disconnect();
+        } else {
+          connect();
+        }
+      }}
       variant={isConnected ? 'outline' : 'default'}
     >
       {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}

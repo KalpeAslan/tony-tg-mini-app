@@ -45,7 +45,7 @@ export default function PacksPage() {
           title="NEWBIES LUCK"
           description="A pack for little cry babies. A small chance for them to make it lol"
           icon={
-            <div className="w-16 h-16 bg-[#33b1fc] rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-[var(--bg-accent)] rounded-full flex items-center justify-center">
               <span className="text-white text-2xl font-bold">🎮</span>
             </div>
           }

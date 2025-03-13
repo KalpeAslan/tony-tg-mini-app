@@ -60,12 +60,25 @@ interface NavItemProps {
 
 function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
   return (
-    <div className="flex relative flex-col items-center cursor-pointer" onClick={onClick}>
-      <Icon
-        size={isActive ? 60 : 36}
-        name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
-      />
-      <span className={clsx('text-base mt-1 text-[var(--nav-text-color)]')}>{label}</span>
+    <div className="flex relative h-full flex-col items-center cursor-pointer" onClick={onClick}>
+      <div className="relative w-full flex justify-center">
+        <Icon
+          size={isActive ? 60 : 36}
+          name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
+          className={clsx(
+            'absolute transition-all duration-300 ease-in-out',
+            isActive && 'transform -translate-y-10'
+          )}
+        />
+      </div>
+      <span
+        className={clsx(
+          'text-base absolute bottom-[-10px] mt-1',
+          isActive ? 'text-white' : 'text-[var(--nav-text-color)]'
+        )}
+      >
+        {label}
+      </span>
     </div>
   );
 }

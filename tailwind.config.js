@@ -6,13 +6,15 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './modules/**/*.{ts,tsx}',
     '*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['CheekyChic', 'Arial', 'Helvetica', 'sans-serif'],
+        sans: ['CheekyChic', 'Roboto', 'Arial', 'Helvetica', 'sans-serif'],
         cheeky: ['CheekyChic', 'cursive'],
+        roboto: ['Roboto', 'Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
