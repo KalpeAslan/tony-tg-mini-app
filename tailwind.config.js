@@ -10,6 +10,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['CheekyChic', 'Arial', 'Helvetica', 'sans-serif'],
+        cheeky: ['CheekyChic', 'cursive'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -53,7 +57,6 @@ module.exports = {
           accent: 'var(--bg-accent)',
           accentHover: 'var(--btn-primary-hover)',
           highlight: 'var(--bg-highlight)',
-          light: '#c295fa',
           dark: 'var(--theme-dark)',
           muted: 'var(--text-muted)',
 

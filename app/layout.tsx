@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { ThemeProvider as NextThemeProvider } from '@/components/theme-provider';
 import { WalletProvider } from '@/lib/context/WalletContext';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
-
-const inter = Inter({ subsets: ['latin'] });
+import { IconDefs } from '@/components/ui/icons';
 
 export const metadata: Metadata = {
   title: 'Tony Wallet',
@@ -20,11 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ErrorBoundary>
           <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ThemeProvider>
               <WalletProvider>
+                <IconDefs />
                 {children}
               </WalletProvider>
             </ThemeProvider>

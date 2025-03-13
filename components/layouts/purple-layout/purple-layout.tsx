@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
-
+import styles from './purple-layout.module.css';
 interface PurpleLayoutProps {
   children: ReactNode;
 }
 
 export function PurpleLayout({ children }: PurpleLayoutProps) {
   return (
-    <div className="min-h-screen bg-tony-primary relative overflow-hidden">
+    <div className={`${styles.layout} min-h-screen  relative overflow-hidden`}>
       {/* Stars background */}
       <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, i) => (

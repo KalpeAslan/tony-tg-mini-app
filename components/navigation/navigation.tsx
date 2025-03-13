@@ -1,9 +1,10 @@
 'use client';
 
 import type React from 'react';
-import { Home, Users, Package, Gift } from 'lucide-react';
 import { TabName } from '@/lib/types';
-import styles from './navigation.module.css';
+import { Icon } from '@/components/ui/icon';
+import clsx from 'clsx';
+import { IconName } from '../ui/icons';
 
 interface NavigationProps {
   activeTab: TabName;
@@ -18,28 +19,30 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
   };
 
   return (
-    <div 
-      className={`bg-tony-orange border-white-translucent rounded-full p-4 flex justify-around items-center shadow-lg ${styles.container}`}>
+    <div
+      className={`bg-tony-orange border-white-translucent rounded-full p-4 flex justify-around 
+        items-center shadow-lg w-[var(--navigation-width)] h-[var(--navigation-height)]`}
+    >
       <NavItem
-        icon={<Home className="w-6 h-6 text-white" />}
+        icon="shack"
         label="SHACK"
         isActive={activeTab === 'shack'}
         onClick={() => handleTabClick('shack')}
       />
       <NavItem
-        icon={<Users className="w-6 h-6 text-white" />}
+        icon="invites"
         label="INVITES"
         isActive={activeTab === 'invites'}
         onClick={() => handleTabClick('invites')}
       />
       <NavItem
-        icon={<Gift className="w-6 h-6 text-white" />}
+        icon="airdrop"
         label="AIRDROP"
         isActive={activeTab === 'airdrop'}
         onClick={() => handleTabClick('airdrop')}
       />
       <NavItem
-        icon={<Package className="w-6 h-6 text-white" />}
+        icon="packs"
         label="PACKS"
         isActive={activeTab === 'packs'}
         onClick={() => handleTabClick('packs')}
@@ -49,24 +52,20 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
 }
 
 interface NavItemProps {
-  icon: React.ReactNode;
+  icon: IconName;
   label: string;
   isActive: boolean;
-  highlightColor?: string;
   onClick?: () => void;
 }
 
-function NavItem({
-  icon,
-  label,
-  isActive,
-  highlightColor = 'bg-tony-yellow',
-  onClick,
-}: NavItemProps) {
+function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
   return (
-    <div className="flex flex-col items-center cursor-pointer" onClick={onClick}>
-      <div className={`p-3 rounded-xl ${isActive ? `${highlightColor} border-white-translucent` : ''}`}>{icon}</div>
-      <span className="text-tony-body text-xs mt-1">{label}</span>
+    <div className="flex relative flex-col items-center cursor-pointer" onClick={onClick}>
+      <Icon
+        size={isActive ? 60 : 36}
+        name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
+      />
+      <span className={clsx('text-base mt-1 text-[var(--nav-text-color)]')}>{label}</span>
     </div>
   );
 }

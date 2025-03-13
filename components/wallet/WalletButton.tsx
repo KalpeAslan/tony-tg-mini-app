@@ -1,9 +1,9 @@
 'use client';
 
 import { Button } from '@/components/button';
-import { useWallet } from '@/lib/context/WalletContext';
+import { useWalletStore } from '@/lib/store';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from '@/components/ui/spinner';
 
 interface WalletButtonProps {
@@ -13,6 +13,7 @@ interface WalletButtonProps {
   className?: string;
   connectText?: string;
   disconnectText?: string;
+  onClick?: () => void;
 }
 
 export function WalletButton({
@@ -22,33 +23,52 @@ export function WalletButton({
   className = 'mb-4',
   connectText = 'CONNECT WALLET',
   disconnectText = 'DISCONNECT WALLET',
+  onClick,
 }: WalletButtonProps) {
-  const { 
-    isConnected, 
-    walletAddress, 
-    connectWallet, 
-    disconnectWallet, 
-    isLoading,
-    error,
-    clearError
-  } = useWallet();
+  const { isConnected, walletAddress, connect, disconnect } = useWalletStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Clear error after 5 seconds
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
-        clearError();
+        setError(null);
       }, 5000);
-      
+
       return () => clearTimeout(timer);
     }
-  }, [error, clearError]);
+  }, [error]);
 
   const handleClick = async () => {
+    if (onClick) {
+      onClick();
+    }
+
     if (isConnected) {
-      disconnectWallet();
+      setIsLoading(true);
+      try {
+        disconnect();
+      } catch (err) {
+        setError('Failed to disconnect wallet');
+      } finally {
+        setIsLoading(false);
+      }
     } else {
-      await connectWallet();
+      setIsLoading(true);
+      try {
+        // Simulate wallet connection
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Generate a random wallet address for demo purposes
+        const mockAddress = `0x${Array.from({ length: 40 }, () =>
+          Math.floor(Math.random() * 16).toString(16)
+        ).join('')}`;
+        connect(mockAddress);
+      } catch (err) {
+        setError('Failed to connect wallet');
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -67,20 +87,22 @@ export function WalletButton({
             <Spinner size="sm" className="mr-2" />
             <span>CONNECTING...</span>
           </div>
+        ) : isConnected ? (
+          disconnectText
         ) : (
-          isConnected ? disconnectText : connectText
+          connectText
         )}
       </Button>
-      
+
       {error ? (
         <p className="text-tony-error text-sm mb-2">{error}</p>
       ) : (
         <p className="text-tony-status">
-          {isConnected 
-            ? `Connected: ${walletAddress?.slice(0, 6)}...${walletAddress?.slice(-4)}` 
+          {isConnected && walletAddress
+            ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
             : 'Wallet Not Connected'}
         </p>
       )}
     </div>
   );
-} 
+}

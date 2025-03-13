@@ -10,6 +10,9 @@
   --bg-secondary: #6d3e95;
   --bg-accent: #33b1fc;
   --bg-highlight: #e07a19;
+
+  --bg-gradient: linear-gradient(180deg, #270E3D 0%, #0C0A20 100%);
+
   
   /* Button colors */
   --btn-primary: #33b1fc;
@@ -32,9 +35,13 @@
 
   --navigation-height: 70px;
   --navigation-width: 100%;
+  --nav-text-color: #860C0C;
+
 }
 
 /* Dark mode overrides if needed */
 .dark {
   /* Add dark mode specific variables here */
+  --nav-text-color: #c295fa;
+
 } 
