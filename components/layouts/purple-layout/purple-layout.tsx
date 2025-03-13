@@ -1,12 +1,25 @@
 import type { ReactNode } from 'react';
+import { useTheme as useNextTheme } from 'next-themes';
+import { useEffect } from 'react';
 import styles from './purple-layout.module.css';
+
 interface PurpleLayoutProps {
   children: ReactNode;
 }
 
 export function PurpleLayout({ children }: PurpleLayoutProps) {
+  const { setTheme } = useNextTheme();
+
+  // Set theme to dark when this layout is used
+  useEffect(() => {
+    setTheme('dark');
+
+    // Cleanup function to reset theme if needed
+    return () => {};
+  }, [setTheme]);
+
   return (
-    <div className={`${styles.layout} min-h-screen relative overflow-hidden`}>
+    <div className={`${styles.layout}`}>
       {/* Stars background */}
       <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, i) => (
@@ -24,9 +37,7 @@ export function PurpleLayout({ children }: PurpleLayoutProps) {
         ))}
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-between min-h-screen py-8 px-4">
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }

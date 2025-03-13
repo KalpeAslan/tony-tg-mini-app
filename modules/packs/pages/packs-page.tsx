@@ -1,15 +1,14 @@
 'use client';
-import { YellowLayout } from '@/components/layouts/yellow-layout';
 import { Button } from '@/components/button';
-import { PaginationDots } from '@/components/containers/pagination-dots';
 import { TonyDevice } from '@/components/tony-device';
 import { AppLayout } from '@/components/layouts/AppLayout';
 import { PromoSection, CurrenciesSection, BalanceSection } from '../components';
+import { SectionMessage } from '@/components/ui/custom/SectionMessage';
 
 export const PacksPage = () => {
   return (
     <AppLayout activeTab="packs">
-      <YellowLayout>
+      <div className="w-full h-full pb-[40px]">
         {/* Balance */}
         <div className="w-full mt-4 mb-6">
           <BalanceSection />
@@ -17,12 +16,12 @@ export const PacksPage = () => {
 
         {/* Store buttons */}
         <div className="flex gap-4 w-full max-w-md mb-8">
-          <Button variant="orange" fullWidth>
-            STORE
-          </Button>
-          <Button variant="orange-outline" fullWidth>
-            YOUR PACKS
-          </Button>
+          <SectionMessage radius="md" color="warning" fullWidth>
+            <p className="flex items-center justify-center">STORE</p>
+          </SectionMessage>
+          <SectionMessage radius="md" color="transparent" fullWidth>
+            <p className="flex items-center justify-center">YOUR PACKS</p>
+          </SectionMessage>
         </div>
 
         {/* Tony Device */}
@@ -36,9 +35,7 @@ export const PacksPage = () => {
         </div>
 
         <PromoSection />
-        {/* Pagination dots */}
-        <PaginationDots total={7} active={0} />
-      </YellowLayout>
+      </div>
     </AppLayout>
   );
 };

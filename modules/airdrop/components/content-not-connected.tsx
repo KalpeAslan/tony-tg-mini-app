@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 export const ContentNotConnected: FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-8 px-6">
+    <div className="flex flex-col items-center justify-center py-8 px-4">
       <h2 className="text-4xl leading-tight mb-2 text-center">
         Connect a wallet <br /> to check your airdrop
       </h2>
@@ -21,13 +21,13 @@ export const ContentNotConnected: FC = () => {
       </div>
 
       <h3 className="text-4xl mb-2">INVITE TO INCREASE CHANCES!</h3>
-      <p className="text-sm mb-8 font-roboto">
+      <p className="text-sm mb-4 font-roboto">
         Increase your chances of getting a larger
         <br />
         airdrop by inviting more friends to join!
       </p>
 
-      <WalletButton className="mt-8" variant="primary" />
+      <WalletButton className="mt-4" variant="primary" />
     </div>
   );
 };

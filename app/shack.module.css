@@ -1,11 +1,16 @@
 .shackContainer {
-  position: relative;
-  width: 100%;
+  position: fixed;
+
+  width: 100vw;
+  top: 0;
+  left: 0;
   height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: black !important;
+
 }
 
 .animationContainer {

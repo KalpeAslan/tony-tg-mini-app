@@ -14,7 +14,7 @@
 
   --bg-gradient: linear-gradient(180deg, #270E3D 0%, #0C0A20 100%);
 
-  --bg-card: linear-gradient(0deg, var(--bg-primary), var(--bg-primary)),linear-gradient(32.35deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, 0.35) 100%);
+  --bg-card: linear-gradient(0deg, #E07A19, #E07A19),linear-gradient(86.81deg, rgba(255, 255, 255, 0) -2.83%, rgba(255, 255, 255, 0.147) 73.5%, rgba(255, 255, 255, 0.2) 101.02%);
   
 
   
@@ -47,5 +47,7 @@
 .dark {
   /* Add dark mode specific variables here */
   --nav-text-color: #c295fa;
+  --bg-card: linear-gradient(0deg, var(--bg-primary), var(--bg-primary)),linear-gradient(32.35deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, 0.35) 100%);
+
 
 } 

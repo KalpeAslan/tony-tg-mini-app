@@ -19,7 +19,7 @@ export const SectionMessage: FC<SectionMessageProps> = ({
   return (
     <div
       className={cn(
-        'uppercase text-xl border-white-translucent text-center font-roboto min-w-[90px]',
+        'flex items-center justify-center uppercase text-xl border-white-translucent text-center font-roboto italic font-bold min-w-[90px]',
         radiusStyles[radius],
         colorStyles[color],
         sizeStyles[size],
@@ -33,7 +33,7 @@ export const SectionMessage: FC<SectionMessageProps> = ({
 
 const radiusStyles: Record<TRadius, string> = {
   sm: 'rounded-sm',
-  md: 'rounded-md',
+  md: 'rounded-2xl',
   lg: 'rounded-3xl',
   full: 'rounded-full',
 };
@@ -44,6 +44,7 @@ const colorStyles: Record<TColors, string> = {
   warning: 'bg-warning',
   info: 'bg-info',
   default: 'bg-card',
+  transparent: 'bg-transparent',
 };
 
 const sizeStyles: Record<TSizes, string> = {

@@ -15,6 +15,7 @@
 
 body {
   font-family: 'CheekyChic', 'Roboto', Arial, Helvetica, sans-serif;
+  color: white;
 }
 
 /* Font utility classes */
@@ -34,7 +35,7 @@ a {
 }
 
 .border-white-translucent {
-  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border: 2.5px solid var(--border-white-medium);
 }
 
 .bg-card {

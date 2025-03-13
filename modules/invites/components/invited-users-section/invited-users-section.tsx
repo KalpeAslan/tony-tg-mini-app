@@ -56,7 +56,7 @@ export const InvitedUsersSection = () => {
 
 const InvitedUserItem = ({ user }: { user: InvitedUser }) => {
   return (
-    <div className="flex w-full justify-between align-center border-white-translucent p-4">
+    <div className="flex w-full justify-between align-center p-4 border-t border-tony-whiteBorderMedium">
       <div className="flex items-center gap-2">
         <Image
           src={user.avatarUrl}
@@ -69,7 +69,7 @@ const InvitedUserItem = ({ user }: { user: InvitedUser }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <p className="font-roboto italic text-lg">{formatNumber(user.amount)}</p>
+        <p className="font-roboto italic text-lg font-bold">{formatNumber(user.amount)}</p>
         <Image src="/invites/coin.png" alt={user.name} width={40} height={40} />
       </div>
     </div>
