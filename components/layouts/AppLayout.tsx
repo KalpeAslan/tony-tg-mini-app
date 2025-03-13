@@ -1,13 +1,8 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation/navigation';
-import { PurpleLayout } from './purple-layout';
-import { YellowLayout } from './yellow-layout';
 import { TabName } from '@/lib/types';
-import { useTheme } from '@/lib/context/ThemeContext';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -15,29 +10,16 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children, activeTab }: AppLayoutProps) {
-  const router = useRouter();
-  const { theme } = useTheme();
-
-  const LayoutComponent = theme === 'purple' ? PurpleLayout : YellowLayout;
-
-  const handleTabChange = (tab: string) => {
-    if (tab !== activeTab) {
-      router.push(tab === 'shack' ? '/' : `/${tab}`);
-    }
-  };
-
   return (
-    <LayoutComponent>
-      {/* Header with Logo and Theme Toggle */}
-      <div className="w-full flex justify-between items-center mb-4">
-        <ThemeToggle className="mr-2" />
-      </div>
-
+    <div
+      data-testid="app-layout"
+      className="w-full max-w-screen max-h-screen overflow-x-hidden overflow-y-auto h-full"
+    >
       {/* Main content */}
-      <div className="w-full max-w-md flex flex-col items-center">{children}</div>
+      <div className="w-full flex flex-col items-center">{children}</div>
 
       {/* Bottom navigation */}
-      <Navigation activeTab={activeTab} onTabChange={handleTabChange} />
-    </LayoutComponent>
+      <Navigation activeTab={activeTab} className="absolute bottom-10 z-20" />
+    </div>
   );
 }

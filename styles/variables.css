@@ -4,6 +4,7 @@
   --text-secondary: #f8f9fa;
   --text-muted: #a67fc2;
   --text-error: #ef4444;
+  --text-highlight: #FFD900;
   
   /* Background colors */
   --bg-primary: #501d7c;
@@ -12,6 +13,9 @@
   --bg-highlight: #e07a19;
 
   --bg-gradient: linear-gradient(180deg, #270E3D 0%, #0C0A20 100%);
+
+  --bg-card: linear-gradient(0deg, var(--bg-primary), var(--bg-primary)),linear-gradient(32.35deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, 0.35) 100%);
+  
 
   
   /* Button colors */

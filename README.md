@@ -53,7 +53,7 @@ The codebase has been refactored to improve:
 The application now uses a consistent color system:
 
 - All colors are defined in `tailwind.config.js` under the `tony` namespace
-- CSS variables are defined in `styles/theme.css` for use with CSS properties
+- CSS variables are defined in `styles/variables.css` for use with CSS properties
 - Utility classes are provided in `globals.css` for common text styles
 
 ### Border Styles
@@ -65,6 +65,13 @@ The application includes several border styles for consistent UI elements:
   - `border-tony-whiteBorder`: Light white border (25% opacity)
   - `border-tony-whiteBorderMedium`: Medium white border (40% opacity)
   - `border-tony-whiteBorderStrong`: Strong white border (60% opacity)
+
+### Reusable Components
+
+For common UI patterns, use these components:
+
+- `BorderedContainer`: A flexible container with configurable border styles
+- `CardWithBorder`: A card component with configurable border, background, and rounded corners
 
 See `REFACTORING_GUIDE.md` for details on how to use the color system.
 
@@ -91,9 +98,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Add form validation
 - Enhance mobile responsiveness
 - Add internationalization support
-- Implement analytics tracking 
+- Implement analytics tracking
 
+## TODO:
 
-## TODO: 
-
- - example of TON - https://github.com/Telegram-Mini-Apps/nextjs-template/
+- example of TON - https://github.com/Telegram-Mini-Apps/nextjs-template/

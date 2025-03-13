@@ -68,10 +68,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(22.1465 34.0204) scale(34.2079 30.6824)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>
@@ -134,10 +134,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(22.1416 34.1904) scale(34.1985 30.8358)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
             <linearGradient
               id="paint1_linear_66_1085"
@@ -147,8 +147,8 @@ export const IconDefs = () => (
               y2="28.5354"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="white" />
-              <stop offset="1" stop-color="white" stop-opacity="0" />
+              <stop stopColor="white" />
+              <stop offset="1" stopColor="white" stopOpacity="0" />
             </linearGradient>
           </defs>
         </symbol>
@@ -208,10 +208,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(22.1465 34.0204) scale(34.2079 30.6824)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>
@@ -271,10 +271,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(22.1466 34.0204) scale(34.2079 30.6824)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>
@@ -342,10 +342,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(34.4365 57.0608) scale(57.3754 51.4623)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
             <linearGradient
               id="paint1_linear_0_1"
@@ -355,8 +355,8 @@ export const IconDefs = () => (
               y2="48"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="white" />
-              <stop offset="1" stop-color="white" stop-opacity="0" />
+              <stop stopColor="white" />
+              <stop offset="1" stopColor="white" stop-opacity="0" />
             </linearGradient>
           </defs>
         </symbol>
@@ -421,10 +421,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(34.2359 57.3517) scale(56.9975 51.7246)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>
@@ -489,10 +489,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(33.2279 53.4783) scale(55.1006 48.2458)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>
@@ -555,10 +555,10 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(33.2281 54.043) scale(55.0976 48.7405)"
             >
-              <stop stop-color="#FFB42A" />
-              <stop offset="0.31" stop-color="#FFBF34" />
-              <stop offset="0.85" stop-color="#FFDE4E" />
-              <stop offset="1" stop-color="#FFE857" />
+              <stop stopColor="#FFB42A" />
+              <stop offset="0.31" stopColor="#FFBF34" />
+              <stop offset="0.85" stopColor="#FFDE4E" />
+              <stop offset="1" stopColor="#FFE857" />
             </radialGradient>
           </defs>
         </symbol>

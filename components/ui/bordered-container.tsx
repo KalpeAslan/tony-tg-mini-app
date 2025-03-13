@@ -8,6 +8,7 @@ interface BorderedContainerProps {
   className?: string;
   borderStyle?: 'light' | 'medium' | 'strong';
   rounded?: boolean;
+  padding?: boolean;
 }
 
 export function BorderedContainer({
@@ -15,6 +16,7 @@ export function BorderedContainer({
   className = '',
   borderStyle = 'medium',
   rounded = true,
+  padding = true,
 }: BorderedContainerProps) {
   const borderClasses = {
     light: 'border-2.5 border-tony-whiteBorder',
@@ -27,10 +29,11 @@ export function BorderedContainer({
       className={cn(
         borderClasses[borderStyle],
         rounded && 'rounded-xl',
+        padding && 'p-4',
         className
       )}
     >
       {children}
     </div>
   );
-} 
+}

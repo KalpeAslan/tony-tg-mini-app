@@ -23,12 +23,15 @@ export function Button({
   fullWidth = false,
   disabled = false,
 }: ButtonProps) {
-  const baseStyles = 'font-bold rounded-full transition-colors flex items-center justify-center';
+  const baseStyles =
+    'font-bold rounded-full transition-colors uppercase flex items-center justify-center border-white-translucent font-roboto';
 
   const variantStyles = {
     primary: 'bg-tony-accent text-white hover:bg-tony-accentHover disabled:bg-tony-accent/50',
-    secondary: 'bg-tony-secondary text-white hover:bg-tony-secondaryHover disabled:bg-tony-secondary/50',
-    outline: 'bg-transparent border-2 border-tony-accent text-tony-accent hover:bg-tony-accent/10 disabled:opacity-50',
+    secondary:
+      'bg-tony-secondary text-white hover:bg-tony-secondaryHover disabled:bg-tony-secondary/50',
+    outline:
+      'bg-transparent border-2 border-tony-accent text-tony-accent hover:bg-tony-accent/10 disabled:opacity-50',
     orange:
       'bg-gradient-to-r from-tony-orange to-tony-orangeLight text-white hover:from-tony-orangeDark hover:to-tony-orangeHover shadow-md disabled:opacity-50',
     'orange-outline':

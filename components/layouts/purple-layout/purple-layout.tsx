@@ -6,7 +6,7 @@ interface PurpleLayoutProps {
 
 export function PurpleLayout({ children }: PurpleLayoutProps) {
   return (
-    <div className={`${styles.layout} min-h-screen  relative overflow-hidden`}>
+    <div className={`${styles.layout} min-h-screen relative overflow-hidden`}>
       {/* Stars background */}
       <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, i) => (

@@ -5,23 +5,28 @@ import { TabName } from '@/lib/types';
 import { Icon } from '@/components/ui/icon';
 import clsx from 'clsx';
 import { IconName } from '../ui/icons';
-
+import { useRouter } from 'next/navigation';
 interface NavigationProps {
   activeTab: TabName;
-  onTabChange?: (tab: string) => void;
+  className?: string;
 }
 
-export function Navigation({ activeTab, onTabChange }: NavigationProps) {
+export function Navigation({ activeTab, className }: NavigationProps) {
+  const router = useRouter();
+
   const handleTabClick = (tab: string) => {
-    if (onTabChange) {
-      onTabChange(tab);
+    if (tab !== activeTab) {
+      router.push(tab === 'shack' ? '/' : `/${tab}`);
     }
   };
 
   return (
     <div
-      className={`bg-tony-orange border-white-translucent rounded-full p-4 flex justify-around 
-        items-center shadow-lg w-[var(--navigation-width)] h-[var(--navigation-height)]`}
+      className={clsx(
+        'bg-card border-white-translucent rounded-full p-4 flex justify-around',
+        'items-center shadow-lg w-[var(--navigation-width)] h-[var(--navigation-height)]',
+        className
+      )}
     >
       <NavItem
         icon="shack"

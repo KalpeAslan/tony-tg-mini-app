@@ -1,6 +1,7 @@
 import { WalletButton } from './WalletButton';
 import { FC, PropsWithChildren } from 'react';
 import Link from 'next/link';
+
 export const ContentConnected: FC = () => {
   return (
     <div className="w-full">

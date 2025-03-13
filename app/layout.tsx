@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
-import { ThemeProvider as NextThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider as NextThemeProvider } from '@/providers';
 import { WalletProvider } from '@/lib/context/WalletContext';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
