@@ -91,6 +91,30 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Docker Support
+
+The application can be run using Docker and Docker Compose.
+
+### Using Docker Compose
+
+```bash
+docker-compose up
+```
+
+### Using Docker directly
+
+Build the Docker image:
+
+```bash
+docker build -t tony-wallet .
+```
+
+Run the container:
+
+```bash
+docker run -p 3000:3000 tony-wallet
+```
+
 ## Future Improvements
 
 - Add unit and integration tests
