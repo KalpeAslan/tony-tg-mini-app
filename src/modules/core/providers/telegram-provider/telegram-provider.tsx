@@ -32,7 +32,7 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
     // Initialize TonConnect
     if (!tonConnectRef.current) {
       tonConnectRef.current = new TonConnect({
-        manifestUrl: '/tonconnect-manifest.json',
+        manifestUrl: 'https://tony.it.com/tonconnect-manifest.json',
       });
       tonConnectRef.current.restoreConnection();
     }
@@ -48,7 +48,7 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <TonConnectUIProvider
-      manifestUrl="/tonconnect-manifest.json"
+      manifestUrl="https://tony.it.com/tonconnect-manifest.json"
       actionsConfiguration={{
         twaReturnUrl: appConfig.tgRedirectUrl,
       }}
