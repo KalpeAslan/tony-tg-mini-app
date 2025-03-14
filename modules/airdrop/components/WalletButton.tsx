@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui';
-import { useWalletStore } from '@/lib/store';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 import { useState } from 'react';
 
 interface WalletButtonProps {
@@ -11,6 +11,7 @@ interface WalletButtonProps {
   fullWidth?: boolean;
   className?: string;
   onClick?: () => void;
+  showWarning?: boolean;
 }
 
 export function WalletButton({
@@ -19,55 +20,33 @@ export function WalletButton({
   fullWidth = true,
   className,
   onClick,
+  showWarning = false,
 }: WalletButtonProps) {
-  const { isConnected, connect, disconnect } = useWalletStore();
+  const [tonConnectUI] = useTonConnectUI();
+
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const handleClick = async () => {
-    if (onClick) {
-      onClick();
-    }
-
-    if (isConnected) {
-      setIsLoading(true);
-      try {
-        disconnect();
-      } catch (err) {
-        setError('Failed to disconnect wallet');
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      setIsLoading(true);
-      try {
-        // Simulate wallet connection
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        // Generate a random wallet address for demo purposes
-        const mockAddress = `0x${Array.from({ length: 40 }, () =>
-          Math.floor(Math.random() * 16).toString(16)
-        ).join('')}`;
-        connect(mockAddress);
-      } catch (err) {
-        setError('Failed to connect wallet');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
+  // Show warning message if requested and wallet is not connected
+  // if (!isConnected && showWarning) {
+  //   return (
+  //     <div>
+  //       <SectionMessage fullWidth color="warning">
+  //         To display the data related to the TON Connect, it is required to connect your wallet
+  //       </SectionMessage>
+  //     </div>
+  //   );
+  // }
 
   const renderSubAction = () => {
-    if (error) return <p className="text-sm font-bold text-error font-roboto mt-3">{error}</p>;
-
-    if (isConnected)
-      return (
-        <p
-          onClick={disconnect}
-          className="text-sm font-bold text-white opacity-50 font-roboto mt-3"
-        >
-          Log Out
-        </p>
-      );
+    // if (isConnected)
+    //   return (
+    //     <p
+    //       onClick={disconnect}
+    //       className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
+    //     >
+    //       Log Out
+    //     </p>
+    //   );
 
     return (
       <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
@@ -84,9 +63,13 @@ export function WalletButton({
         </div>
       );
 
-    if (isConnected) return 'connected';
+    // if (isConnected) return `Connected: ${address?.slice(0, 6)}...${address?.slice(-4)}`;
 
-    return 'link $ton wallet';
+    return 'Link TON Wallet';
+  };
+
+  const handleClick = async () => {
+    tonConnectUI.openModal();
   };
 
   return (

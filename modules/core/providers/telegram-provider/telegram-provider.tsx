@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, type PropsWithChildren, useEffect } from 'react';
+import { FC, type PropsWithChildren, useEffect, useRef } from 'react';
 import { initData, miniApp, useLaunchParams, useSignal } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
@@ -8,9 +8,12 @@ import { init } from './init';
 import { useTelegramMock } from './use-telegram-mock';
 import { useClientOnce } from '@/hooks/use-client-once';
 import { useDidMount } from '@/hooks/use-did-mount';
+import TonConnect from '@tonconnect/sdk';
+import { appConfig } from '@/app.config';
 
 const Root: FC<PropsWithChildren> = ({ children }) => {
   const isDev = process.env.NODE_ENV === 'development';
+  const tonConnectRef = useRef<TonConnect | null>(null);
 
   console.log('isDev', isDev);
   // Mock Telegram environment in development mode if needed.
@@ -25,6 +28,14 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
   // Initialize the library.
   useClientOnce(() => {
     init(debug);
+
+    // Initialize TonConnect
+    if (!tonConnectRef.current) {
+      tonConnectRef.current = new TonConnect({
+        manifestUrl: '/tonconnect-manifest.json',
+      });
+      tonConnectRef.current.restoreConnection();
+    }
   });
 
   const isDark = useSignal(miniApp.isDark);
@@ -36,7 +47,12 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
   }, [initDataUser]);
 
   return (
-    <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
+    <TonConnectUIProvider
+      manifestUrl="/tonconnect-manifest.json"
+      actionsConfiguration={{
+        twaReturnUrl: appConfig.tgRedirectUrl,
+      }}
+    >
       <AppRoot
         appearance={isDark ? 'dark' : 'light'}
         platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}

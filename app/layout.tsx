@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider as NextThemeProvider } from '@/providers';
-import { WalletProvider } from '@/lib/context/WalletContext';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { IconDefs } from '@/components/ui/icons';
@@ -26,16 +25,23 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
         />
+        <script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            // VConsole will be exported to \`window.VConsole\` by default.
+            var vConsole = new window.VConsole();
+          `,
+          }}
+        />
       </head>
       <body>
         <ErrorBoundary>
           <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ThemeProvider>
               <TelegramProvider>
-                <WalletProvider>
-                  <IconDefs />
-                  {children}
-                </WalletProvider>
+                <IconDefs />
+                {children}
               </TelegramProvider>
             </ThemeProvider>
           </NextThemeProvider>
