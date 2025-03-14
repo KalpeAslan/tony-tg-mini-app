@@ -18,9 +18,8 @@ export function WalletButton({
   className,
 }: WalletButtonProps) {
   const [tonConnectUI] = useTonConnectUI();
-  const address = useTonAddress();
 
-  const isConnected = !!address;
+  const isConnected = tonConnectUI.connected;
 
   const renderSubAction = () => {
     if (isConnected)
