@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { IconDefs } from '@/components/ui/icons';
 import { TelegramProvider } from '@/modules/core';
+import { TgAuthProvider } from '@/modules/core/providers/tg-auth/tg-auth-provider';
 
 export const metadata: Metadata = {
   title: 'Tony Wallet',
@@ -41,7 +42,7 @@ export default function RootLayout({
             <ThemeProvider>
               <TelegramProvider>
                 <IconDefs />
-                {children}
+                <TgAuthProvider>{children}</TgAuthProvider>
               </TelegramProvider>
             </ThemeProvider>
           </NextThemeProvider>
