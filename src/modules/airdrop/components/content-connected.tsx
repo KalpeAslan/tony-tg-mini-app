@@ -1,8 +1,13 @@
-import { WalletButton } from './WalletButton';
+'use client';
+
 import { FC, PropsWithChildren } from 'react';
 import Link from 'next/link';
+import { SectionMessage } from '@/components';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 
 export const ContentConnected: FC = () => {
+  const [tonConnectUI] = useTonConnectUI();
+
   return (
     <div className="w-full">
       <WalletStatus>Eligible</WalletStatus>
@@ -20,7 +25,16 @@ export const ContentConnected: FC = () => {
           <p>Invite friends</p>
         </Link>
 
-        <WalletButton className="mt-8" variant="primary" />
+        {/* <WalletButton className="mt-8" variant="primary" /> */}
+        <div className="w-full flex flex-col items-center">
+          <SectionMessage color="success">Connected</SectionMessage>
+          <p
+            onClick={tonConnectUI.disconnect}
+            className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
+          >
+            Log Out
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,13 @@
-import { WalletButton } from './WalletButton';
+'use client';
+
+import { Button } from '@/components';
 import Image from 'next/image';
 import { FC } from 'react';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 
 export const ContentNotConnected: FC = () => {
+  const [tonConnectUI] = useTonConnectUI();
+
   return (
     <div className="flex flex-col items-center justify-center py-8 px-4">
       <h2 className="text-4xl leading-tight mb-2 text-center">
@@ -27,7 +32,12 @@ export const ContentNotConnected: FC = () => {
         airdrop by inviting more friends to join!
       </p>
 
-      <WalletButton className="mt-4" variant="primary" />
+      <div className="w-full flex flex-col items-center gap-2">
+        <Button onClick={tonConnectUI.openModal}>link $ton wallet</Button>
+        <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
+          Wallet Not Connected
+        </p>
+      </div>
     </div>
   );
 };
