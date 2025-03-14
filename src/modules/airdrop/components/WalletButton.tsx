@@ -2,16 +2,13 @@
 
 import { Button } from '@/components/ui';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
-import { useTonConnectUI } from '@tonconnect/ui-react';
-import { useState } from 'react';
+import { useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
 
 interface WalletButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
   className?: string;
-  onClick?: () => void;
-  showWarning?: boolean;
 }
 
 export function WalletButton({
@@ -19,34 +16,22 @@ export function WalletButton({
   size = 'lg',
   fullWidth = true,
   className,
-  onClick,
-  showWarning = false,
 }: WalletButtonProps) {
   const [tonConnectUI] = useTonConnectUI();
+  const address = useTonAddress();
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Show warning message if requested and wallet is not connected
-  // if (!isConnected && showWarning) {
-  //   return (
-  //     <div>
-  //       <SectionMessage fullWidth color="warning">
-  //         To display the data related to the TON Connect, it is required to connect your wallet
-  //       </SectionMessage>
-  //     </div>
-  //   );
-  // }
+  const isConnected = !!address;
 
   const renderSubAction = () => {
-    // if (isConnected)
-    //   return (
-    //     <p
-    //       onClick={disconnect}
-    //       className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
-    //     >
-    //       Log Out
-    //     </p>
-    //   );
+    if (isConnected)
+      return (
+        <p
+          onClick={tonConnectUI.disconnect}
+          className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
+        >
+          Log Out
+        </p>
+      );
 
     return (
       <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
@@ -56,15 +41,7 @@ export function WalletButton({
   };
 
   const renderButtonText = () => {
-    if (isLoading)
-      return (
-        <div className="flex items-center justify-center">
-          <span>CONNECTING</span>
-        </div>
-      );
-
-    // if (isConnected) return `Connected: ${address?.slice(0, 6)}...${address?.slice(-4)}`;
-
+    if (isConnected) return 'Connected';
     return 'Link TON Wallet';
   };
 
@@ -80,7 +57,6 @@ export function WalletButton({
         fullWidth={fullWidth}
         className={className}
         onClick={handleClick}
-        disabled={isLoading}
       >
         {renderButtonText()}
       </Button>
