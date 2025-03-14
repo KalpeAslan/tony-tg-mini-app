@@ -5,6 +5,7 @@ import { WalletProvider } from '@/lib/context/WalletContext';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { IconDefs } from '@/components/ui/icons';
+import { TelegramProvider } from '@/modules/core';
 
 export const metadata: Metadata = {
   title: 'Tony Wallet',
@@ -30,10 +31,12 @@ export default function RootLayout({
         <ErrorBoundary>
           <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ThemeProvider>
-              <WalletProvider>
-                <IconDefs />
-                {children}
-              </WalletProvider>
+              <TelegramProvider>
+                <WalletProvider>
+                  <IconDefs />
+                  {children}
+                </WalletProvider>
+              </TelegramProvider>
             </ThemeProvider>
           </NextThemeProvider>
         </ErrorBoundary>

@@ -1,5 +1,5 @@
-import { Button } from '@/components/button';
-import { SectionMessage } from '@/components/ui/custom/SectionMessage';
+import { Button } from '@/components/ui';
+import { SectionMessage } from '@/components/ui/SectionMessage';
 import Image from 'next/image';
 
 export const BalanceSection = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { AppLayout } from '@/components/layouts/AppLayout';
+import { AppLayout } from '@/layouts/AppLayout';
 import { TasksSection, BalanceSection, InvitedUsersSection } from '../components';
 
 export function InvitesPage() {

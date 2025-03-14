@@ -1,10 +1,9 @@
 'use client';
 
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui';
 import { useWalletStore } from '@/lib/store';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
-import { useEffect, useState } from 'react';
-import { Spinner } from '@/components/ui/spinner';
+import { useState } from 'react';
 
 interface WalletButtonProps {
   variant?: ButtonVariant;
@@ -81,7 +80,6 @@ export function WalletButton({
     if (isLoading)
       return (
         <div className="flex items-center justify-center">
-          <Spinner size="sm" className="mr-2" />
           <span>CONNECTING</span>
         </div>
       );

@@ -1,9 +1,7 @@
 'use client';
-import { Button } from '@/components/button';
-import { TonyDevice } from '@/components/tony-device';
-import { AppLayout } from '@/components/layouts/AppLayout';
-import { PromoSection, CurrenciesSection, BalanceSection } from '../components';
-import { SectionMessage } from '@/components/ui/custom/SectionMessage';
+import { AppLayout } from '@/layouts/AppLayout';
+import { PromoSection, CurrenciesSection, BalanceSection, TonyDevice } from '../components';
+import { SectionMessage } from '@/components/ui/SectionMessage';
 
 export const PacksPage = () => {
   return (

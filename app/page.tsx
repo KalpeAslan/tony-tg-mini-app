@@ -1,6 +1,6 @@
 'use client';
 
-import { AppLayout } from '@/components/layouts/AppLayout';
+import { AppLayout } from '@/layouts/AppLayout';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './shack.module.css';

@@ -1,4 +1,4 @@
-import { SectionMessage } from '@/components/ui/custom/SectionMessage';
+import { SectionMessage } from '@/components/ui/SectionMessage';
 import { formatNumber } from '@/lib/utils';
 import Image from 'next/image';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { AppLayout } from '@/components/layouts/AppLayout';
+import { AppLayout } from '@/layouts/AppLayout';
 import { Logo } from '@/components/logo/logo';
 import { useWalletStore } from '@/lib/store';
 import { ContentNotConnected, ContentConnected, Card } from '../components';

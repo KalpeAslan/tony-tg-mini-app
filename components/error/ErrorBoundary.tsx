@@ -1,7 +1,7 @@
 'use client';
 
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -61,4 +61,4 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     return this.props.children;
   }
-} 
+}
