@@ -9,7 +9,7 @@ import { useTelegramMock } from './use-telegram-mock';
 import { useClientOnce } from '@/hooks/use-client-once';
 import { useDidMount } from '@/hooks/use-did-mount';
 import TonConnect from '@tonconnect/sdk';
-import { appConfig } from '@/app.config';
+import { appConfig } from '@/configs/app.config';
 
 const Root: FC<PropsWithChildren> = ({ children }) => {
   const isDev = process.env.NODE_ENV === 'development';
