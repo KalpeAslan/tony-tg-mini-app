@@ -1,20 +1,16 @@
 import { SectionMessage } from '@/components/ui/SectionMessage';
 import { CurrenciesSection, TonyDevice } from './parts';
 import { Task } from '@/components/task';
+import { PackItem as PackItemType } from '../../model';
+import { FC } from 'react';
 
-export const PackItem = () => {
+interface PackItemProps {
+  data: PackItemType;
+}
+
+export const PackItem: FC<PackItemProps> = ({ data }) => {
   return (
     <div>
-      {/* Store buttons */}
-      <div className="flex gap-4 w-full max-w-md mb-8">
-        <SectionMessage radius="md" color="warning" fullWidth>
-          <p className="flex items-center justify-center">STORE</p>
-        </SectionMessage>
-        <SectionMessage radius="md" color="transparent" fullWidth>
-          <p className="flex items-center justify-center">YOUR PACKS</p>
-        </SectionMessage>
-      </div>
-
       {/* Tony Device */}
       <div className="flex justify-center mb-8">
         <TonyDevice size="l" />
@@ -25,7 +21,7 @@ export const PackItem = () => {
         <CurrenciesSection />
       </div>
 
-      {/* <Task key={task.title} {...task} /> */}
+      <Task key={data.id} title={data.name} description={data.description} img={data.image} />
     </div>
   );
 };

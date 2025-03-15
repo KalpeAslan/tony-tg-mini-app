@@ -1,16 +1,23 @@
 'use client';
-import { AppLayout } from '@/layouts/AppLayout';
+
 import { PackItem } from '../components';
+import { mockPacks } from '../model/pack/mocks';
+import { Slider } from '@/components/ui';
+import { PacksLayout } from '../layouts';
 
 export const PacksPage = () => {
+  const packs = mockPacks;
+
   return (
-    <AppLayout activeTab="packs">
+    <PacksLayout>
       <div className="w-full h-full pb-[40px]">
-        {/* Balance */}
-        <div className="w-full mt-4 mb-6">
-          <PackItem />
-        </div>
+        <Slider
+          items={packs.map(pack => ({
+            id: pack.id,
+            content: <PackItem key={pack.id} data={pack} />,
+          }))}
+        />
       </div>
-    </AppLayout>
+    </PacksLayout>
   );
 };

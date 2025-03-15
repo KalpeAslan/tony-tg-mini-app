@@ -1,1 +1,1 @@
-export * from './pack.model';
+export * from './pack';
