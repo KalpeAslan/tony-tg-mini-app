@@ -25,7 +25,7 @@ export const ContentNotConnected: FC = () => {
         />
       </div>
 
-      <h3 className="text-4xl mb-2">INVITE TO INCREASE CHANCES!</h3>
+      <h3 className="text-4xl mb-2 whitespace-nowrap">INVITE TO INCREASE CHANCES!</h3>
       <p className="text-sm mb-4 font-roboto">
         Increase your chances of getting a larger
         <br />

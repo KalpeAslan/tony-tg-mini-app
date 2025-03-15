@@ -17,7 +17,7 @@ export function AirdropPage() {
         {/* Main card */}
         <div className="w-full h-full">
           <Card>
-            <div className="pb-10 w-full">
+            <div className="w-full">
               {isConnected ? <ContentConnected /> : <ContentNotConnected />}
             </div>
           </Card>

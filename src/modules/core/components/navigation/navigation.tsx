@@ -50,7 +50,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
         icon="packs"
         label="PACKS"
         isActive={activeTab === 'packs'}
-        onClick={() => handleTabClick('packs')}
+        onClick={() => handleTabClick('packs/store')}
       />
     </div>
   );

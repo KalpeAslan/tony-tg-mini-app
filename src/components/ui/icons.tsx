@@ -39,9 +39,9 @@ export const IconDefs = () => (
               width="44.0098"
               height="38.8458"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -86,7 +86,7 @@ export const IconDefs = () => (
             <path
               d="M39.9725 13.3529C39.9294 7.97909 38.499 2.73501 37.7353 2.02138C36.9394 1.36182 29.615 0.053504 22.0002 0.0102539C14.3746 0.0426915 7.05016 1.35101 6.25426 2.01057C5.47987 2.73501 4.06016 7.97909 4.01713 13.3529C3.84505 18.7267 5.10343 24.3276 5.80253 25.7873C6.45861 27.02 14.1272 28.6743 22.0002 28.7716C29.8731 28.6743 37.531 27.02 38.1978 25.7873C38.8969 24.3276 40.1553 18.7267 39.9832 13.3529H39.9725Z"
               fill="url(#paint1_linear_66_1085)"
-              fill-opacity="0.55"
+              fillOpacity="0.55"
             />
             <path
               d="M4.01794 15.4515C4.16852 20.0901 5.19028 24.4584 5.80334 25.7234C6.45942 26.9561 14.128 28.6104 22.001 28.7077C29.8739 28.6104 37.5318 26.9561 38.1986 25.7234C38.8009 24.4584 39.8334 20.0901 39.984 15.4515C39.984 15.4948 39.984 15.538 39.984 15.5813C40.1561 20.9551 38.8977 26.556 38.1986 28.0157C37.5425 29.2483 29.8739 30.9026 22.001 31C14.128 30.9026 6.47017 29.2483 5.80334 28.0157C5.09348 26.556 3.8351 20.9551 4.01794 15.5813C4.01794 15.538 4.01794 15.4948 4.01794 15.4515Z"
@@ -105,9 +105,9 @@ export const IconDefs = () => (
               width="44"
               height="39"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -165,8 +165,8 @@ export const IconDefs = () => (
               fill="#E07A19"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M27.8 12.4C27.8063 12.6797 27.7567 12.9575 27.6541 13.2177C27.5514 13.478 27.3978 13.7155 27.2023 13.9155C27.0068 14.1156 26.7733 14.2746 26.5155 14.3831C26.2577 14.4917 25.9808 14.5476 25.7011 14.5477C25.4213 14.5477 25.1444 14.4915 24.8865 14.3831C24.6287 14.2747 24.3951 14.116 24.1995 13.916C24.0038 13.7161 23.8501 13.4789 23.7474 13.2188C23.6446 12.9586 23.5949 12.6807 23.6011 12.401C23.6132 11.8523 23.8396 11.3303 24.2319 10.9465C24.6242 10.5627 25.1512 10.3478 25.7 10.3477C26.2488 10.3475 26.7759 10.5619 27.1684 10.9455C27.5609 11.3291 27.7876 11.8513 27.8 12.4ZM17.3 14.5C17.0203 14.5063 16.7422 14.4565 16.482 14.3539C16.2218 14.2512 15.9847 14.0977 15.7847 13.9022C15.5846 13.7067 15.4256 13.4735 15.3171 13.2157C15.2085 12.9579 15.1526 12.6808 15.1525 12.401C15.1524 12.1213 15.2083 11.8442 15.3167 11.5864C15.4251 11.3285 15.584 11.095 15.7839 10.8993C15.9839 10.7037 16.2209 10.5499 16.481 10.4471C16.7412 10.3444 17.0193 10.2948 17.2989 10.301C17.8476 10.3132 18.3698 10.5399 18.7536 10.9322C19.1374 11.3244 19.3524 11.8512 19.3525 12.4C19.3526 12.9488 19.1379 13.4759 18.7543 13.8684C18.3707 14.2608 17.8487 14.4876 17.3 14.5ZM26.6492 17.0758C25.6391 22.8277 17.3609 22.7185 16.3508 16.9666C16.2406 16.3387 16.7561 15.9858 17.3945 15.9858H25.6055C26.2439 15.9858 26.7594 16.4479 26.6492 17.0758ZM21.5 22.9C16.8685 22.9 13.1 19.1315 13.1 14.5C13.1 9.86845 16.8685 6.1 21.5 6.1C26.1315 6.1 29.9 9.86845 29.9 14.5C29.9 19.1315 26.1315 22.9 21.5 22.9ZM21.5 4C15.7009 4 11 8.70085 11 14.5C11 20.2991 15.7009 25 21.5 25C27.2991 25 32 20.2991 32 14.5C32 8.70085 27.2991 4 21.5 4Z"
               fill="#565656"
             />
@@ -179,9 +179,9 @@ export const IconDefs = () => (
               width="44.0098"
               height="38.8458"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -228,8 +228,8 @@ export const IconDefs = () => (
               fill="#E07A19"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M18 4C16.3431 4 15 5.34315 15 7V22C15 23.6569 16.3431 25 18 25H26C27.6569 25 29 23.6569 29 22V7C29 5.34315 27.6569 4 26 4H18ZM22 19C24.2091 19 26 17.2091 26 15C26 12.7909 24.2091 11 22 11C19.7909 11 18 12.7909 18 15C18 17.2091 19.7909 19 22 19Z"
               fill="#6D3E95"
             />
@@ -242,9 +242,9 @@ export const IconDefs = () => (
               width="44.0099"
               height="38.8458"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -294,7 +294,7 @@ export const IconDefs = () => (
             <path
               d="M64.3515 22.2849C64.2794 13.3164 61.8794 4.56453 60.5983 3.37355C59.263 2.2728 46.9747 0.0893315 34.1992 0.0171509C21.4056 0.0712864 9.11733 2.25475 7.78203 3.35551C6.48283 4.56453 4.10096 13.3164 4.02878 22.2849C3.74007 31.2533 5.85127 40.6007 7.02416 43.0368C8.12488 45.094 20.9906 47.8549 34.1992 48.0173C47.4077 47.8549 60.2554 45.094 61.3742 43.0368C62.5471 40.6007 64.6583 31.2533 64.3696 22.2849H64.3515Z"
               fill="url(#paint1_linear_0_1)"
-              fill-opacity="0.55"
+              fillOpacity="0.55"
             />
             <path
               d="M4.0301 25.7873C4.28272 33.5287 5.99695 40.8189 7.02549 42.9302C8.1262 44.9873 20.9919 47.7483 34.2005 47.9107C47.4091 47.7483 60.2567 44.9873 61.3755 42.9302C62.386 40.8189 64.1183 33.5287 64.3709 25.7873C64.3709 25.8595 64.3709 25.9317 64.3709 26.0038C64.6596 34.9723 62.5484 44.3197 61.3755 46.7558C60.2748 48.8129 47.4091 51.5738 34.2005 51.7362C20.9919 51.5738 8.14425 48.8129 7.02549 46.7558C5.83455 44.3197 3.72334 34.9723 4.0301 26.0038C4.0301 25.9317 4.0301 25.8595 4.0301 25.7873Z"
@@ -313,9 +313,9 @@ export const IconDefs = () => (
               width="68.3977"
               height="59.7363"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -356,7 +356,7 @@ export const IconDefs = () => (
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="white" />
-              <stop offset="1" stopColor="white" stop-opacity="0" />
+              <stop offset="1" stopColor="white" stopOpacity="0" />
             </linearGradient>
           </defs>
         </symbol>
@@ -378,8 +378,8 @@ export const IconDefs = () => (
               fill="#E07A19"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M25.3284 6.74323C23.6715 6.74323 22.3284 8.08637 22.3284 9.74323V39.1451C22.3284 40.802 23.6715 42.1451 25.3284 42.1451H42.6553C44.3122 42.1451 45.6553 40.802 45.6553 39.1451V9.74323C45.6553 8.08637 44.3122 6.74323 42.6553 6.74323H25.3284ZM33.9918 32.0303C37.6727 32.0303 40.6567 29.0113 40.6567 25.2871C40.6567 21.5629 37.6727 18.5439 33.9918 18.5439C30.311 18.5439 27.327 21.5629 27.327 25.2871C27.327 29.0113 30.311 32.0303 33.9918 32.0303Z"
               fill="#B85700"
             />
@@ -392,9 +392,9 @@ export const IconDefs = () => (
               width="68"
               height="60.0001"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -446,8 +446,8 @@ export const IconDefs = () => (
               fill="#E07A19"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M42.4 19.6C42.4099 20.0528 42.332 20.5027 42.1707 20.924C42.0094 21.3453 41.768 21.7298 41.4608 22.0537C41.1535 22.3776 40.7866 22.635 40.3815 22.8107C39.9763 22.9865 39.5412 23.0771 39.1017 23.0772C38.6621 23.0773 38.2269 22.9863 37.8217 22.8107C37.4165 22.6352 37.0494 22.3783 36.742 22.0545C36.4346 21.7308 36.1931 21.3469 36.0316 20.9256C35.8701 20.5044 35.7919 20.0544 35.8017 19.6017C35.8207 18.7133 36.1766 17.8681 36.793 17.2467C37.4095 16.6253 38.2376 16.2774 39.1 16.2772C39.9624 16.277 40.7907 16.624 41.4075 17.2451C42.0242 17.8662 42.3805 18.7117 42.4 19.6ZM25.9 23C25.4605 23.0102 25.0235 22.9296 24.6146 22.7634C24.2057 22.5973 23.8331 22.3487 23.5188 22.0321C23.2044 21.7156 22.9546 21.3381 22.784 20.9207C22.6134 20.5033 22.5255 20.0546 22.5254 19.6017C22.5253 19.1488 22.613 18.7002 22.7834 18.2827C22.9538 17.8652 23.2034 17.4871 23.5176 17.1704C23.8318 16.8536 24.2042 16.6046 24.6131 16.4382C25.0219 16.2719 25.4589 16.1916 25.8983 16.2017C26.7606 16.2213 27.5811 16.5883 28.1842 17.2235C28.7873 17.8586 29.1252 18.7114 29.1254 19.6C29.1256 20.4886 28.7882 21.3419 28.1854 21.9773C27.5825 22.6128 26.7622 22.9799 25.9 23ZM40.5916 27.1703C39.0043 36.4829 25.9957 36.3061 24.4084 26.9935C24.2352 25.9769 25.0453 25.4056 26.0485 25.4056H38.9515C39.9547 25.4056 40.7648 26.1537 40.5916 27.1703ZM32.5 36.6C25.2219 36.6 19.3 30.4987 19.3 23C19.3 15.5013 25.2219 9.4 32.5 9.4C39.7782 9.4 45.7 15.5013 45.7 23C45.7 30.4987 39.7782 36.6 32.5 36.6ZM32.5 6C23.3871 6 16 13.6109 16 23C16 32.3891 23.3871 40 32.5 40C41.6129 40 49 32.3891 49 23C49 13.6109 41.6129 6 32.5 6Z"
               fill="#B85700"
             />
@@ -460,9 +460,9 @@ export const IconDefs = () => (
               width="66"
               height="57"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -526,9 +526,9 @@ export const IconDefs = () => (
               width="66"
               height="57.0001"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"

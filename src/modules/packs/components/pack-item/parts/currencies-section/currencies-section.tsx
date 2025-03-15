@@ -10,8 +10,8 @@ interface CurrenciesSectionProps {
 
 export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, starts }) => {
   return (
-    <div className="grid grid-cols-12 gap-2 px-2 justify-center items-center">
-      <div className="col-span-6">
+    <div className="grid grid-cols-12 gap-2 px-2 justify-between">
+      <div className="col-span-6 flex justify-end items-center">
         <SectionMessage color="neutral" fullWidth radius="full">
           <div className="px-4">
             <p className="text-2xl">{formatNumber(tonyCoins)}</p>
@@ -20,7 +20,7 @@ export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, 
         </SectionMessage>
       </div>
 
-      <div className="col-span-3">
+      <div className="col-span-3 flex justify-end items-center">
         <SectionMessage color="info" fullWidth radius="full">
           <div className="px-2">
             <p className="text-2xl">{formatNumber(ton)}</p>
@@ -29,7 +29,7 @@ export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, 
         </SectionMessage>
       </div>
 
-      <div className="col-span-3">
+      <div className="col-span-3 flex justify-end items-center">
         <SectionMessage color="success" fullWidth radius="full">
           <div className="px-2">
             <p className="text-2xl">{formatNumber(starts)}</p>

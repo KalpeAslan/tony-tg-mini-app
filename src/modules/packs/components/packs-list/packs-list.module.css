@@ -1,0 +1,7 @@
+.header {
+    width: 100%;
+    max-width: 390px;
+    background: url('/packs/krishka.png') no-repeat center center;
+    background-size: cover;
+    height: 35px;
+}
