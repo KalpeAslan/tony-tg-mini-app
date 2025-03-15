@@ -22,7 +22,7 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
     <Layout>
       <div
         data-testid="app-layout"
-        className="w-full min-h-screen max-w-screen max-h-screen overflow-x-hidden overflow-y-auto h-full relative px-6 pt-10"
+        className="w-full max-w-screen h-screen overflow-x-hidden h-full relative px-6 pt-10"
       >
         {/* Main content */}
         <div className="w-full flex flex-col items-center pb-[var(--navigation-height)]">

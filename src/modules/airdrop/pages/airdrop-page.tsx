@@ -11,15 +11,17 @@ export function AirdropPage() {
 
   return (
     <AppLayout activeTab="airdrop">
-      <Logo isConnected={isConnected} />
+      <div className="w-full">
+        <Logo isConnected={isConnected} />
 
-      {/* Main card */}
-      <div className="w-full h-full pb-[70px]">
-        <Card>
-          <div className="pb-10 w-full">
-            {isConnected ? <ContentConnected /> : <ContentNotConnected />}
-          </div>
-        </Card>
+        {/* Main card */}
+        <div className="w-full h-full">
+          <Card>
+            <div className="pb-10 w-full">
+              {isConnected ? <ContentConnected /> : <ContentNotConnected />}
+            </div>
+          </Card>
+        </div>
       </div>
     </AppLayout>
   );

@@ -33,7 +33,7 @@ export const ContentNotConnected: FC = () => {
       </p>
 
       <div className="w-full flex flex-col items-center gap-2">
-        <Button onClick={() => tonConnectUI.openModal}>link $ton wallet</Button>
+        <Button onClick={() => tonConnectUI.openModal()}>link $ton wallet</Button>
         <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
           Wallet Not Connected
         </p>

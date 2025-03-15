@@ -29,7 +29,7 @@ export const ContentConnected: FC = () => {
         <div className="w-full flex flex-col items-center">
           <SectionMessage color="success">Connected</SectionMessage>
           <p
-            onClick={() => tonConnectUI.disconnect}
+            onClick={() => tonConnectUI.disconnect()}
             className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
           >
             Log Out

@@ -49,7 +49,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return (
         <div className="flex flex-col items-center justify-center p-6 bg-red-50 rounded-lg border border-red-200 text-center">
           <h2 className="text-xl font-bold text-red-700 mb-2">Something went wrong</h2>
-          <p className="text-red-600 mb-4">
+          <p className="text-red-600 mb-4 font-roboto">
             {this.state.error?.message || 'An unexpected error occurred'}
           </p>
           <Button variant="primary" onClick={this.resetError}>

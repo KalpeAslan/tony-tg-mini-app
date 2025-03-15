@@ -31,7 +31,7 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
     typeof description === 'string' ? highlightNumbers(description) : description;
 
   return (
-    <div className="bg-card flex w-full h-[105px] border-white-translucent rounded-3xl px-4">
+    <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl px-2">
       <div className="flex-shrink-0 w-[84px] h-full flex items-center justify-center">
         {typeof img === 'string' ? (
           <img src={img} alt={title} className="w-[84px] h-[84px] object-cover" />

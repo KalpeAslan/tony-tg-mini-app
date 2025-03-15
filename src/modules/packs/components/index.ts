@@ -1,4 +1,3 @@
 export * from './promo-section';
-export * from './currencies-section';
-export * from './balance-section';
-export * from './tony-device';
+export * from './pack-item';
+export * from './pack-item/parts/tony-device';
