@@ -2,6 +2,6 @@
     width: 100%;
     max-width: 390px;
     background: url('/packs/krishka.png') no-repeat center center;
-    background-size: cover;
+    background-size: contain;
     height: 35px;
 }

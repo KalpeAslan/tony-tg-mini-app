@@ -1,4 +1,5 @@
 @import '../styles/variables.css';
+@import '../styles/classes.css';
 
 @tailwind base;
 @tailwind components;
@@ -43,21 +44,20 @@ a {
 }
 
 .bg-neutral {
-  background: linear-gradient(0deg, #787878, #787878),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 100%);
+  background: var(--bg-neutral);
 }
 
 .bg-success {
-  background: linear-gradient(0deg, #55FC33, #55FC33),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 100%);
+  background: var(--bg-success);
 }
 
 .bg-info {
-  background: linear-gradient(0deg, #33B1FC, #33B1FC), linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 100%);
+  background: var(--bg-info);
 }
 
 .bg-warning {
-  background: linear-gradient(0deg, #E07A19, #E07A19),linear-gradient(84.96deg, rgba(241, 24, 24, 0) 33.49%, rgba(241, 24, 24, 0.55) 100%);
+  background: var(--bg-warning);
 }
-
 
 @layer utilities {
   .text-balance {

@@ -34,11 +34,13 @@ const mockPacks: PackItem[] = [
 
 export const PacksList = () => {
   return (
-    <div className="w-full max-w-[340px]">
+    <div className="w-full max-w-[390px]">
       <div className={styles.header} />
-      <Row packs={mockPacks} />
-      <Row packs={mockPacks} />
-      <Row packs={mockPacks} />
+      <div className="flex flex-col">
+        <Row packs={mockPacks} />
+        <Row packs={mockPacks} />
+        <Row packs={mockPacks} />
+      </div>
     </div>
   );
 };

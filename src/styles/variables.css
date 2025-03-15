@@ -16,7 +16,17 @@
 
   --bg-card: linear-gradient(0deg, #E07A19, #E07A19),linear-gradient(86.81deg, rgba(255, 255, 255, 0) -2.83%, rgba(255, 255, 255, 0.147) 73.5%, rgba(255, 255, 255, 0.2) 101.02%);
   
-
+  /* Background colors for status classes */
+  --color-neutral: #787878;
+  --color-success: #55FC33;
+  --color-info: #33B1FC;
+  --color-warning: #E07A19;
+  
+  /* Background gradients for status classes */
+  --bg-neutral: linear-gradient(0deg, var(--color-neutral), var(--color-neutral)),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 100%);
+  --bg-success: linear-gradient(0deg, var(--color-success), var(--color-success)),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 100%);
+  --bg-info: linear-gradient(0deg, var(--color-info), var(--color-info)), linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 100%);
+  --bg-warning: linear-gradient(0deg, var(--color-warning), var(--color-warning)),linear-gradient(84.96deg, rgba(241, 24, 24, 0) 33.49%, rgba(241, 24, 24, 0.55) 100%);
   
   /* Button colors */
   --btn-primary: #33b1fc;

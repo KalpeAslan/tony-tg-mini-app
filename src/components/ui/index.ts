@@ -1,5 +1,5 @@
 export * from './icons';
 export * from './icon';
-export * from './SectionMessage';
+export * from './section-message';
 export * from './button';
 export * from './slider';

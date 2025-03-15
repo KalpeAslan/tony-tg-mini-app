@@ -1,4 +1,4 @@
-import { SectionMessage } from '@/components/ui/SectionMessage';
+import { SectionMessage } from '@/components/ui/section-message';
 import { CurrenciesSection, TonyDevice } from './parts';
 import { Task } from '@/components/task';
 import { PackItem as PackItemType } from '../../model';

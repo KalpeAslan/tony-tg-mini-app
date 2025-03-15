@@ -1,0 +1,72 @@
+.sectionMessage {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  /* border-color: rgba(255, 255, 255, 0.1); */
+}
+
+/* Radius styles */
+.radius-sm {
+  border-radius: 0.125rem;
+}
+
+.radius-md {
+  border-radius: 1rem;
+}
+
+.radius-lg {
+  border-radius: 1.5rem;
+}
+
+.radius-full {
+  border-radius: 9999px;
+}
+
+/* Color styles */
+.color-success {
+  background-color: var(--color-success);
+}
+
+.color-neutral {
+  background-color: var(--color-neutral);
+}
+
+.color-warning {
+  background-color: var(--color-warning);
+}
+
+.color-info {
+  background-color: var(--color-info);
+}
+
+.color-default {
+  background-color: #1e293b; /* Slate */
+}
+
+.color-transparent {
+  background-color: transparent;
+}
+
+.color-dark {
+  background-color: rgba(27, 27, 27, 0.65);
+}
+
+/* Size styles */
+.size-extra-sm {
+  padding: 0.1rem 0.5rem;
+}
+
+.size-sm {
+  padding: 0.5rem;
+}
+
+.size-md {
+  padding: 1rem;
+}
+
+.size-lg {
+  padding: 1.5rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
