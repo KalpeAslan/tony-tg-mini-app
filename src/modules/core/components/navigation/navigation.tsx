@@ -23,7 +23,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
   return (
     <div
       className={clsx(
-        'bg-card border-white-translucent rounded-full p-4 flex justify-around',
+        'bg-card border-white-translucent rounded-full flex justify-around text-center',
         'items-center shadow-lg w-[var(--navigation-width)] h-[var(--navigation-height)]',
         className
       )}
@@ -65,23 +65,23 @@ interface NavItemProps {
 
 function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
   return (
-    <div className="flex relative h-full flex-col items-center cursor-pointer" onClick={onClick}>
-      <div className="relative w-full flex justify-center">
-        <Icon
-          size={isActive ? 60 : 36}
-          name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
-          className={clsx(
-            'absolute transition-all duration-300 ease-in-out',
-            isActive && 'transform -translate-y-10'
-          )}
-        />
-      </div>
-      <span
+    <div className="relative h-full cursor-pointer pb-[25px]" onClick={onClick}>
+      <div
         className={clsx(
-          'text-base absolute bottom-[-10px] mt-1',
-          isActive ? 'text-white' : 'text-[var(--nav-text-color)]'
+          'relative w-full flex justify-center max-h-[48px] h-full',
+          isActive ? 'bottom-0' : 'bottom-[-16px]'
         )}
       >
+        <Icon
+          width={isActive ? 60 : 36}
+          height={isActive ? 48 : 28}
+          name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
+          className={clsx('transition-all duration-300 ease-in-out bottom-0', {
+            '-translate-y-[15px]': isActive,
+          })}
+        />
+      </div>
+      <span className={clsx('text-base', isActive ? 'text-white' : 'text-[var(--nav-text-color)]')}>
         {label}
       </span>
     </div>
