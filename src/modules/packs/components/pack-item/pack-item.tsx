@@ -18,7 +18,7 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
 
       {/* Currency indicators */}
       <div className="w-full max-w-md mb-6">
-        <CurrenciesSection />
+        <CurrenciesSection tonyCoins={data.tonyCoins} ton={data.ton} starts={data.starts} />
       </div>
 
       <Task key={data.id} title={data.name} description={data.description} img={data.image} />

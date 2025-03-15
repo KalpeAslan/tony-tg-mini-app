@@ -1,29 +1,42 @@
 import { SectionMessage } from '@/components/ui/SectionMessage';
 import { formatNumber } from '@/lib/utils';
+import { FC } from 'react';
 
-export const CurrenciesSection = () => {
+interface CurrenciesSectionProps {
+  tonyCoins: number;
+  ton: number;
+  starts: number;
+}
+
+export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, starts }) => {
   return (
-    <div className="flex gap-3 items-center justify-center gap-x-4">
-      <SectionMessage color="neutral" radius="full">
-        <div className="px-4">
-          <p className="text-2xl">{formatNumber(99999)}</p>
-          <p className="text-sm">Tony Coins</p>
-        </div>
-      </SectionMessage>
+    <div className="grid grid-cols-12 gap-2 px-2 justify-center items-center">
+      <div className="col-span-6">
+        <SectionMessage color="neutral" fullWidth radius="full">
+          <div className="px-4">
+            <p className="text-2xl">{formatNumber(tonyCoins)}</p>
+            <p className="text-sm">Tony Coins</p>
+          </div>
+        </SectionMessage>
+      </div>
 
-      <SectionMessage color="info" radius="full">
-        <div className="px-2">
-          <p className="text-2xl">{formatNumber(0.1)}</p>
-          <p className="text-sm">TON</p>
-        </div>
-      </SectionMessage>
+      <div className="col-span-3">
+        <SectionMessage color="info" fullWidth radius="full">
+          <div className="px-2">
+            <p className="text-2xl">{formatNumber(ton)}</p>
+            <p className="text-sm">TON</p>
+          </div>
+        </SectionMessage>
+      </div>
 
-      <SectionMessage color="success" radius="full">
-        <div className="px-2">
-          <p className="text-2xl">{formatNumber(5)}</p>
-          <p className="text-sm">Stars</p>
-        </div>
-      </SectionMessage>
+      <div className="col-span-3">
+        <SectionMessage color="success" fullWidth radius="full">
+          <div className="px-2">
+            <p className="text-2xl">{formatNumber(starts)}</p>
+            <p className="text-sm">Stars</p>
+          </div>
+        </SectionMessage>
+      </div>
     </div>
   );
 };
