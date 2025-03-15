@@ -23,15 +23,15 @@ export const Slider = ({
 }: SliderProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  useEffect(() => {
-    if (!autoSlide) return;
+  // useEffect(() => {
+  //   if (!autoSlide) return;
 
-    const interval = setInterval(() => {
-      setActiveSlide(prev => (prev + 1) % items.length);
-    }, slideInterval);
+  //   const interval = setInterval(() => {
+  //     setActiveSlide(prev => (prev + 1) % items.length);
+  //   }, slideInterval);
 
-    return () => clearInterval(interval);
-  }, [autoSlide, items.length, slideInterval]);
+  //   return () => clearInterval(interval);
+  // }, [autoSlide, items.length, slideInterval]);
 
   return (
     <div className={`w-full ${className}`}>

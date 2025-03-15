@@ -9,7 +9,7 @@ export const Card: FC<CardProps> = ({ children, className = '' }) => {
   return (
     <div
       className={cn(
-        'rounded-3xl w-full max-w-md flex flex-col items-center text-center h-full',
+        'rounded-3xl w-full flex flex-col items-center text-center h-full',
         'border-white-translucent overflow-hidden',
         className
       )}

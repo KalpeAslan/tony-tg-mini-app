@@ -8,7 +8,7 @@ export const PacksLayout: FC<PropsWithChildren> = ({ children }) => {
     <AppLayout activeTab="packs">
       <BalanceSection />
 
-      <div className="flex gap-4 w-full max-w-md mb-8 mt-4">
+      <div className="flex gap-4 w-full mb-8 mt-4">
         <SectionMessage radius="md" color="warning" fullWidth>
           <p className="flex items-center justify-center">STORE</p>
         </SectionMessage>

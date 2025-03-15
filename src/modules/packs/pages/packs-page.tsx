@@ -16,6 +16,7 @@ export const PacksPage = () => {
             id: pack.id,
             content: <PackItem key={pack.id} data={pack} />,
           }))}
+          autoSlide={false}
         />
       </div>
     </PacksLayout>
