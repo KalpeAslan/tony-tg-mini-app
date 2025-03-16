@@ -9,17 +9,10 @@ import { TelegramAuthResponse } from '@/modules/core/api';
 import { isValidJWT } from './util';
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({
-    mutationFn: async (initData: string) => {
-      console.log(
-        '📡 Sending authentication request with initData:',
-        initData.substring(0, 50) + '...'
-      );
-      return await TelegramApi.auth.webApp({ initData });
-    },
+    mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
     onSuccess: (data: TelegramAuthResponse) => {
       console.log('✅ Authentication response received:', { success: data.success });
       console.log('data', data);
@@ -27,7 +20,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
       if (data.success && data.access_token) {
         console.log('🔑 Valid JWT token received');
         localStorage.setItem('accessToken', data.access_token);
-        setIsAuthenticated(true);
         console.log('🎉 Authentication successful', {
           userId: data.user?.id,
           username: data.user?.telegramUsername,
@@ -53,14 +45,18 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
       if (isValidJWT(existingToken)) {
         console.log('✅ Existing token is valid');
-        setIsAuthenticated(true);
+        // setIsAuthenticated(true);
       } else {
         console.log('❌ Existing token is invalid, removing from localStorage');
         localStorage.removeItem('accessToken');
       }
       return;
+    } else {
+      if (initDataRaw) {
+        authenticateTelegram(initDataRaw);
+      }
     }
-  }, [initDataRaw, isAuthenticated, isPending, authenticateTelegram]);
+  }, [initDataRaw]);
 
   return <>{children}</>;
 };
