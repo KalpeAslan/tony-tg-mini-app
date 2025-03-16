@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/configs/axios.config';
-import { TelegramAuthWebAppRequest, TelegramAuthResponse } from './telegram-model';
+import { TelegramAuthWebAppRequest, TelegramAuthResponse, TelegramMeResponse } from './telegram-model';
 
 export const TelegramApi = {
   auth: {
@@ -9,6 +9,17 @@ export const TelegramApi = {
         return response.data;
       } catch (error) {
         console.error('Error in Telegram WebApp authentication:', error);
+        throw error;
+      }
+    }
+  },
+  telegram: {
+    me: async (): Promise<TelegramMeResponse> => {
+      try {
+        const response = await axiosInstance.get('/telegram/me');
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching Telegram user data:', error);
         throw error;
       }
     }

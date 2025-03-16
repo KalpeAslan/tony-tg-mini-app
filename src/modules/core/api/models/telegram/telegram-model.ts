@@ -27,5 +27,17 @@ export interface TelegramAuthResponse {
   access_token?: string;
   user?: TelegramUser;
   error?: string;
+}
+
+/**
+ * Interface for Telegram Me endpoint response
+ */
+export interface TelegramMeResponse {
+  success: boolean;
+  user?: {
+    id: string;
+    email: string;
+  };
+  error?: string;
 } 
 
