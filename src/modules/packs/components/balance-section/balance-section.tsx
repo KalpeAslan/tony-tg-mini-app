@@ -5,7 +5,7 @@ import Image from 'next/image';
 export const BalanceSection = () => {
   return (
     <div className="flex items-center justify-center">
-      <SectionMessage color="warning" radius="full">
+      <SectionMessage size="extra-sm" color="warning" radius="full">
         <div className="flex items-center gap-2 pr-10">
           <Image src="/packs/coin.png" alt="Tony Coins" width={37} height={37} />
 

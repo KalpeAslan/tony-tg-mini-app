@@ -10,14 +10,14 @@ interface PackItemProps {
 
 export const PackItem: FC<PackItemProps> = ({ data }) => {
   return (
-    <div>
+    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       {/* Tony Device */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center">
         <TonyDevice size="l" />
       </div>
 
       {/* Currency indicators */}
-      <div className="w-full mb-6">
+      <div className="w-full">
         <CurrenciesSection tonyCoins={data.tonyCoins} ton={data.ton} starts={data.starts} />
       </div>
 

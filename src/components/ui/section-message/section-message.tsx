@@ -22,13 +22,13 @@ export const SectionMessage: FC<SectionMessageProps> = ({
   return (
     <div
       className={cn(
+        className,
         'inline-flex items-center justify-center text-center font-roboto italic font-bold border-white-translucent',
         styles.sectionMessage,
         styles[`radius-${radius}`],
         styles[`color-${color}`],
         styles[`size-${size}`],
-        fullWidth && styles.fullWidth,
-        className
+        fullWidth && styles.fullWidth
       )}
       {...props}
     >

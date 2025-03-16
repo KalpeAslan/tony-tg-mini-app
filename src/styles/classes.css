@@ -1,3 +1,36 @@
 .font-6 {
     font-size: 6px;
 }
+
+.font-cheeky {
+    font-family: 'CheekyChic', cursive;
+  }
+  
+  .font-roboto {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  }
+  
+  .border-white-translucent {
+    border: 2.5px solid var(--border-white-medium);
+  }
+  
+  .bg-card {
+    background: var(--bg-card);
+  }
+  
+  .bg-neutral {
+    background: var(--bg-neutral);
+  }
+  
+  .bg-success {
+    background: var(--bg-success);
+  }
+  
+  .bg-info {
+    background: var(--bg-info);
+  }
+  
+  .bg-warning {
+    background: var(--bg-warning);
+  }
+  
