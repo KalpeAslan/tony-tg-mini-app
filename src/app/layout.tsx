@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { IconDefs } from '@/components/ui/icons';
 import { TelegramProvider } from '@/modules/core';
-import { TgAuthProvider } from '@/modules/core/providers/tg-auth/tg-auth-provider';
+import { TgAuthProvider } from '@/modules/core';
 
 export const metadata: Metadata = {
   title: 'Tony Wallet',

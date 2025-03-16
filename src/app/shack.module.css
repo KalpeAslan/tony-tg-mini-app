@@ -41,7 +41,7 @@
 }
 
 .topConnected {
-  transform: translateY(0);
+  transform: translateY(5px);
 }
 
 .bottomConnected {
