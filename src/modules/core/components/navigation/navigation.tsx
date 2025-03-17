@@ -16,7 +16,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
 
   const handleTabClick = (tab: string) => {
     if (tab !== activeTab) {
-      router.push(tab === 'shack' ? '/' : `/${tab}`);
+      router.push(tab === 'airdrop' ? '/' : `/${tab}`);
     }
   };
 
