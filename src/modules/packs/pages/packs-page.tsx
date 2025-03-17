@@ -4,7 +4,6 @@ import { PackItem } from '../components';
 import { mockPacks } from '../model/pack/mocks';
 import { Slider } from '@/components/ui';
 import { PacksLayout } from '../layouts';
-import { AutoScale } from '@/modules/core';
 
 export const PacksPage = () => {
   const packs = mockPacks;
