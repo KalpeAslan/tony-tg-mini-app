@@ -4,7 +4,7 @@ import { useSignal } from '@telegram-apps/sdk-react';
 import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { TelegramAuthResponse, TelegramApi } from '../../api';
+import { TelegramAuthResponse, TelegramApi } from '../../models';
 import { isValidJWT } from './util';
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
