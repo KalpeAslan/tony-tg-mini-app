@@ -22,10 +22,10 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
     <Layout>
       <div
         data-testid="app-layout"
-        className="w-full h-screen max-w-screen overflow-x-hidden h-full relative flex flex-col items-center justify-center px-3"
+        className="w-full h-screen max-w-screen overflow-x-hidden relative flex flex-col items-center justify-center px-3"
       >
         {/* Main content */}
-        <div className="w-full h-full flex flex-col justify-around items-center">{children}</div>
+        <div className="w-full h-full">{children}</div>
 
         {/* Bottom navigation */}
         <div className="fixed bottom-[40px] z-20 left-0 right-0 mx-auto px-6">

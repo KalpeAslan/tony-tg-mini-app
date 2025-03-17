@@ -12,13 +12,13 @@ export function AirdropPage() {
 
   return (
     <AppLayout activeTab="airdrop">
-      <div className="w-full flex flex-col items-center justify-center gap-4 pb-[calc(var(--navigation-height)+50px)]">
+      <div className="w-full flex flex-col items-center justify-center pb-[calc(var(--navigation-height)+50px)]">
         <Logo isConnected={isConnected} />
 
         {/* Main card */}
         <div
           className={cn(
-            'rounded-3xl w-full flex flex-col items-center text-center ',
+            'rounded-3xl w-full flex flex-col items-center text-center',
             'border-white-translucent overflow-hidden'
           )}
           style={{
