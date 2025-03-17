@@ -29,7 +29,7 @@ export function InvitesPage() {
           />
         </div>
 
-        <InvitedUsersSection />
+        <InvitedUsersSection referralPercent={rewardsInfo?.referralPercent || 0} />
       </div>
     </AppLayout>
   );
