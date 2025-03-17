@@ -1,6 +1,11 @@
 import { InvitedUser } from '../../models';
 import Image from 'next/image';
 import { formatNumber } from '@/lib/utils';
+import { FC } from 'react';
+
+interface InvitedUsersSectionProps {
+  referralPercent: number;
+}
 
 const mockInvitedUsers: InvitedUser[] = [
   {
@@ -34,14 +39,14 @@ const mockInvitedUsers: InvitedUser[] = [
   },
 ];
 
-export const InvitedUsersSection = () => {
+export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({ referralPercent }) => {
   return (
     <div className="w-full border-white-translucent rounded-3xl bg-card overflow-hidden">
       <div className="w-full p-4 flex flex-col gap-4">
         <p className="text-3xl uppercase">you have invited: 7 dudes</p>
         <p className="font-roboto text-lg">
-          Earn 15% from each one of you dudes shack and an additional 5% from each pack they
-          purchase!
+          Earn {referralPercent}% from each one of you dudes shack and an additional 5% from each
+          pack they purchase!
         </p>
       </div>
 
