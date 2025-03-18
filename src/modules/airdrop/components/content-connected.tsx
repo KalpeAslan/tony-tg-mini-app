@@ -1,33 +1,63 @@
 'use client';
 
 import { FC, PropsWithChildren } from 'react';
-import Link from 'next/link';
-import { SectionMessage } from '@/components';
+import { Button, SectionMessage } from '@/components';
 import { useTonConnectUI } from '@tonconnect/ui-react';
+import { init, shareURL } from '@telegram-apps/sdk';
+import { TelegramApi } from '@/modules/core/models/telegram/telegram-api';
+import { useMutation } from '@tanstack/react-query';
 
 export const ContentConnected: FC = () => {
   const [tonConnectUI] = useTonConnectUI();
+
+  const getReferralLinkMutation = useMutation({
+    mutationFn: TelegramApi.telegram.getReferralLink,
+    onSuccess: data => {
+      console.log('data', data);
+      if (data.success && data.referralLink) {
+        console.log('data.referralLink', data.referralLink);
+        shareURL(data.referralLink);
+      }
+    },
+    onError: error => {
+      console.error('Error getting referral link:', error);
+    },
+  });
+
+  const handleInvite = () => {
+    init();
+    getReferralLinkMutation.mutate();
+  };
 
   return (
     <div className="w-full">
       <WalletStatus>Eligible</WalletStatus>
 
-      <div className="flex flex-col items-center justify-center py-8 px-6">
+      <div className="flex flex-col items-center justify-center py-8 px-12">
         {/* Character */}
 
         <h3 className="text-4xl mb-2">You are eligible!</h3>
-        <p className="text-sm font-roboto px-6">
+        <p className="text-sm font-roboto">
           Soon details on the exact amount of token you wallet will be airdropped, will be revealed
           here! Stay tuned!
         </p>
 
-        <Link href="/invite" className="flex items-center mt-5">
+        <Button
+          onClick={handleInvite}
+          variant="primary"
+          size="sm"
+          fullWidth
+          className="flex items-center mt-5 mb-5"
+          loading={getReferralLinkMutation.isPending}
+        >
           <p>Invite friends</p>
-        </Link>
+        </Button>
 
         {/* <WalletButton className="mt-8" variant="primary" /> */}
         <div className="w-full flex flex-col items-center">
-          <SectionMessage color="success">Connected</SectionMessage>
+          <SectionMessage fullWidth radius="full" color="success">
+            Connected
+          </SectionMessage>
           <p
             onClick={() => tonConnectUI.disconnect()}
             className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"

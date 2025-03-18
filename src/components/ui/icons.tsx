@@ -4,11 +4,11 @@ import React from 'react';
 export type IconName =
   | 'shack'
   | 'airdrop'
-  | 'packs'
+  | 'tony-packs'
   | 'invites'
   | 'selected-shack'
   | 'selected-airdrop'
-  | 'selected-packs'
+  | 'selected-tony-packs'
   | 'selected-invites';
 
 export const IconDefs = () => (
@@ -217,7 +217,7 @@ export const IconDefs = () => (
         </symbol>
 
         {/* PACKS */}
-        <symbol id="packs" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="tony-packs" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g style={{ mixBlendMode: 'luminosity' }} filter="url(#filter0_d_66_1076)">
             <path
               d="M39.9823 13.2865C39.9392 7.93945 38.5084 2.72146 37.7445 2.01138C36.9484 1.3551 29.622 0.0532889 22.0051 0.0102539C14.3774 0.0425301 7.05098 1.34434 6.25486 2.00062C5.48026 2.72146 4.06016 7.93945 4.01712 13.2865C3.84499 18.6336 5.10372 24.2067 5.80301 25.6591C6.45927 26.8856 14.13 28.5317 22.0051 28.6285C29.8802 28.5317 37.5401 26.8856 38.2071 25.6591C38.9064 24.2067 40.1652 18.6336 39.993 13.2865H39.9823Z"
@@ -363,7 +363,7 @@ export const IconDefs = () => (
 
         {/* PACKS SELECTED */}
         <symbol
-          id="packs-selected"
+          id="tony-packs-selected"
           viewBox="0 0 68 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

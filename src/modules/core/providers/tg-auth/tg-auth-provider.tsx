@@ -9,7 +9,10 @@ import { isValidJWT } from './util';
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
+  const telegramUser = useSignal(initData.user);
+  const startAppParam = useSignal(initData.startParam);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [processedStartParam, setProcessedStartParam] = useState(false);
 
   // Query for fetching user data
   const { refetch: refetchUserData } = useQuery({
@@ -38,6 +41,18 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     },
     enabled: false, // Don't run automatically
     retry: false,
+  });
+
+  // Create a mutation for processing startapp parameter
+  const { mutate: processStartApp } = useMutation({
+    mutationFn: TelegramApi.telegram.processStartApp,
+    onSuccess: data => {
+      console.log('✅ StartApp parameter processed successfully:', data);
+      setProcessedStartParam(true);
+    },
+    onError: error => {
+      console.error('❌ Error processing StartApp parameter:', error);
+    },
   });
 
   // Create a mutation for the Telegram WebApp authentication
@@ -75,27 +90,38 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const existingToken = localStorage.getItem('accessToken');
 
     if (existingToken) {
-      console.log('🔍 Found existing token in localStorage');
-
       if (isValidJWT(existingToken)) {
-        console.log('✅ Existing token is valid');
-        // Fetch user data with the existing token
         refetchUserData();
       } else {
-        console.log('❌ Existing token is invalid, removing from localStorage');
         localStorage.removeItem('accessToken');
 
-        // Try to authenticate with initData if available
         if (initDataRaw) {
+          console.log('initDataRaw', initDataRaw);
           authenticateTelegram(initDataRaw);
         }
       }
     } else {
       if (initDataRaw) {
+        console.log('initDataRaw', initDataRaw);
         authenticateTelegram(initDataRaw);
       }
     }
   }, [initDataRaw]);
 
-  return <>{children}</>;
+  // Process startapp parameter if it exists and user is authenticated
+  useEffect(() => {
+    if (isAuthenticated && startAppParam && telegramUser?.id && !processedStartParam) {
+      console.log('📱 Processing startapp parameter:', startAppParam);
+      processStartApp({
+        telegramId: telegramUser.id.toString(),
+        startAppParam: startAppParam,
+      });
+    }
+  }, [isAuthenticated, startAppParam, telegramUser, processedStartParam]);
+
+  const isDev = process.env.NODE_ENV === 'development';
+
+  const isAuthenticated_ = isDev ? true : isAuthenticated;
+
+  return <>{isAuthenticated_ ? children : <div>Not authenticated</div>}</>;
 };

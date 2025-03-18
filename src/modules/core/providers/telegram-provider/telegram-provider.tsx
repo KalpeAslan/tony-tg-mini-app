@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, type PropsWithChildren, useEffect, useRef } from 'react';
-import { initData, miniApp, useLaunchParams, useSignal } from '@telegram-apps/sdk-react';
+import { useLaunchParams, expandViewport } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { init } from './init';
@@ -38,13 +38,11 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
     }
   });
 
-  const isDark = useSignal(miniApp.isDark);
-  const initDataUser = useSignal(initData.user);
-
-  // Set the user locale.
   useEffect(() => {
-    initDataUser;
-  }, [initDataUser]);
+    if (expandViewport.isAvailable()) {
+      expandViewport();
+    }
+  }, [expandViewport]);
 
   return (
     <TonConnectUIProvider
@@ -54,7 +52,7 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
       }}
     >
       <AppRoot
-        appearance={isDark ? 'dark' : 'light'}
+        appearance={'dark'}
         platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
       >
         {children}

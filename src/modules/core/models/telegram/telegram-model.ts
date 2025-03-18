@@ -39,5 +39,31 @@ export interface TelegramMeResponse {
     email: string;
   };
   error?: string;
+}
+
+/**
+ * Interface for Telegram referral link response
+ */
+export interface TelegramReferralLinkResponse {
+  success: boolean;
+  referralLink?: string;
+  error?: string;
+}
+
+/**
+ * Interface for Telegram process startapp request
+ */
+export interface TelegramProcessStartAppRequest {
+  telegramId: string;
+  startAppParam: string;
+}
+
+/**
+ * Interface for Telegram process startapp response
+ */
+export interface TelegramProcessStartAppResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
 } 
 

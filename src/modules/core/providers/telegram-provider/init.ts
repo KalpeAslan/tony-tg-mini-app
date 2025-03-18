@@ -17,7 +17,9 @@ import {
   
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
+    console.log('initSDK');
     initSDK();
+    console.log('initSDK done');
   
     // Mount all components used in the project.
     backButton.isSupported() && backButton.mount();
@@ -31,8 +33,8 @@ import {
     });
   
     // Define components-related CSS variables.
-    miniApp.bindCssVars();
-    themeParams.bindCssVars();
+    // miniApp.bindCssVars();
+    // themeParams.bindCssVars();
   
     // Add Eruda if needed.
     import('eruda')
