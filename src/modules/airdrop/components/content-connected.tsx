@@ -47,7 +47,7 @@ export const ContentConnected: FC = () => {
           variant="primary"
           size="sm"
           fullWidth
-          className="flex items-center mt-5 mb-5"
+          className="flex items-center mt-5 mb-5 text-3xl"
           loading={getReferralLinkMutation.isPending}
         >
           <p>Invite friends</p>
@@ -55,9 +55,9 @@ export const ContentConnected: FC = () => {
 
         {/* <WalletButton className="mt-8" variant="primary" /> */}
         <div className="w-full flex flex-col items-center">
-          <SectionMessage fullWidth radius="full" color="success">
+          <Button className="text-3xl" variant="green" fullWidth size="sm" active={false}>
             Connected
-          </SectionMessage>
+          </Button>
           <p
             onClick={() => tonConnectUI.disconnect()}
             className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"

@@ -13,6 +13,7 @@ interface ButtonProps {
   fullWidth?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  active?: boolean;
 }
 
 export function Button({
@@ -24,13 +25,15 @@ export function Button({
   fullWidth = false,
   disabled = false,
   loading = false,
+  active = true,
 }: ButtonProps) {
-  const baseStyles =
-    'font-bold rounded-full transition-colors uppercase flex items-center justify-center border-white-translucent font-roboto active:scale-95 active:transform transition-transform';
+  const activeStyles = active ? 'active:scale-95 active:transform transition-transform' : '';
+
+  const baseStyles = `font-bold rounded-full transition-colors uppercase flex items-center justify-center border-white-translucent ${activeStyles}`;
 
   const variantStyles = {
     primary:
-      'bg-tony-accent text-white hover:bg-tony-accentHover active:bg-tony-accentHover disabled:bg-tony-accent/50',
+      'bg-info text-white hover:bg-tony-accentHover active:bg-tony-accentHover disabled:bg-tony-accent/50',
     secondary:
       'bg-tony-secondary text-white hover:bg-tony-secondaryHover active:bg-tony-secondaryHover disabled:bg-tony-secondary/50',
     outline:
@@ -70,7 +73,14 @@ export function Button({
       }}
       disabled={disabled}
     >
-      {loading ? <p>Loading...</p> : children}
+      {loading ? (
+        <div
+          className="w-5 h-5 border-2 border-white rounded-full border-t-transparent animate-spin"
+          aria-label="Loading"
+        ></div>
+      ) : (
+        children
+      )}
     </button>
   );
 }
