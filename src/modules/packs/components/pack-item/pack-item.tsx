@@ -1,7 +1,7 @@
 import { SectionMessage } from '@/components/ui/section-message';
 import { CurrenciesSection, TonyDevice } from './parts';
 import { Task } from '@/components/task';
-import { PackItem as PackItemType } from '../../model';
+import { BostItem as PackItemType } from '@/modules/core';
 import { FC } from 'react';
 
 interface PackItemProps {
@@ -18,10 +18,10 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
 
       {/* Currency indicators */}
       <div className="w-full">
-        <CurrenciesSection tonyCoins={data.tonyCoins} ton={data.ton} starts={data.starts} />
+        <CurrenciesSection ton={data.price.ton} starts={Number(data.price.xtr)} />
       </div>
 
-      <Task key={data.id} title={data.name} description={data.description} img={data.image} />
+      <Task key={data.id} title={data.name} img={data.image} />
     </div>
   );
 };

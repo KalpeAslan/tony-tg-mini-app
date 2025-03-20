@@ -96,13 +96,13 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
         localStorage.removeItem('accessToken');
 
         if (initDataRaw) {
-          console.log('initDataRaw', initDataRaw);
+          console.log('initDataRaw 1', initDataRaw);
           authenticateTelegram(initDataRaw);
         }
       }
     } else {
       if (initDataRaw) {
-        console.log('initDataRaw', initDataRaw);
+        console.log('initDataRaw 2', initDataRaw);
         authenticateTelegram(initDataRaw);
       }
     }

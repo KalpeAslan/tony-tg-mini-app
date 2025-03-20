@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 interface TaskProps {
   title: string;
-  description: string | ReactNode;
+  description?: string | ReactNode;
   img: string | ReactNode;
 }
 
@@ -41,7 +41,9 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
       </div>
       <div className="flex-grow flex flex-col justify-center px-4">
         <h3 className="text-2xl text-white">{title}</h3>
-        <div className="text-sm text-white mt-1 font-roboto">{processedDescription}</div>
+        {processedDescription && (
+          <div className="text-sm text-white mt-1 font-roboto">{processedDescription}</div>
+        )}
       </div>
     </div>
   );

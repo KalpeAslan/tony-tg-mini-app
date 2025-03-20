@@ -3,24 +3,14 @@ import { formatNumber } from '@/lib/utils';
 import { FC } from 'react';
 
 interface CurrenciesSectionProps {
-  tonyCoins: number;
   ton: number;
   starts: number;
 }
 
-export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, starts }) => {
+export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ ton, starts }) => {
   return (
     <div className="flex justify-between px-2 gap-2">
-      <div className="flex justify-end items-center w-full">
-        <SectionMessage size="extra-sm" color="neutral" fullWidth radius="full">
-          <div className="px-4 whitespace-nowrap">
-            <p className="text-xl">{formatNumber(tonyCoins)}</p>
-            <p className="text-xs">Tony Coins</p>
-          </div>
-        </SectionMessage>
-      </div>
-
-      <div className="flex justify-end items-center">
+      <div className="flex w-full justify-end items-center">
         <SectionMessage className="!px-[15px]" size="extra-sm" color="info" fullWidth radius="full">
           <div className="px-2">
             <p className="text-xl">{formatNumber(ton)}</p>
@@ -29,7 +19,7 @@ export const CurrenciesSection: FC<CurrenciesSectionProps> = ({ tonyCoins, ton, 
         </SectionMessage>
       </div>
 
-      <div className="flex justify-end items-center">
+      <div className="flex w-full justify-end items-center">
         <SectionMessage
           className="!px-[15px]"
           size="extra-sm"
