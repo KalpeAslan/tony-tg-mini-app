@@ -1,10 +1,12 @@
 'use client';
 
 import { AppLayout } from '@/layouts/app-layout';
-import { BalanceSection, InvitedUsersSection } from '../components';
+import {  InvitedUsersSection } from '../components';
 import { Task as TaskComponent } from '@/components/task';
 import { useQuery } from '@tanstack/react-query';
 import { WalletApi } from '@/modules/core/models/wallet';
+import { FullLoader } from '@/components/ui';
+
 
 export function InvitesPage() {
   const { data: rewardsInfo } = useQuery({
@@ -14,6 +16,7 @@ export function InvitesPage() {
 
   return (
     <AppLayout activeTab="invites">
+      {/* <FullLoader isVisible={true} /> */}
       <div className="flex flex-col gap-6 pt-6">
         <div className="flex flex-col gap-2">
           <TaskComponent
