@@ -5,7 +5,7 @@ type size = 's' | 'l';
 
 const sizes: Record<size, { width: number; height: number }> = {
   s: { width: 100, height: 100 },
-  l: { width: 346, height: 346 },
+  l: { width: 246, height: 246 },
 };
 
 interface TonyDeviceProps {

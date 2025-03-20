@@ -11,7 +11,7 @@ export const PacksLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <AppLayout activeTab="packs">
-      <div className="w-full flex flex-col items-center gap-4 pt-6 pb-[calc(var(--navigation-height)+50px)]">
+      <div className="w-full flex flex-col items-center gap-4 pt-6">
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <div className="flex gap-4 w-full">
             <SectionMessage

@@ -12,7 +12,7 @@ export function AirdropPage() {
 
   return (
     <AppLayout activeTab="airdrop">
-      <div className="w-full flex flex-col items-center justify-center pb-[calc(var(--navigation-height)+50px)]">
+      <div className="w-full flex flex-col items-center justify-center">
         <Logo isConnected={isConnected} />
 
         {/* Main card */}
