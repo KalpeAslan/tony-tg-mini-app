@@ -24,5 +24,5 @@ export interface SingleBoostResponse {
   
 export interface UserActiveBoostsResponse {
     success: boolean;
-    boosts: BostItem[];
+    userBosts: BostItem[];
 }

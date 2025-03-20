@@ -1,10 +1,10 @@
 'use client';
 
 import { PackItem } from '../components';
-import { Slider } from '@/components/ui';
+import { FullLoader, Slider } from '@/components/ui';
 import { PacksLayout } from '../layouts';
 import { useQuery } from '@tanstack/react-query';
-import { BoostsApi } from '@/modules/core/models/bosts';
+import { BoostsApi } from '@/modules/core';
 
 export const PacksPage = () => {
   // Using Tanstack Query to fetch boosts data
@@ -17,12 +17,9 @@ export const PacksPage = () => {
     queryFn: BoostsApi.boosts.getAll,
   });
 
-  console.log('Boosts data:', boostsData);
-
   return (
     <PacksLayout>
-      {isLoading && <div>Loading boosts...</div>}
-      {error && <div>Error loading boosts</div>}
+      {isLoading && <FullLoader isVisible={isLoading} />}
 
       {boostsData?.success && (
         <Slider

@@ -1,12 +1,10 @@
 'use client';
 
 import { AppLayout } from '@/layouts/app-layout';
-import {  InvitedUsersSection } from '../components';
+import { InvitedUsersSection } from '../components';
 import { Task as TaskComponent } from '@/components/task';
 import { useQuery } from '@tanstack/react-query';
 import { WalletApi } from '@/modules/core/models/wallet';
-import { FullLoader } from '@/components/ui';
-
 
 export function InvitesPage() {
   const { data: rewardsInfo } = useQuery({
