@@ -80,5 +80,5 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const isAuthenticated_ = isDev ? true : isAuthenticated;
 
-  return <>{isAuthenticated_ ? children : <FullLoader />}</>;
+  return <>{isAuthenticated_ ? children : <FullLoader isVisible />}</>;
 };

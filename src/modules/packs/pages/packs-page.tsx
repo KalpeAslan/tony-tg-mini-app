@@ -26,7 +26,7 @@ export const PacksPage = () => {
 
   return (
     <PacksLayout>
-      {isLoading && <FullLoader isVisible={isLoading} />}
+      {/* {isLoading && <FullLoader isVisible={isLoading} />} */}
 
       {boostsData?.success && (
         <Swiper

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './FullLoader.module.css';
 
 interface FullLoaderProps {
   isVisible?: boolean;
@@ -6,13 +7,13 @@ interface FullLoaderProps {
 
 export const FullLoader: React.FC<FullLoaderProps> = ({ isVisible = true }) => {
   if (!isVisible) return null;
-  
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
-      <div className="relative w-full max-w-md">
+    <div className={styles.container}>
+      <div className={styles.videoContainer}>
         <video
           src="/loader.MP4"
-          className="w-full h-auto"
+          className={styles.backgroundVideo}
           autoPlay
           loop
           muted
@@ -21,4 +22,4 @@ export const FullLoader: React.FC<FullLoaderProps> = ({ isVisible = true }) => {
       </div>
     </div>
   );
-}; 
+};

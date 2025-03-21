@@ -5,11 +5,17 @@ import { InvitedUsersSection } from '../components';
 import { Task as TaskComponent } from '@/components/task';
 import { useQuery } from '@tanstack/react-query';
 import { WalletApi } from '@/modules/core/models/wallet';
+import { ReferralsApi } from '@/modules/core/models/referrals';
 
 export function InvitesPage() {
   const { data: rewardsInfo } = useQuery({
     queryKey: ['walletRewardsInfo'],
     queryFn: () => WalletApi.wallets.rewards.info(),
+  });
+
+  const { data: invitesData, isLoading: invitesLoading } = useQuery({
+    queryKey: ['referralsInvites'],
+    queryFn: () => ReferralsApi.invites.getInvites(),
   });
 
   return (
@@ -30,7 +36,10 @@ export function InvitesPage() {
           />
         </div>
 
-        <InvitedUsersSection referralPercent={rewardsInfo?.referralPercent || 0} />
+        <InvitedUsersSection
+          referralPercent={rewardsInfo?.referralPercent || 0}
+          invitedUsers={invitesData?.invites || []}
+        />
       </div>
     </AppLayout>
   );
