@@ -1,9 +1,10 @@
 import { TonyDevice } from './parts';
 import { Task } from '@/components/task';
-import { Button, SectionMessage } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { formatNumber } from '@/lib/utils';
 import { BostItem as PackItemType } from '@/modules/core';
 import { PaymentsApi } from '@/modules/core/models/payments';
+import { invoice } from '@telegram-apps/sdk-react';
 import { FC, useState } from 'react';
 
 interface PackItemProps {
@@ -28,6 +29,7 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
       } else {
         console.log('stars');
         response = await PaymentsApi.stars.invoice({ bostId: String(data.id) });
+        invoice.open(response.paymentLink);
       }
 
       console.log(`${currency.toUpperCase()} invoice response:`, response);

@@ -9,12 +9,12 @@ export interface PaymentInvoiceRequest {
  * Interface for stars payment invoice response
  */
 export interface StarsPaymentInvoiceResponse {
-  data: any;
+  paymentLink: string;
 }
 
 /**
  * Interface for TON payment invoice response
  */
 export interface TonPaymentInvoiceResponse {
-  data: any;
+  paymentLink: string;
 } 
