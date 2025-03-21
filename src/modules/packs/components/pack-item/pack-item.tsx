@@ -29,7 +29,8 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
       } else {
         console.log('stars');
         response = await PaymentsApi.stars.invoice({ bostId: String(data.id) });
-        invoice.open(response.paymentLink);
+        console.log('response', response.paymentLink);
+        openInvoice(response.paymentLink);
       }
 
       console.log(`${currency.toUpperCase()} invoice response:`, response);
@@ -37,6 +38,14 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
       console.error(`Error getting ${currency} invoice:`, error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const openInvoice = async (paymentLink: string) => {
+    if (!invoice.isOpened()) {
+      await invoice.open(paymentLink, 'url');
+      const isOpened = invoice.isOpened();
+      console.log('isOpened', isOpened);
     }
   };
 
