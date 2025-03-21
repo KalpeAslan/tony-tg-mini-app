@@ -14,7 +14,7 @@ export const MyPacksPage = () => {
 
   return (
     <PacksLayout>
-      {isLoading && <FullLoader isVisible={isLoading} />}
+      {/* {isLoading && <FullLoader isVisible={isLoading} />} */}
       <PacksList activeBoosts={activeBoosts?.userBosts || []} />
     </PacksLayout>
   );

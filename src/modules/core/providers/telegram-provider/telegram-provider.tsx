@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, type PropsWithChildren, useEffect, useRef } from 'react';
-import { useLaunchParams, expandViewport } from '@telegram-apps/sdk-react';
+import { useLaunchParams, expandViewport, requestFullscreen } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { init } from './init';
@@ -38,11 +38,16 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
     }
   });
 
-  useEffect(() => {
-    if (expandViewport.isAvailable()) {
-      expandViewport();
-    }
-  }, [expandViewport]);
+  // useEffect(() => {
+  //   console.log('expandViewport', expandViewport.isAvailable());
+  //   if (requestFullscreen.isAvailable()) {
+  //     requestFullscreen();
+  //   }
+  // }, [expandViewport]);
+
+  // useEffect(() => {
+  //   // makeStick();
+  // }, []);
 
   return (
     <TonConnectUIProvider
@@ -66,8 +71,6 @@ export function TelegramProvider(props: PropsWithChildren) {
   // the Server Side Rendering. That's why we are showing loader on the server
   // side.
   const didMount = useDidMount();
-
-  console.log('didMount', didMount);
 
   return didMount ? <Root {...props} /> : <div className="root__loading">Loading</div>;
 }

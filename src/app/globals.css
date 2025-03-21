@@ -131,3 +131,33 @@ a {
     @apply text-[color:var(--text-muted)];
   }
 }
+
+
+.mobile-body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.mobile-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--bg-gradient);
+  z-index: 1;
+}
+
+.mobile-content {
+  height: calc(100% + 1px);
+}
+
+.content_yellow {
+  background: linear-gradient(to bottom, var(--theme-yellow), var(--theme-orange-light), var(--theme-orange));
+}
+
+.content_purple {
+  background:  var(--bg-gradient);
+}

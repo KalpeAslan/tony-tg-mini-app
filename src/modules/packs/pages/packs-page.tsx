@@ -8,18 +8,14 @@ import { BoostsApi } from '@/modules/core';
 
 export const PacksPage = () => {
   // Using Tanstack Query to fetch boosts data
-  const {
-    data: boostsData,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: boostsData, isLoading } = useQuery({
     queryKey: ['boosts'],
     queryFn: BoostsApi.boosts.getAll,
   });
 
   return (
     <PacksLayout>
-      {isLoading && <FullLoader isVisible={isLoading} />}
+      {/* {isLoading && <FullLoader isVisible={isLoading} />} */}
 
       {boostsData?.success && (
         <Slider
