@@ -52,6 +52,7 @@ export function Button({
     sm: 'text-sm py-2 px-4',
     md: 'text-lg py-3 px-6',
     lg: 'text-2xl py-4 px-8',
+    'extra-sm': 'text-sm py-2 px-4',
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';

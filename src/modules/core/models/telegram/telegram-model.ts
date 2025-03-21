@@ -50,20 +50,3 @@ export interface TelegramReferralLinkResponse {
   error?: string;
 }
 
-/**
- * Interface for Telegram process startapp request
- */
-export interface TelegramProcessStartAppRequest {
-  telegramId: string;
-  startAppParam: string;
-}
-
-/**
- * Interface for Telegram process startapp response
- */
-export interface TelegramProcessStartAppResponse {
-  success: boolean;
-  message?: string;
-  error?: string;
-} 
-

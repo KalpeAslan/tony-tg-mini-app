@@ -9,7 +9,7 @@ export type ButtonVariant =
   | 'blue'
   | 'green';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'extra-sm';
 
 // Navigation types
 export type TabName = 'shack' | 'invites' | 'airdrop' | 'packs';

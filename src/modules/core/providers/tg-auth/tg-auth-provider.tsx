@@ -5,14 +5,11 @@ import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { TelegramAuthResponse, TelegramApi } from '../../models';
-import { isValidJWT } from './util';
-
+import { FullLoader } from '@/components/ui';
+import { usePathname } from 'next/navigation';
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
-  const telegramUser = useSignal(initData.user);
-  const startAppParam = useSignal(initData.startParam);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [processedStartParam, setProcessedStartParam] = useState(false);
 
   // Query for fetching user data
   const { refetch: refetchUserData } = useQuery({
@@ -27,32 +24,18 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
           setIsAuthenticated(true);
         } else {
           console.error('❌ Failed to fetch user data:', response.error);
-          localStorage.removeItem('accessToken');
           setIsAuthenticated(false);
         }
 
         return response;
       } catch (error) {
         console.error('❌ Error fetching user data:', error);
-        localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
         throw error;
       }
     },
     enabled: false, // Don't run automatically
     retry: false,
-  });
-
-  // Create a mutation for processing startapp parameter
-  const { mutate: processStartApp } = useMutation({
-    mutationFn: TelegramApi.telegram.processStartApp,
-    onSuccess: data => {
-      console.log('✅ StartApp parameter processed successfully:', data);
-      setProcessedStartParam(true);
-    },
-    onError: error => {
-      console.error('❌ Error processing StartApp parameter:', error);
-    },
   });
 
   // Create a mutation for the Telegram WebApp authentication
@@ -86,42 +69,16 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   });
 
   useEffect(() => {
-    // Check if we already have a token in localStorage
-    const existingToken = localStorage.getItem('accessToken');
-
-    if (existingToken) {
-      if (isValidJWT(existingToken)) {
-        refetchUserData();
-      } else {
-        localStorage.removeItem('accessToken');
-
-        if (initDataRaw) {
-          console.log('initDataRaw 1', initDataRaw);
-          authenticateTelegram(initDataRaw);
-        }
-      }
-    } else {
-      if (initDataRaw) {
-        console.log('initDataRaw 2', initDataRaw);
-        authenticateTelegram(initDataRaw);
-      }
+    // Always authenticate with Telegram when initDataRaw is available
+    if (initDataRaw) {
+      console.log('initDataRaw', initDataRaw);
+      authenticateTelegram(initDataRaw);
     }
   }, [initDataRaw]);
-
-  // Process startapp parameter if it exists and user is authenticated
-  useEffect(() => {
-    if (isAuthenticated && startAppParam && telegramUser?.id && !processedStartParam) {
-      console.log('📱 Processing startapp parameter:', startAppParam);
-      processStartApp({
-        telegramId: telegramUser.id.toString(),
-        startAppParam: startAppParam,
-      });
-    }
-  }, [isAuthenticated, startAppParam, telegramUser, processedStartParam]);
 
   const isDev = process.env.NODE_ENV === 'development';
 
   const isAuthenticated_ = isDev ? true : isAuthenticated;
 
-  return <>{isAuthenticated_ ? children : <div>Not authenticated</div>}</>;
+  return <>{isAuthenticated_ ? children : <FullLoader />}</>;
 };
