@@ -66,7 +66,6 @@ export function Button({
   return (
     <button
       className={cn(baseStyles, variantStyles[variant], sizeStyles[size], widthStyle, className)}
-      onClick={handleInteraction}
       onTouchStart={e => e.currentTarget.classList.add('touch-active')}
       onTouchEnd={e => {
         e.currentTarget.classList.remove('touch-active');

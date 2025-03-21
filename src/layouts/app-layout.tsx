@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from 'react';
 import { Navigation } from '@/modules/core';
 import { TabName } from '@/lib/types';
-import { requestFullscreen, retrieveLaunchParams } from '@telegram-apps/sdk-react';
+import { retrieveLaunchParams, viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
 interface AppLayoutProps {
   children: ReactNode;
@@ -17,11 +17,23 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
   const { setTheme } = useNextTheme();
 
   useEffect(() => {
-    if (requestFullscreen.isAvailable()) {
-      requestFullscreen().then(() => {
-        makeStick(isPurpleLayout);
-      });
-    }
+    (async () => {
+      if (viewport.mount.isAvailable()) {
+        try {
+          await viewport.mount();
+          viewport.expand();
+        } catch (error) {
+          console.error('Error mounting viewport:', error);
+        }
+      }
+
+      try {
+        await viewport.requestFullscreen();
+      } catch (error) {
+        console.error('Error requesting fullscreen:', error);
+      }
+      makeStick(isPurpleLayout);
+    })();
   }, []);
 
   useEffect(() => {
@@ -44,7 +56,9 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
 
         {/* Bottom navigation */}
         <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
-          <Navigation activeTab={activeTab} className="" />
+          <div className="fixed bottom-5 left-0 right-0">
+            <Navigation activeTab={activeTab} className="" />
+          </div>
         </div>
       </div>
       {isPurpleLayout && (

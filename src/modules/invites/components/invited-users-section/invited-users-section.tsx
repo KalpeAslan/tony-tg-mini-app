@@ -50,7 +50,7 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({ referralPerc
         </p>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 overflow-y-auto h-full">
         {mockInvitedUsers.map(user => (
           <InvitedUserItem key={user.id} user={user} />
         ))}

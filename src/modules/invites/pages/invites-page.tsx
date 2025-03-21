@@ -15,7 +15,7 @@ export function InvitesPage() {
   return (
     <AppLayout activeTab="invites">
       {/* <FullLoader isVisible={true} /> */}
-      <div className="flex flex-col gap-6 pt-6">
+      <div className="flex flex-col gap-6" style={{ paddingTop: 150 }}>
         <div className="flex flex-col gap-2">
           <TaskComponent
             title="Invite dudes"

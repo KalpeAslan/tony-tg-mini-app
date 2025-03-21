@@ -218,10 +218,10 @@ export const IconDefs = () => (
 
         {/* PACKS */}
         <symbol id="tony-packs" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g style={{ mixBlendMode: 'luminosity' }} filter="url(#filter0_d_66_1076)">
+          <g style={{ mixBlendMode: 'luminosity' }} filter="url(#filter0_d_66_1107)">
             <path
-              d="M39.9823 13.2865C39.9392 7.93945 38.5084 2.72146 37.7445 2.01138C36.9484 1.3551 29.622 0.0532889 22.0051 0.0102539C14.3774 0.0425301 7.05098 1.34434 6.25486 2.00062C5.48026 2.72146 4.06016 7.93945 4.01712 13.2865C3.84499 18.6336 5.10372 24.2067 5.80301 25.6591C6.45927 26.8856 14.13 28.5317 22.0051 28.6285C29.8802 28.5317 37.5401 26.8856 38.2071 25.6591C38.9064 24.2067 40.1652 18.6336 39.993 13.2865H39.9823Z"
-              fill="url(#paint0_radial_66_1076)"
+              d="M39.9822 13.2865C39.9392 7.93945 38.5084 2.72146 37.7445 2.01138C36.9484 1.3551 29.622 0.0532889 22.005 0.0102539C14.3774 0.0425301 7.05095 1.34434 6.25483 2.00062C5.48023 2.72146 4.06013 7.93945 4.01709 13.2865C3.84496 18.6336 5.10369 24.2067 5.80298 25.6591C6.45924 26.8856 14.1299 28.5317 22.005 28.6285C29.8802 28.5317 37.5401 26.8856 38.2071 25.6591C38.9064 24.2067 40.1651 18.6336 39.993 13.2865H39.9822Z"
+              fill="url(#paint0_radial_66_1107)"
             />
             <path
               d="M4.01795 15.3748C4.16856 19.9903 5.19061 24.3368 5.80383 25.5956C6.46009 26.8221 14.1308 28.4682 22.0059 28.565C29.881 28.4682 37.541 26.8221 38.208 25.5956C38.8104 24.3368 39.8432 19.9903 39.9939 15.3748C39.9939 15.4178 39.9939 15.4608 39.9939 15.5039C40.166 20.851 38.9073 26.424 38.208 27.8764C37.5517 29.1029 29.881 30.749 22.0059 30.8458C14.1308 30.749 6.47085 29.1029 5.80383 27.8764C5.09378 26.424 3.83505 20.851 4.01795 15.5039C4.01795 15.4608 4.01795 15.4178 4.01795 15.3748Z"
@@ -236,40 +236,40 @@ export const IconDefs = () => (
           </g>
           <defs>
             <filter
-              id="filter0_d_66_1076"
+              id="filter0_d_66_1107"
               x="0"
               y="0"
-              width="44.0099"
+              width="44.0098"
               height="38.8458"
               filterUnits="userSpaceOnUse"
               colorInterpolationFilters="sRGB"
             >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                 result="hardAlpha"
               />
               <feOffset dy="4" />
               <feGaussianBlur stdDeviation="2" />
               <feComposite in2="hardAlpha" operator="out" />
-              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_66_1076" />
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_66_1107" />
               <feBlend
                 mode="normal"
                 in="SourceGraphic"
-                in2="effect1_dropShadow_66_1076"
+                in2="effect1_dropShadow_66_1107"
                 result="shape"
               />
             </filter>
             <radialGradient
-              id="paint0_radial_66_1076"
+              id="paint0_radial_66_1107"
               cx="0"
               cy="0"
               r="1"
               gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(22.1466 34.0204) scale(34.2079 30.6824)"
+              gradientTransform="translate(22.1465 34.0204) scale(34.2079 30.6824)"
             >
               <stop stopColor="#FFB42A" />
               <stop offset="0.31" stopColor="#FFBF34" />
