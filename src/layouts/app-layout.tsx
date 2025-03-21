@@ -87,7 +87,7 @@ const makeStick = (isPurple: boolean) => {
 
   // Some versions of Telegram don't need the classes above.
   if (['macos', 'tdesktop', 'weba', 'web', 'webk'].includes(lp.platform)) {
-    return;
+    // return;
   }
 
   document.body.classList.add('mobile-body');
