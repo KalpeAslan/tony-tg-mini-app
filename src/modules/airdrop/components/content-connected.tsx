@@ -2,11 +2,10 @@
 
 import { FC, PropsWithChildren } from 'react';
 import { Button } from '@/components';
-import { useTonConnectUI } from '@tonconnect/ui-react';
-import { InviteFriendsButton } from '@/modules/core';
+import { InviteFriendsButton, useWallet } from '@/modules/core';
 
 export const ContentConnected: FC = () => {
-  const [tonConnectUI] = useTonConnectUI();
+  const { disconnect } = useWallet();
 
   return (
     <div className="w-full">
@@ -28,7 +27,7 @@ export const ContentConnected: FC = () => {
             Connected
           </Button>
           <p
-            onClick={() => tonConnectUI.disconnect()}
+            onClick={disconnect}
             className="text-sm font-bold text-white opacity-50 font-roboto mt-3 cursor-pointer"
           >
             Log Out

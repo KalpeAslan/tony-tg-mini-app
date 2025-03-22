@@ -36,7 +36,7 @@ export function PacksStoreWidget() {
         >
           {boostsData.bosts.map((boost: BostItem) => (
             <SwiperSlide key={boost.id}>
-              <PackItem data={boost} />
+              <PackItem boost={boost} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -3,16 +3,18 @@
 import { useSignal } from '@telegram-apps/sdk-react';
 import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { TelegramAuthResponse, TelegramApi } from '../../models';
 import { FullLoader } from '@/components/ui';
-import { usePathname } from 'next/navigation';
 import { useTimeout } from 'usehooks-ts';
+import { useMe } from '../../hooks';
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showMinLoader, setShowMinLoader] = useState(true);
+
+  const { refetchUserData, isLoading } = useMe();
 
   // Set minimum loader time
   useTimeout(() => {
@@ -20,31 +22,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   }, 1000);
 
   // Query for fetching user data
-  const { refetch: refetchUserData, isLoading } = useQuery({
-    queryKey: ['telegramMe'],
-    queryFn: async () => {
-      try {
-        const response = await TelegramApi.telegram.me();
-        console.log('response', response);
-
-        if (response.success && response.user) {
-          console.log('👤 User data fetched successfully:', response.user);
-          setIsAuthenticated(true);
-        } else {
-          console.error('❌ Failed to fetch user data:', response.error);
-          setIsAuthenticated(false);
-        }
-
-        return response;
-      } catch (error) {
-        console.error('❌ Error fetching user data:', error);
-        setIsAuthenticated(false);
-        throw error;
-      }
-    },
-    enabled: false, // Don't run automatically
-    retry: false,
-  });
 
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({

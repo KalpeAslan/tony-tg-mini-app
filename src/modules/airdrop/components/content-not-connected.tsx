@@ -3,10 +3,10 @@
 import { Button } from '@/components';
 import Image from 'next/image';
 import { FC } from 'react';
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { useWallet } from '@/modules/core';
 
 export const ContentNotConnected: FC = () => {
-  const [tonConnectUI] = useTonConnectUI();
+  const { connect } = useWallet();
 
   return (
     <div className="flex flex-col items-center justify-center py-2 px-4">
@@ -33,7 +33,7 @@ export const ContentNotConnected: FC = () => {
       </p>
 
       <div className="w-full flex flex-col items-center gap-2">
-        <Button onClick={() => tonConnectUI.openModal()}>link $ton wallet</Button>
+        <Button onClick={connect}>link $ton wallet</Button>
         <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
           Wallet Not Connected
         </p>

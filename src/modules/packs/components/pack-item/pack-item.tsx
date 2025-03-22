@@ -3,74 +3,89 @@ import { TonyDevice } from './parts';
 import { Task } from '@/components/task';
 import { Button } from '@/components/ui';
 import { formatNumber } from '@/lib/utils';
-import { BostItem as PackItemType } from '@/modules/core';
+import { BostItem as PackItemType, useMe, useWallet } from '@/modules/core';
 import { PaymentsApi, TonPaymentInvoiceResponse } from '@/modules/core/models/payments';
 import { invoice } from '@telegram-apps/sdk-react';
-import { SendTransactionRequest } from '@tonconnect/sdk';
-import { useTonConnectUI } from '@tonconnect/ui-react';
 import { FC, useState } from 'react';
 
 interface PackItemProps {
-  data: PackItemType;
+  boost: PackItemType;
 }
 
 type Currency = 'ton' | 'stars';
 
-export const PackItem: FC<PackItemProps> = ({ data }) => {
+export const PackItem: FC<PackItemProps> = ({ boost }) => {
+  const { isConnected, loading: walletLoading, sendTonTransaction, connect } = useWallet();
   const [loading, setLoading] = useState(false);
 
-  const [tonConnectUI] = useTonConnectUI();
+  const { userData } = useMe();
 
   const handleClickBuy = (currency: Currency) => async () => {
-    try {
-      setLoading(true);
+    // Check if wallet is connected
+    if (!isConnected) {
+      connect();
+      return;
+    }
 
+    setLoading(true);
+    try {
       if (currency === 'ton') {
-        const response = await PaymentsApi.ton.invoice({ bostId: String(data.id) });
-        openTonInvoice(response);
+        await purchaseWithTon(String(boost.id));
       } else {
-        const response = await PaymentsApi.stars.invoice({ bostId: String(data.id) });
-        openInvoice(response.paymentLink);
+        await purchaseWithStars(String(boost.id));
       }
-    } catch (error) {
-      console.error(`Error getting ${currency} invoice:`, error);
     } finally {
       setLoading(false);
     }
   };
 
-  const openInvoice = async (paymentLink: string) => {
-    if (!invoice.isOpened()) {
-      await invoice.open(paymentLink, 'url');
-      const isOpened = invoice.isOpened();
-    }
-  };
-
-  const openTonInvoice = async (data: TonPaymentInvoiceResponse) => {
+  // Purchase with TON
+  const purchaseWithTon = async (bostId: string) => {
     try {
-      setLoading(true);
-      const nanoTons = Math.pow(10, 9);
-      console.log('data', data);
-
-      const transaction: SendTransactionRequest = {
-        validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
-        messages: [
-          {
-            address: appConfig.tonAddress,
-            amount: (data.amount * nanoTons).toString(),
-          },
-        ],
-      };
-
-      console.log('transaction', transaction);
-
-      await tonConnectUI.sendTransaction(transaction);
+      const response = await PaymentsApi.ton.invoice({ bostId });
+      return await processTonInvoice(response);
     } catch (error) {
-      console.error(`Error sending TON transaction: ${error}`, error);
-    } finally {
-      setLoading(false);
+      console.error('Error getting TON invoice:', error);
+      return false;
     }
   };
+
+  // Purchase with Stars
+  const purchaseWithStars = async (bostId: string) => {
+    try {
+      const response = await PaymentsApi.stars.invoice({ bostId });
+      return await processStarsInvoice(response.paymentLink);
+    } catch (error) {
+      console.error('Error getting Stars invoice:', error);
+      return false;
+    }
+  };
+
+  // Process TON invoice
+  const processTonInvoice = async (data: TonPaymentInvoiceResponse) => {
+    return await sendTonTransaction(
+      appConfig.tonAddress,
+      data.amount,
+      boost.id.toString(),
+      userData?.user?.id ?? ''
+    );
+  };
+
+  // Process Stars invoice
+  const processStarsInvoice = async (paymentLink: string) => {
+    try {
+      if (!invoice.isOpened()) {
+        await invoice.open(paymentLink, 'url');
+        return invoice.isOpened();
+      }
+      return false;
+    } catch (error) {
+      console.error('Error opening stars invoice:', error);
+      return false;
+    }
+  };
+
+  const isButtonLoading = loading || walletLoading;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
@@ -89,10 +104,10 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
               fullWidth
               onClick={handleClickBuy('ton')}
               className="max-h-[55px]"
-              loading={loading}
+              loading={isButtonLoading}
             >
               <div className="flex flex-col items-center justify-center text-center">
-                <p className="text-xl font-roboto">{data.price.ton}</p>
+                <p className="text-xl font-roboto">{boost.price.ton}</p>
                 <p className="text-xl leading-none">TON</p>
               </div>
             </Button>
@@ -103,12 +118,12 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
               size="extra-sm"
               variant="green"
               fullWidth
-              loading={loading}
+              loading={isButtonLoading}
               onClick={handleClickBuy('stars')}
               className="max-h-[55px]"
             >
               <div className="flex flex-col items-center justify-center text-center">
-                <p className="text-xl font-roboto">{formatNumber(+data.price.xtr)}</p>
+                <p className="text-xl font-roboto">{formatNumber(+boost.price.xtr)}</p>
                 <p className="text-xl leading-none">Stars</p>
               </div>
             </Button>
@@ -116,7 +131,7 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
         </div>
       </div>
 
-      <Task key={data.id} title={data.name} img={data.image} />
+      <Task key={boost.id} title={boost.name} img={boost.image} />
     </div>
   );
 };

@@ -3,12 +3,11 @@
 import { AppLayout } from '@/layouts/app-layout';
 import { Logo } from '@/components/logo/logo';
 import { ContentNotConnected, ContentConnected } from '../components';
-import { useTonAddress } from '@tonconnect/ui-react';
+import { useWallet } from '@/modules/core';
 import { cn } from '@/lib/utils';
 
 export function AirdropPage() {
-  const userFriendlyAddress = useTonAddress();
-  const isConnected = !!userFriendlyAddress;
+  const { isConnected } = useWallet();
 
   return (
     <AppLayout activeTab="airdrop">
