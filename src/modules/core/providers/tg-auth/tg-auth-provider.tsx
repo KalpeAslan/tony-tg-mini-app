@@ -67,5 +67,5 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const showLoader = isLoading || isPending || !isAuthenticated_ || showMinLoader;
 
-  return <>{showLoader ? <FullLoader isVisible /> : children}</>;
+  return <>{children}</>;
 };
