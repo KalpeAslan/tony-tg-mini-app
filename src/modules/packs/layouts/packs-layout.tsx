@@ -17,7 +17,7 @@ export const PacksLayout: FC<PacksLayoutProps> = ({ children, activeTab, onTabCl
 
   return (
     <AppLayout activeTab="packs">
-      <div className="w-full h-full justify-start flex flex-col items-center gap-4 pt-20">
+      <div className="w-full h-full justify-start flex flex-col items-center gap-4 pt-[100px]">
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <div className="flex gap-4 w-full">
             <SectionMessage
