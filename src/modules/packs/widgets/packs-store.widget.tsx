@@ -39,20 +39,20 @@ export function PacksStoreWidget() {
               <PackItem data={boost} />
             </SwiperSlide>
           ))}
-          <div className="flex justify-center mt-4 mb-6 gap-2">
-            {boostsData.bosts.map((_, index) => (
-              <button
-                key={index}
-                className={`w-[6px] h-[6px] rounded-full transition-opacity ${
-                  activeIndex === index ? 'bg-white' : 'bg-white opacity-50'
-                }`}
-                onClick={() => swiperInstance?.slideTo(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
         </Swiper>
       )}
+      <div className="flex justify-center mt-4 mb-6 gap-2">
+        {boostsData?.bosts.map((_, index) => (
+          <button
+            key={index}
+            className={`w-[6px] h-[6px] rounded-full transition-opacity ${
+              activeIndex === index ? 'bg-white' : 'bg-white opacity-50'
+            }`}
+            onClick={() => swiperInstance?.slideTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </>
   );
 }
