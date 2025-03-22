@@ -1,10 +1,13 @@
+import { appConfig } from '@/configs/app.config';
 import { TonyDevice } from './parts';
 import { Task } from '@/components/task';
 import { Button } from '@/components/ui';
 import { formatNumber } from '@/lib/utils';
 import { BostItem as PackItemType } from '@/modules/core';
-import { PaymentsApi } from '@/modules/core/models/payments';
+import { PaymentsApi, TonPaymentInvoiceResponse } from '@/modules/core/models/payments';
 import { invoice } from '@telegram-apps/sdk-react';
+import { SendTransactionRequest } from '@tonconnect/sdk';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 import { FC, useState } from 'react';
 
 interface PackItemProps {
@@ -16,24 +19,19 @@ type Currency = 'ton' | 'stars';
 export const PackItem: FC<PackItemProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
 
-  const handleClickBuy = (currency: Currency) => async () => {
-    console.log(currency);
+  const [tonConnectUI] = useTonConnectUI();
 
+  const handleClickBuy = (currency: Currency) => async () => {
     try {
       setLoading(true);
 
-      let response;
       if (currency === 'ton') {
-        console.log('ton');
-        response = await PaymentsApi.ton.invoice({ bostId: String(data.id) });
+        const response = await PaymentsApi.ton.invoice({ bostId: String(data.id) });
+        openTonInvoice(response);
       } else {
-        console.log('stars');
-        response = await PaymentsApi.stars.invoice({ bostId: String(data.id) });
-        console.log('response', response.paymentLink);
+        const response = await PaymentsApi.stars.invoice({ bostId: String(data.id) });
         openInvoice(response.paymentLink);
       }
-
-      console.log(`${currency.toUpperCase()} invoice response:`, response);
     } catch (error) {
       console.error(`Error getting ${currency} invoice:`, error);
     } finally {
@@ -45,7 +43,32 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
     if (!invoice.isOpened()) {
       await invoice.open(paymentLink, 'url');
       const isOpened = invoice.isOpened();
-      console.log('isOpened', isOpened);
+    }
+  };
+
+  const openTonInvoice = async (data: TonPaymentInvoiceResponse) => {
+    try {
+      setLoading(true);
+      const nanoTons = Math.pow(10, 9);
+      console.log('data', data);
+
+      const transaction: SendTransactionRequest = {
+        validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+        messages: [
+          {
+            address: appConfig.tonAddress,
+            amount: (data.amount * nanoTons).toString(),
+          },
+        ],
+      };
+
+      console.log('transaction', transaction);
+
+      await tonConnectUI.sendTransaction(transaction);
+    } catch (error) {
+      console.error(`Error sending TON transaction: ${error}`, error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,9 +89,10 @@ export const PackItem: FC<PackItemProps> = ({ data }) => {
               fullWidth
               onClick={handleClickBuy('ton')}
               className="max-h-[55px]"
+              loading={loading}
             >
               <div className="flex flex-col items-center justify-center text-center">
-                <p className="text-xl font-roboto">{formatNumber(data.price.ton)}</p>
+                <p className="text-xl font-roboto">{data.price.ton}</p>
                 <p className="text-xl leading-none">TON</p>
               </div>
             </Button>

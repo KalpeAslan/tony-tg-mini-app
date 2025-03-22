@@ -16,5 +16,7 @@ export interface StarsPaymentInvoiceResponse {
  * Interface for TON payment invoice response
  */
 export interface TonPaymentInvoiceResponse {
-  paymentLink: string;
-} 
+  success: boolean;
+  amount: number;
+  paymentId: number;
+}

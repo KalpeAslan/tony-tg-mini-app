@@ -41,7 +41,7 @@ export function PacksStoreWidget() {
           ))}
         </Swiper>
       )}
-      <div className="flex justify-center mt-4 mb-6 gap-2">
+      <div className="flex justify-center mt-2 gap-2">
         {boostsData?.bosts.map((_, index) => (
           <button
             key={index}

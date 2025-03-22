@@ -6,7 +6,10 @@ export class AppConfig {
   get apiUrl(): string {
     return process.env.NEXT_PUBLIC_API_URL as string;
   }
-}
 
+  get tonAddress(): string {
+    return process.env.NEXT_PUBLIC_TON_ADDRESS as string;
+  }
+}
 
 export const appConfig = new AppConfig();
