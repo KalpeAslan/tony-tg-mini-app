@@ -7,9 +7,17 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { TelegramAuthResponse, TelegramApi } from '../../models';
 import { FullLoader } from '@/components/ui';
 import { usePathname } from 'next/navigation';
+import { useTimeout } from 'usehooks-ts';
+
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showMinLoader, setShowMinLoader] = useState(true);
+
+  // Set minimum loader time
+  useTimeout(() => {
+    setShowMinLoader(false);
+  }, 1000);
 
   // Query for fetching user data
   const { refetch: refetchUserData, isLoading } = useQuery({
@@ -80,7 +88,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const isAuthenticated_ = isDev ? true : isAuthenticated;
 
-  const showLoader = isLoading || isPending || !isAuthenticated_;
+  const showLoader = isLoading || isPending || !isAuthenticated_ || showMinLoader;
 
   return <>{showLoader ? <FullLoader isVisible /> : children}</>;
 };
