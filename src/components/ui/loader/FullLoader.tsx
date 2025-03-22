@@ -18,6 +18,10 @@ export const FullLoader: React.FC<FullLoaderProps> = ({ isVisible = true }) => {
           loop
           muted
           playsInline
+          preload="auto"
+          poster="/loader-poster.png"
+          disablePictureInPicture
+          disableRemotePlayback
         />
       </div>
     </div>
