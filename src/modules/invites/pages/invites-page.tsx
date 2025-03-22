@@ -38,7 +38,7 @@ export function InvitesPage() {
           <InviteFriendsButton className="flex items-center text-3xl" />
         </div>
 
-        <div className="w-full h-full overflow-y-auto">
+        <div className="w-full h-full pb-[100px]">
           <InvitedUsersSection
             referralPercent={rewardsInfo?.referralPercent || 0}
             invitedUsers={invitesData?.invites || []}

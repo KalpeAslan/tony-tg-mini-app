@@ -25,7 +25,7 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
         </p>
       </div>
 
-      <div className="flex flex-col gap-2 overflow-y-auto h-full">
+      <div className="flex flex-col gap-2 overflow-y-auto max-h-[300px]">
         {invitedUsers.map(user => (
           <InvitedUserItem key={user.id} user={user} />
         ))}
