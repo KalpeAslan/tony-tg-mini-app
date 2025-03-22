@@ -21,7 +21,7 @@ export function InvitesPage() {
 
   return (
     <AppLayout activeTab="invites">
-      <div className="w-full h-full items-center justify-start pt-10 gap-6 flex flex-col">
+      <div className="w-full h-full items-center justify-start gap-6 flex flex-col pt-[100px]">
         <div className="flex flex-col gap-2">
           <TaskComponent
             title="Invite dudes"
