@@ -23,7 +23,7 @@
   --color-warning: #E07A19;
   
   /* Background gradients for status classes */
-  --bg-neutral: linear-gradient(0deg, var(--color-neutral), var(--color-neutral)),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 100%);
+  --bg-neutral: linear-gradient(90deg, rgba(79,79,79,0.9794511554621849) 38%, rgba(122,120,120,1) 100%);
   --bg-success: linear-gradient(0deg, var(--color-success), var(--color-success)),linear-gradient(87.79deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 100%);
   --bg-info: linear-gradient(99deg, rgba(51,177,252,1) 43%, rgba(159,211,242,1) 100%);
   --bg-warning: linear-gradient(0deg, var(--color-warning), var(--color-warning)),linear-gradient(84.96deg, rgba(241, 24, 24, 0) 33.49%, rgba(241, 24, 24, 0.55) 100%);

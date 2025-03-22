@@ -12,7 +12,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Query for fetching user data
-  const { refetch: refetchUserData } = useQuery({
+  const { refetch: refetchUserData, isLoading } = useQuery({
     queryKey: ['telegramMe'],
     queryFn: async () => {
       try {
@@ -39,7 +39,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   });
 
   // Create a mutation for the Telegram WebApp authentication
-  const { mutate: authenticateTelegram } = useMutation({
+  const { mutate: authenticateTelegram, isPending } = useMutation({
     mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
     onSuccess: (data: TelegramAuthResponse) => {
       console.log('✅ Authentication response received:', { success: data.success });
@@ -80,5 +80,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const isAuthenticated_ = isDev ? true : isAuthenticated;
 
-  return <>{isAuthenticated_ ? children : <FullLoader isVisible />}</>;
+  const showLoader = isLoading || isPending || !isAuthenticated_;
+
+  return <>{showLoader ? <FullLoader isVisible /> : children}</>;
 };

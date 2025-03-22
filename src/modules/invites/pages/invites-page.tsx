@@ -6,6 +6,7 @@ import { Task as TaskComponent } from '@/components/task';
 import { useQuery } from '@tanstack/react-query';
 import { WalletApi } from '@/modules/core/models/wallet';
 import { ReferralsApi } from '@/modules/core/models/referrals';
+import { InviteFriendsButton } from '@/modules/core';
 
 export function InvitesPage() {
   const { data: rewardsInfo } = useQuery({
@@ -13,15 +14,14 @@ export function InvitesPage() {
     queryFn: () => WalletApi.wallets.rewards.info(),
   });
 
-  const { data: invitesData, isLoading: invitesLoading } = useQuery({
+  const { data: invitesData } = useQuery({
     queryKey: ['referralsInvites'],
     queryFn: () => ReferralsApi.invites.getInvites(),
   });
 
   return (
     <AppLayout activeTab="invites">
-      {/* <FullLoader isVisible={true} /> */}
-      <div className="flex flex-col gap-6" style={{ paddingTop: 150 }}>
+      <div className="w-full h-full items-center justify-start pt-10 gap-6 flex flex-col">
         <div className="flex flex-col gap-2">
           <TaskComponent
             title="Invite dudes"
@@ -34,12 +34,16 @@ export function InvitesPage() {
             description={`Earn ${rewardsInfo?.premiumReward || ''} Tony Coins by inviting friends with Telegram Premium`}
             img="/invites/on-rocket.png"
           />
+
+          <InviteFriendsButton className="flex items-center text-3xl" />
         </div>
 
-        <InvitedUsersSection
-          referralPercent={rewardsInfo?.referralPercent || 0}
-          invitedUsers={invitesData?.invites || []}
-        />
+        <div className="w-full h-full overflow-y-auto">
+          <InvitedUsersSection
+            referralPercent={rewardsInfo?.referralPercent || 0}
+            invitedUsers={invitesData?.invites || []}
+          />
+        </div>
       </div>
     </AppLayout>
   );

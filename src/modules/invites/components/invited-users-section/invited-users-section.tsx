@@ -8,48 +8,6 @@ interface InvitedUsersSectionProps {
   invitedUsers: Invite[];
 }
 
-// const mockInvitedUsers: Invite[] = [
-//   {
-//     id: '1',
-//     name: 'John Doe',
-//     amount: 123,
-//     avatarUrl:
-//       'https://s3-alpha-sig.figma.com/img/1a48/6507/86c2355e0238118cc2eadda577290f80?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AgM2MQCGMpzHWqrJycBU66xw98WGyRj5actJC4zlcH-gQRMxEQhnkVyWQ49ylSc-Q7XpQr3ViT39nBCSnaged9vnorsxPEZ5nBNaN-DLafiIzS~2t9YxdhbuR9qMwMEYmqoa-NuJ~7rVS8mGeCrHxiJ9PohJT-3Nq6dqLIy8-XIGnM4~vklE1CkXL0rffpnAGymHzPdlYnsHsGrkivMue0MDpFRxPP16U6IpFYtWf8bCAP25hEdLWnvVjAuJ8h0o9~AEiIO9NUwSfzSJ9RjCZYJSSMyQg5FSyTGFfeEVWteWQuM0NO9qP1y5k9b4On8GfnstbqoR8bO5Cg2nbUlPiQ__',
-//   },
-
-//   {
-//     id: '2',
-//     name: 'John Doe',
-//     amount: 100000000,
-//     avatarUrl:
-//       'https://s3-alpha-sig.figma.com/img/1a48/6507/86c2355e0238118cc2eadda577290f80?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AgM2MQCGMpzHWqrJycBU66xw98WGyRj5actJC4zlcH-gQRMxEQhnkVyWQ49ylSc-Q7XpQr3ViT39nBCSnaged9vnorsxPEZ5nBNaN-DLafiIzS~2t9YxdhbuR9qMwMEYmqoa-NuJ~7rVS8mGeCrHxiJ9PohJT-3Nq6dqLIy8-XIGnM4~vklE1CkXL0rffpnAGymHzPdlYnsHsGrkivMue0MDpFRxPP16U6IpFYtWf8bCAP25hEdLWnvVjAuJ8h0o9~AEiIO9NUwSfzSJ9RjCZYJSSMyQg5FSyTGFfeEVWteWQuM0NO9qP1y5k9b4On8GfnstbqoR8bO5Cg2nbUlPiQ__',
-//   },
-//   {
-//     id: '3',
-//     name: 'John Doe',
-//     amount: 49736,
-//     avatarUrl:
-//       'https://s3-alpha-sig.figma.com/img/1a48/6507/86c2355e0238118cc2eadda577290f80?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AgM2MQCGMpzHWqrJycBU66xw98WGyRj5actJC4zlcH-gQRMxEQhnkVyWQ49ylSc-Q7XpQr3ViT39nBCSnaged9vnorsxPEZ5nBNaN-DLafiIzS~2t9YxdhbuR9qMwMEYmqoa-NuJ~7rVS8mGeCrHxiJ9PohJT-3Nq6dqLIy8-XIGnM4~vklE1CkXL0rffpnAGymHzPdlYnsHsGrkivMue0MDpFRxPP16U6IpFYtWf8bCAP25hEdLWnvVjAuJ8h0o9~AEiIO9NUwSfzSJ9RjCZYJSSMyQg5FSyTGFfeEVWteWQuM0NO9qP1y5k9b4On8GfnstbqoR8bO5Cg2nbUlPiQ__',
-//   },
-//   {
-//     id: '4',
-//     name: 'John Doe',
-//     amount: 234796345,
-//     avatarUrl:
-//       'https://s3-alpha-sig.figma.com/img/1a48/6507/86c2355e0238118cc2eadda577290f80?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AgM2MQCGMpzHWqrJycBU66xw98WGyRj5actJC4zlcH-gQRMxEQhnkVyWQ49ylSc-Q7XpQr3ViT39nBCSnaged9vnorsxPEZ5nBNaN-DLafiIzS~2t9YxdhbuR9qMwMEYmqoa-NuJ~7rVS8mGeCrHxiJ9PohJT-3Nq6dqLIy8-XIGnM4~vklE1CkXL0rffpnAGymHzPdlYnsHsGrkivMue0MDpFRxPP16U6IpFYtWf8bCAP25hEdLWnvVjAuJ8h0o9~AEiIO9NUwSfzSJ9RjCZYJSSMyQg5FSyTGFfeEVWteWQuM0NO9qP1y5k9b4On8GfnstbqoR8bO5Cg2nbUlPiQ__',
-//   },
-// ];
-
-// Helper function to convert Invite to InvitedUser format
-// const mapInviteToInvitedUser = (invite: Invite): Invite => {
-//   return {
-//     id: invite.id,
-//     name: invite.invitee?.telegramUsername || invite.telegramUsername || 'Unknown User',
-//     amount: invite.rewardAmount || 0,
-//     avatarUrl: 'https://via.placeholder.com/50', // Default avatar since we don't have actual avatar URLs in the Invite model
-//   };
-// };
-
 export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
   referralPercent,
   invitedUsers,
@@ -81,15 +39,13 @@ const InvitedUserItem = ({ user }: { user: Invite }) => {
     <div className="flex w-full justify-between align-center p-4 border-t border-tony-whiteBorderMedium">
       <div className="flex items-center gap-2">
         <Image
-          src={
-            'https://s3-alpha-sig.figma.com/img/1a48/6507/86c2355e0238118cc2eadda577290f80?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AgM2MQCGMpzHWqrJycBU66xw98WGyRj5actJC4zlcH-gQRMxEQhnkVyWQ49ylSc-Q7XpQr3ViT39nBCSnaged9vnorsxPEZ5nBNaN-DLafiIzS~2t9YxdhbuR9qMwMEYmqoa-NuJ~7rVS8mGeCrHxiJ9PohJT-3Nq6dqLIy8-XIGnM4~vklE1CkXL0rffpnAGymHzPdlYnsHsGrkivMue0MDpFRxPP16U6IpFYtWf8bCAP25hEdLWnvVjAuJ8h0o9~AEiIO9NUwSfzSJ9RjCZYJSSMyQg5FSyTGFfeEVWteWQuM0NO9qP1y5k9b4On8GfnstbqoR8bO5Cg2nbUlPiQ__'
-          }
+          src={user.invitee?.photoUrl || ''}
           alt={user.telegramUsername || ''}
           width={50}
           height={50}
           className="rounded-full border-white-translucent"
         />
-        <p className="font-roboto text-lg">{user.telegramUsername || 'Unknown User'}</p>
+        <p className="font-roboto text-lg">{user.invitee?.telegramUsername}</p>
       </div>
 
       <div className="flex items-center gap-2">
@@ -98,7 +54,7 @@ const InvitedUserItem = ({ user }: { user: Invite }) => {
         </p>
         <Image
           src="/invites/coin.png"
-          alt={user.telegramUsername || 'Unknown User'}
+          alt={user.invitee?.telegramUsername || 'Unknown User'}
           width={40}
           height={40}
         />

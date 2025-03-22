@@ -3,9 +3,9 @@
  */
 export interface Invite {
   id: string;
-  inviter: User;
+  inviter: Invitee;
   inviterId: string;
-  invitee?: User;
+  invitee?: Invitee;
   inviteeId?: string;
   isAccepted: boolean;
   telegramUsername?: string;
@@ -18,11 +18,18 @@ export interface Invite {
 /**
  * Interface for User with invite relationships
  */
-export interface User {
-  id: string;
-  sentInvites?: Invite[];
-  receivedInvites?: Invite[];
-  [key: string]: any;
+export interface Invitee {
+  id:               string;
+  photoUrl:         string;
+  firstName:        string;
+  lastName:         string;
+  isPremium:        boolean;
+  telegramId:       string;
+  telegramUsername: string;
+  referralCode:     string;
+  referrerId:       string;
+  createdAt:        Date;
+  updatedAt:        Date;
 }
 
 /**

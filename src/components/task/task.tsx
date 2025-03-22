@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 interface TaskProps {
   title: string;
   description?: string | ReactNode;
-  img: string | ReactNode;
+  img?: string | ReactNode;
 }
 
 export const Task: FC<TaskProps> = ({ title, description, img }) => {
@@ -30,14 +30,17 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
   const processedDescription =
     typeof description === 'string' ? highlightNumbers(description) : description;
 
+  const renderImage = () => {
+    if (!img) return null;
+    if (typeof img === 'string') {
+      return <img src={img} alt={title} className="w-[84px] h-[84px] object-cover" />;
+    }
+    return img;
+  };
   return (
     <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl px-2">
       <div className="flex-shrink-0 w-[84px] h-full flex items-center justify-center">
-        {typeof img === 'string' ? (
-          <img src={img} alt={title} className="w-[84px] h-[84px] object-cover" />
-        ) : (
-          img
-        )}
+        {renderImage()}
       </div>
       <div className="flex-grow flex flex-col justify-center px-4">
         <h3 className="text-2xl text-white">{title}</h3>

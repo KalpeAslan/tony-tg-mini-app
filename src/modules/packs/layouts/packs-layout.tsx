@@ -3,29 +3,35 @@
 import { SectionMessage } from '@/components/ui';
 import { AppLayout } from '@/layouts/app-layout';
 import { FC, PropsWithChildren } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { TActiveTab } from '../models';
 
-export const PacksLayout: FC<PropsWithChildren> = ({ children }) => {
-  const router = useRouter();
-  const pathname = usePathname();
+interface PacksLayoutProps extends PropsWithChildren {
+  activeTab: TActiveTab;
+  onTabClick: (tab: TActiveTab) => void;
+}
+
+export const PacksLayout: FC<PacksLayoutProps> = ({ children, activeTab, onTabClick }) => {
+  const handleTabClick = (tab: TActiveTab) => {
+    onTabClick(tab);
+  };
 
   return (
     <AppLayout activeTab="packs">
-      <div className="w-full flex flex-col items-center gap-4 pt-6">
+      <div className="w-full h-full justify-start flex flex-col items-center gap-4 pt-20">
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <div className="flex gap-4 w-full">
             <SectionMessage
-              onClick={() => router.push('/packs/store')}
+              onClick={() => handleTabClick('store')}
               radius="md"
-              color={pathname === '/packs/store' ? 'warning' : 'transparent'}
+              color={activeTab === 'store' ? 'warning' : 'transparent'}
               fullWidth
             >
               <p className="flex font-cheeky items-center justify-center font-chee">STORE</p>
             </SectionMessage>
             <SectionMessage
-              onClick={() => router.push('/packs/my')}
+              onClick={() => handleTabClick('my')}
               radius="md"
-              color={pathname === '/packs/my' ? 'warning' : 'transparent'}
+              color={activeTab === 'my' ? 'warning' : 'transparent'}
               fullWidth
             >
               <p className="flex font-cheeky items-center justify-center whitespace-nowrap">

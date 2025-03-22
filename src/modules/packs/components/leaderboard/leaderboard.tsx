@@ -11,7 +11,7 @@ interface LeaderboardProps {
 export const Leaderboard = ({ name, photoUrl, myPosition, allPositions }: LeaderboardProps) => {
   return (
     <div
-      className="w-full h-full rounded-3xl p-4 flex flex-col gap-4 border-white-translucent text-center"
+      className="w-full rounded-3xl p-4 flex flex-col gap-4 border-white-translucent text-center"
       style={{ background: 'var(--bg-neutral)' }}
     >
       <div className="flex justify-center gap-2 items-center">

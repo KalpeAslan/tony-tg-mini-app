@@ -1,33 +1,12 @@
 'use client';
 
 import { FC, PropsWithChildren } from 'react';
-import { Button, SectionMessage } from '@/components';
+import { Button } from '@/components';
 import { useTonConnectUI } from '@tonconnect/ui-react';
-import { init, shareURL } from '@telegram-apps/sdk';
-import { TelegramApi } from '@/modules/core/models/telegram/telegram-api';
-import { useMutation } from '@tanstack/react-query';
+import { InviteFriendsButton } from '@/modules/core';
 
 export const ContentConnected: FC = () => {
   const [tonConnectUI] = useTonConnectUI();
-
-  const getReferralLinkMutation = useMutation({
-    mutationFn: TelegramApi.telegram.getReferralLink,
-    onSuccess: data => {
-      console.log('data', data);
-      if (data.success && data.referralLink) {
-        console.log('data.referralLink', data.referralLink);
-        shareURL(data.referralLink);
-      }
-    },
-    onError: error => {
-      console.error('Error getting referral link:', error);
-    },
-  });
-
-  const handleInvite = () => {
-    init();
-    getReferralLinkMutation.mutate();
-  };
 
   return (
     <div className="w-full">
@@ -42,18 +21,8 @@ export const ContentConnected: FC = () => {
           here! Stay tuned!
         </p>
 
-        <Button
-          onClick={handleInvite}
-          variant="primary"
-          size="sm"
-          fullWidth
-          className="flex items-center mt-5 mb-5 text-3xl"
-          loading={getReferralLinkMutation.isPending}
-        >
-          <p>Invite friends</p>
-        </Button>
+        <InviteFriendsButton className="flex items-center mt-5 mb-5 text-3xl" />
 
-        {/* <WalletButton className="mt-8" variant="primary" /> */}
         <div className="w-full flex flex-col items-center">
           <Button className="text-3xl" variant="green" fullWidth size="sm" active={false}>
             Connected
