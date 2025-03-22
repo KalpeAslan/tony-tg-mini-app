@@ -30,15 +30,15 @@ export const useWallet = () => {
   // Send TON transaction
   const sendTonTransaction = async (address: string, amount: number, bostId: string, userId: string) => {
 
-    
     try {
       setLoading(true);
       const nanoTons = Math.pow(10, 9);
 
-      const comment1 = beginCell()
+      const comment = beginCell()
        .storeUint(0, 32)
        .storeStringTail(JSON.stringify({bostId, userId}))
        .endCell();
+       console.log('')
       
       const transaction: SendTransactionRequest = {
         validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
@@ -46,7 +46,7 @@ export const useWallet = () => {
           {
             address: address,
             amount: (amount * nanoTons).toString(),
-            payload: comment1.toBoc().toString('base64'),
+            payload: comment.toBoc().toString('base64'),
           },
         ],
       };

@@ -11,10 +11,9 @@ import { useMe } from '../../hooks';
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showMinLoader, setShowMinLoader] = useState(true);
 
-  const { refetchUserData, isLoading } = useMe();
+  const { refetchUserData, isLoading, isAuthenticated } = useMe();
 
   // Set minimum loader time
   useTimeout(() => {
@@ -45,7 +44,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     },
     onError: error => {
       console.error('❌ Authentication error:', error);
-      setIsAuthenticated(false);
     },
     retry: false,
     retryDelay: 0,
@@ -67,5 +65,5 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const showLoader = isLoading || isPending || !isAuthenticated_ || showMinLoader;
 
-  return <>{children}</>;
+  return <>{showLoader ? <FullLoader isVisible /> : children}</>;
 };
