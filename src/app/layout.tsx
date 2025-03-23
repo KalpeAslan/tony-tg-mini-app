@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider as NextThemeProvider, QueryProvider } from '@/providers';
+import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { IconDefs } from '@/components/ui/icons';
 import { TelegramProvider } from '@/modules/core';
@@ -46,14 +47,16 @@ export default function RootLayout({
       <body>
         <ErrorBoundary>
           <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <QueryProvider>
-              <TelegramProvider>
-                <IconDefs />
-                <TgAuthProvider>
-                  <AppLayout>{children}</AppLayout>
-                </TgAuthProvider>
-              </TelegramProvider>
-            </QueryProvider>
+            <ThemeProvider>
+              <QueryProvider>
+                <TelegramProvider>
+                  <IconDefs />
+                  <TgAuthProvider>
+                    <AppLayout>{children}</AppLayout>
+                  </TgAuthProvider>
+                </TelegramProvider>
+              </QueryProvider>
+            </ThemeProvider>
           </NextThemeProvider>
         </ErrorBoundary>
       </body>

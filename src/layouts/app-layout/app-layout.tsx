@@ -6,7 +6,7 @@ import { EPages } from '@/lib/types';
 import { viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
-import { makeStick, handleBgColor } from './utils';
+import { makeStick } from './make-stick';
 import { usePathname } from 'next/navigation';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
@@ -25,6 +25,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
   const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
   const isStarsPage = pagesWithStars.includes(activeTab);
+  console.log('isStarsPage', isStarsPage);
 
   // Handle viewport setup
   useEffect(() => {
@@ -38,10 +39,8 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    console.log('isPurpleLayout', isPurpleLayout);
-    handleBgColor(isPurpleLayout);
     handleBackgroundAnimation();
-  }, [activeTab, isInitialized, isPurpleLayout]);
+  }, [activeTab, isInitialized]);
 
   // Handle background animation
   const handleBackgroundAnimation = () => {
