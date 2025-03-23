@@ -1,69 +1,68 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { Navigation } from '@/modules/core';
-import { TabName } from '@/lib/types';
-import { retrieveLaunchParams, viewport } from '@telegram-apps/sdk-react';
+import { EPages } from '@/lib/types';
+import { viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
+import { makeStick } from './make-stick';
+import { usePathname } from 'next/navigation';
 
-interface AppLayoutProps {
-  children: ReactNode;
-  activeTab: TabName;
-}
-
-const pagesWithPurpleLayout: TabName[] = ['airdrop', 'invites', 'shack'];
-const pagesWithStars: TabName[] = ['airdrop', 'invites'];
+const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
+const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
 
 const starsMovePercent = 10;
 
-export function AppLayout({ children, activeTab }: AppLayoutProps) {
-  const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
+export const AppLayout = ({ children }: PropsWithChildren) => {
   const { setTheme } = useNextTheme();
   const [bgTransform, setBgTransform] = useState('translateX(0)');
   const [isInitialized, setIsInitialized] = useState(false);
   const [showStars, setShowStars] = useState(true);
 
+  const activeTab = usePathname() as EPages;
+  console.log('activeTab', activeTab);
+
+  const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
+  const isStarsPage = pagesWithStars.includes(activeTab);
+  console.log('isStarsPage', isStarsPage);
+
   // Handle viewport setup
   useEffect(() => {
-    (async () => {
-      if (viewport.mount.isAvailable()) {
-        try {
-          await viewport.mount();
-          viewport.expand();
-        } catch (error) {
-          console.error('Error mounting viewport:', error);
-        }
-      }
-
-      try {
-        await viewport.requestFullscreen();
-      } catch (error) {
-        console.error('Error requesting fullscreen:', error);
-      }
+    handleViewport(() => {
       makeStick(isPurpleLayout);
       setIsInitialized(true);
-    })();
+      if (!isStarsPage) {
+        setShowStars(false);
+      }
+    });
   }, []);
 
-  // Handle background animation
   useEffect(() => {
+    handleBackgroundAnimation();
+  }, [activeTab, isInitialized]);
+
+  // Handle background animation
+  const handleBackgroundAnimation = () => {
+    console.log('isPurpleLayout', isPurpleLayout);
     if (isPurpleLayout) {
       setTheme('dark');
+      console.log('setting theme to dark');
     } else {
+      console.log('setting theme to light');
       setTheme('light');
     }
 
     if (!isInitialized) return;
 
-    const prevTab = localStorage.getItem('prevTab') as TabName | null;
+    const prevTab = localStorage.getItem('prevTab') as EPages | null;
 
     const isLeavingFromPurpleToPurple =
       prevTab && isPurpleLayout && pagesWithPurpleLayout.includes(prevTab);
 
     if (isLeavingFromPurpleToPurple) {
-      const isMovingLeft = prevTab === 'airdrop' && activeTab === 'invites';
-      const isMovingRight = prevTab === 'invites' && activeTab === 'airdrop';
+      const isMovingLeft = prevTab === EPages.Airdrop && activeTab === EPages.Invites;
+      const isMovingRight = prevTab === EPages.Invites && activeTab === EPages.Airdrop;
 
       if (isMovingLeft) {
         console.log('Moving bg LEFT');
@@ -103,7 +102,7 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
 
     // Store current tab for next navigation
     localStorage.setItem('prevTab', activeTab);
-  }, [activeTab, isPurpleLayout, isInitialized]);
+  };
 
   return (
     <div id="wrap" className="w-full h-full">
@@ -136,43 +135,35 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
       {showStars && (
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div
-            className={`absolute inset-0 w-[140%] h-[140%] left-[-${starsMovePercent}%] top-[-${starsMovePercent}%]`}
+            className={`absolute inset-0 w-[140%] h-[140%] left-[-${starsMovePercent}%] top-[-${starsMovePercent}%] bg-cover bg-center bg-no-repeat`}
             style={{
               backgroundImage: 'url(/stars_bg.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
               transform: bgTransform,
-              transition: 'transform 1s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              opacity: showStars ? 1 : 0,
+              transition:
+                'transform 1s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 1s cubic-bezier(0.25, 0.1, 0.25, 1)',
             }}
           />
         </div>
       )}
     </div>
   );
-}
+};
 
-const makeStick = (isPurple: boolean) => {
-  const lp = retrieveLaunchParams();
-
-  // Some versions of Telegram don't need the classes above.
-  if (['macos', 'tdesktop', 'weba', 'web', 'webk'].includes(lp.platform)) {
-    // return;
-  }
-
-  document.body.classList.add('mobile-body');
-  const wrapElement = document.getElementById('wrap');
-  if (wrapElement) {
-    wrapElement.classList.add('mobile-wrap');
-    if (isPurple) {
-      wrapElement.classList.add('content_purple');
-    } else {
-      wrapElement.classList.add('content_yellow');
+const handleViewport = async (cb: () => void) => {
+  if (viewport.mount.isAvailable()) {
+    try {
+      await viewport.mount();
+      viewport.expand();
+    } catch (error) {
+      console.error('Error mounting viewport:', error);
     }
   }
 
-  const contentElement = document.getElementById('content');
-  if (contentElement) {
-    contentElement.classList.add('mobilec-content');
+  try {
+    await viewport.requestFullscreen();
+  } catch (error) {
+    console.error('Error requesting fullscreen:', error);
   }
+  cb();
 };
