@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState, useRef } from 'react';
 import { Navigation } from '@/modules/core';
 import { TabName } from '@/lib/types';
 import { retrieveLaunchParams, viewport } from '@telegram-apps/sdk-react';
@@ -12,10 +12,24 @@ interface AppLayoutProps {
 
 const pagesWithPurpleLayout = ['airdrop', 'invites', 'shack'];
 
+const starsMovePercent = 10;
+
 export function AppLayout({ children, activeTab }: AppLayoutProps) {
   const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
   const { setTheme } = useNextTheme();
+  const [bgTransform, setBgTransform] = useState('translateX(0)');
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Handle theme
+  useEffect(() => {
+    if (isPurpleLayout) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, [activeTab, isPurpleLayout, setTheme]);
+
+  // Handle viewport setup
   useEffect(() => {
     (async () => {
       if (viewport.mount.isAvailable()) {
@@ -33,16 +47,36 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
         console.error('Error requesting fullscreen:', error);
       }
       makeStick(isPurpleLayout);
+      setIsInitialized(true);
     })();
-  }, []);
+  }, [isPurpleLayout]);
 
+  // Handle background animation
   useEffect(() => {
-    if (isPurpleLayout) {
-      setTheme('dark');
+    if (!isInitialized) return;
+
+    const prevTab = localStorage.getItem('prevTab') as TabName | null;
+    console.log('Animation check - Previous tab:', prevTab, 'Current tab:', activeTab);
+
+    if (prevTab && isPurpleLayout && pagesWithPurpleLayout.includes(prevTab)) {
+      if (prevTab === 'airdrop' && activeTab === 'invites') {
+        console.log('Moving bg LEFT');
+        setBgTransform(`translateX(-${starsMovePercent}%)`);
+      } else if (prevTab === 'invites' && activeTab === 'airdrop') {
+        console.log('Moving bg RIGHT');
+        setBgTransform(`translateX(${starsMovePercent}%)`);
+      } else {
+        console.log('Resetting bg position - different tabs');
+        setBgTransform('translateX(0)');
+      }
     } else {
-      setTheme('light');
+      console.log('Resetting bg position - initial load');
+      setBgTransform('translateX(0)');
     }
-  }, [activeTab]);
+
+    // Store current tab for next navigation
+    localStorage.setItem('prevTab', activeTab);
+  }, [activeTab, isPurpleLayout, isInitialized]);
 
   return (
     <div id="wrap" className="w-full h-full">
@@ -62,20 +96,18 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
         </div>
       </div>
       {isPurpleLayout && (
-        <div className="absolute inset-0 z-0">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 10 + 5 + 'px',
-                height: Math.random() * 10 + 5 + 'px',
-                top: Math.random() * 100 + '%',
-                left: Math.random() * 100 + '%',
-                opacity: Math.random() * 0.5 + 0.5,
-              }}
-            />
-          ))}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div
+            className={`absolute inset-0 w-[140%] h-[140%] left-[-${starsMovePercent}%] top-[-${starsMovePercent}%]`}
+            style={{
+              backgroundImage: 'url(/stars_bg.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              transform: bgTransform,
+              transition: 'transform 1s cubic-bezier(0.25, 0.1, 0.25, 1)',
+            }}
+          />
         </div>
       )}
     </div>
