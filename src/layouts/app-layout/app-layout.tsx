@@ -5,9 +5,9 @@ import { Navigation } from '@/modules/core';
 import { EPages } from '@/lib/types';
 import { viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
-import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -19,12 +19,32 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   const [bgTransform, setBgTransform] = useState('translateX(0)');
   const [isInitialized, setIsInitialized] = useState(false);
   const [showStars, setShowStars] = useState(true);
+  const [isPageTransitioning, setIsPageTransitioning] = useState(false);
+  const [content, setContent] = useState(children);
 
   const activeTab = usePathname() as EPages;
   console.log('activeTab', activeTab);
 
   const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
   const isStarsPage = pagesWithStars.includes(activeTab);
+
+  // Handle content change on route change
+  useEffect(() => {
+    // Only trigger transition if initialized
+    if (isInitialized) {
+      setIsPageTransitioning(true);
+
+      // Delay setting the new content to ensure previous content fades out first
+      const timer = setTimeout(() => {
+        setContent(children);
+        setIsPageTransitioning(false);
+      }, 300); // Ensure this is longer than the exit animation
+
+      return () => clearTimeout(timer);
+    } else {
+      setContent(children);
+    }
+  }, [children, isInitialized]);
 
   // Handle viewport setup
   useEffect(() => {
@@ -113,18 +133,13 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
       >
         {/* Main content with Framer Motion */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            className="w-full flex items-center justify-center h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          className="flex-1 w-full"
+          animate={{ opacity: isPageTransitioning ? 0 : 1 }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+        >
+          {content}
+        </motion.div>
 
         {/* Bottom navigation */}
         <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
