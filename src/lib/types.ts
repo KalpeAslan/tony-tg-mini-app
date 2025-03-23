@@ -11,13 +11,8 @@ export type ButtonVariant =
 
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'extra-sm';
 
-
-export enum EPages {
-  Shack = '/shack',
-  Invites = '/invites',
-  Airdrop = '/',
-  Packs = '/packs',
-}
+// Navigation types
+export type TabName = 'shack' | 'invites' | 'airdrop' | 'packs';
 
 // Layout types
 export type LayoutVariant = 'purple' | 'yellow';

@@ -1,22 +1,22 @@
 'use client';
 
 import type React from 'react';
-import { EPages } from '@/lib/types';
+import { TabName } from '@/lib/types';
 import { Icon } from '@/components/ui/icon';
 import clsx from 'clsx';
 import { IconName } from '@/components/ui';
 import { useRouter } from 'next/navigation';
 interface NavigationProps {
-  activeTab: EPages;
+  activeTab: TabName;
   className?: string;
 }
 
 export function Navigation({ activeTab, className }: NavigationProps) {
   const router = useRouter();
 
-  const handleTabClick = (tab: EPages) => {
+  const handleTabClick = (tab: string) => {
     if (tab !== activeTab) {
-      router.push(tab);
+      router.push(tab === 'airdrop' ? '/' : `/${tab}`);
     }
   };
 
@@ -31,26 +31,26 @@ export function Navigation({ activeTab, className }: NavigationProps) {
       <NavItem
         icon="shack"
         label="SHACK"
-        isActive={activeTab === EPages.Shack}
-        onClick={() => handleTabClick(EPages.Shack)}
+        isActive={activeTab === 'shack'}
+        onClick={() => handleTabClick('shack')}
       />
       <NavItem
         icon="invites"
         label="INVITES"
-        isActive={activeTab === EPages.Invites}
-        onClick={() => handleTabClick(EPages.Invites)}
+        isActive={activeTab === 'invites'}
+        onClick={() => handleTabClick('invites')}
       />
       <NavItem
         icon="airdrop"
         label="AIRDROP"
-        isActive={activeTab === EPages.Airdrop}
-        onClick={() => handleTabClick(EPages.Airdrop)}
+        isActive={activeTab === 'airdrop'}
+        onClick={() => handleTabClick('airdrop')}
       />
       <NavItem
         icon="tony-packs"
         label="PACKS"
-        isActive={activeTab === EPages.Packs}
-        onClick={() => handleTabClick(EPages.Packs)}
+        isActive={activeTab === 'packs'}
+        onClick={() => handleTabClick('packs')}
       />
     </div>
   );
