@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState, useRef } from 'react';
 import { Navigation } from '@/modules/core';
 import { TabName } from '@/lib/types';
 import { retrieveLaunchParams, viewport } from '@telegram-apps/sdk-react';
@@ -12,8 +12,7 @@ interface AppLayoutProps {
   activeTab: TabName;
 }
 
-const pagesWithPurpleLayout: TabName[] = ['airdrop', 'invites', 'shack'];
-const pagesWithStars: TabName[] = ['airdrop', 'invites'];
+const pagesWithPurpleLayout = ['airdrop', 'invites', 'shack'];
 
 const starsMovePercent = 10;
 
@@ -22,7 +21,15 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
   const { setTheme } = useNextTheme();
   const [bgTransform, setBgTransform] = useState('translateX(0)');
   const [isInitialized, setIsInitialized] = useState(false);
-  const [showStars, setShowStars] = useState(true);
+
+  // Handle theme
+  useEffect(() => {
+    if (isPurpleLayout) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, [activeTab, isPurpleLayout, setTheme]);
 
   // Handle viewport setup
   useEffect(() => {
@@ -44,61 +51,29 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
       makeStick(isPurpleLayout);
       setIsInitialized(true);
     })();
-  }, []);
+  }, [isPurpleLayout]);
 
   // Handle background animation
   useEffect(() => {
-    if (isPurpleLayout) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-
     if (!isInitialized) return;
 
     const prevTab = localStorage.getItem('prevTab') as TabName | null;
+    console.log('Animation check - Previous tab:', prevTab, 'Current tab:', activeTab);
 
-    const isLeavingFromPurpleToPurple =
-      prevTab && isPurpleLayout && pagesWithPurpleLayout.includes(prevTab);
-
-    if (isLeavingFromPurpleToPurple) {
-      const isMovingLeft = prevTab === 'airdrop' && activeTab === 'invites';
-      const isMovingRight = prevTab === 'invites' && activeTab === 'airdrop';
-
-      if (isMovingLeft) {
+    if (prevTab && isPurpleLayout && pagesWithPurpleLayout.includes(prevTab)) {
+      if (prevTab === 'airdrop' && activeTab === 'invites') {
         console.log('Moving bg LEFT');
         setBgTransform(`translateX(-${starsMovePercent}%)`);
-      } else if (isMovingRight) {
+      } else if (prevTab === 'invites' && activeTab === 'airdrop') {
         console.log('Moving bg RIGHT');
         setBgTransform(`translateX(${starsMovePercent}%)`);
       } else {
-        // Resetting bg position - different tabs
+        console.log('Resetting bg position - different tabs');
         setBgTransform('translateX(0)');
       }
     } else {
       console.log('Resetting bg position - initial load');
       setBgTransform('translateX(0)');
-    }
-
-    const leaveFromStarsToNonStarsPage =
-      prevTab && pagesWithStars.includes(prevTab) && !pagesWithStars.includes(activeTab);
-
-    if (leaveFromStarsToNonStarsPage) {
-      setBgTransform('translateX(0) scale(15)');
-      setTimeout(() => {
-        setShowStars(false);
-      }, 1000);
-    }
-
-    const comeFromNonStarsToStarsPage =
-      prevTab && !pagesWithStars.includes(prevTab) && pagesWithStars.includes(activeTab);
-
-    if (comeFromNonStarsToStarsPage) {
-      setShowStars(true);
-      // setBgTransform('translateX(0) scale(15)');
-      setTimeout(() => {
-        // setBgTransform('translateX(0) scale(1)');
-      }, 0);
     }
 
     // Store current tab for next navigation
@@ -133,7 +108,7 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
           </div>
         </div>
       </div>
-      {showStars && (
+      {isPurpleLayout && (
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div
             className={`absolute inset-0 w-[140%] h-[140%] left-[-${starsMovePercent}%] top-[-${starsMovePercent}%]`}
