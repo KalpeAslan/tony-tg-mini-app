@@ -5,8 +5,6 @@ import { Navigation } from '@/modules/core';
 import { TabName } from '@/lib/types';
 import { retrieveLaunchParams, viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
-import { motion, AnimatePresence } from 'framer-motion';
-
 interface AppLayoutProps {
   children: ReactNode;
   activeTab: TabName;
@@ -87,19 +85,8 @@ export function AppLayout({ children, activeTab }: AppLayoutProps) {
         id="content"
         className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
       >
-        {/* Main content with Framer Motion */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            className="w-full flex items-center justify-center h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        {/* Main content */}
+        <div className="w-full flex items-center justify-center h-full">{children}</div>
 
         {/* Bottom navigation */}
         <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
