@@ -1,6 +1,5 @@
 .shackContainer {
   position: fixed;
-
   width: 100vw;
   top: 0;
   left: 0;
@@ -10,7 +9,7 @@
   justify-content: center;
   align-items: center;
   background: black !important;
-
+  -webkit-overflow-scrolling: touch;
 }
 
 .animationContainer {
@@ -22,38 +21,55 @@
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .topImage, .bottomImage {
   position: relative;
-  transition: transform 1s ease-in-out;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   height: 50%;
   overflow: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .topImage {
-  transform: translateY(-100%);
+  transform: translate3d(0, -100%, 0);
+  -webkit-transform: translate3d(0, -100%, 0);
 }
 
 .bottomImage {
-  transform: translateY(100%);
+  transform: translate3d(0, 100%, 0);
+  -webkit-transform: translate3d(0, 100%, 0);
 }
 
 .topConnected {
-  transform: translateY(5px);
+  transform: translate3d(0, 5px, 0);
+  -webkit-transform: translate3d(0, 5px, 0);
 }
 
 .bottomConnected {
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .mainContent {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: 1s;
   z-index: 5;
   text-align: center;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .visible {

@@ -76,9 +76,19 @@ function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
           width={isActive ? 60 : 36}
           height={isActive ? 48 : 28}
           name={`${isActive ? ((icon + '-selected') as IconName) : icon}`}
-          className={clsx('transition-all duration-300 ease-in-out bottom-0', {
-            '-translate-y-[15px]': isActive,
-          })}
+          className={clsx(
+            'transition-all duration-300 cubic-bezier(0.4, 0, 0.2, 1) ease-in-out bottom-0 transform-gpu',
+            {
+              '-translate-y-[15px]': isActive,
+            }
+          )}
+          style={{
+            transform: 'translateZ(0)',
+            WebkitTransform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            willChange: 'transform',
+          }}
         />
       </div>
       <span className={clsx('text-base', isActive ? 'text-white' : 'text-[var(--nav-text-color)]')}>
