@@ -6,7 +6,7 @@ import { ButtonVariant, ButtonSize } from '@/lib/types';
 import { Sound } from '@/lib/constants';
 import { useAudioPlayer } from 'react-use-audio-player';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   onClick?: () => void;
   className?: string;
@@ -28,6 +28,7 @@ export function Button({
   disabled = false,
   loading = false,
   active = true,
+  ...props
 }: ButtonProps) {
   const activeStyles = active ? 'active:scale-95 active:transform transition-transform' : '';
 
@@ -69,6 +70,7 @@ export function Button({
 
   return (
     <button
+      {...props}
       className={cn(baseStyles, variantStyles[variant], sizeStyles[size], widthStyle, className)}
       onTouchStart={e => e.currentTarget.classList.add('touch-active')}
       onTouchEnd={e => {
