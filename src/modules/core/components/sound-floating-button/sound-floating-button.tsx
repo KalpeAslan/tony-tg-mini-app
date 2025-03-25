@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 export const SoundFloatingButton = () => {
   const { value: isExpanded, toggle, setTrue: expand, setFalse: collapse } = useBoolean(false);
   const { value: isPlaying, setTrue: play, setFalse: pause } = useBoolean(false);
-  const [position, setPosition] = useState({ x: window.innerWidth - 80, y: 60 }); // Initial position
+  const [position, setPosition] = useState({ x: window.innerWidth - 80, y: 90 }); // Initial position
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const dragRef = useRef<HTMLDivElement>(null);
