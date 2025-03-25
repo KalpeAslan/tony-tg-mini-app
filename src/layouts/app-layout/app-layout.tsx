@@ -20,6 +20,10 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   const [bgTransform, setBgTransform] = useState('translateX(0)');
   const [isInitialized, setIsInitialized] = useState(false);
   const [showStars, setShowStars] = useState(true);
+  const [showColorTransition, setShowColorTransition] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<
+    'purple-to-yellow' | 'yellow-to-purple' | null
+  >(null);
 
   const activeTab = usePathname() as EPages;
   console.log('activeTab', activeTab);
@@ -58,6 +62,23 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     if (!isInitialized) return;
 
     const prevTab = localStorage.getItem('prevTab') as EPages | null;
+
+    // Handle color transition animation
+    if (prevTab) {
+      const wasPurpleLayout = pagesWithPurpleLayout.includes(prevTab as EPages);
+
+      if (wasPurpleLayout && !isPurpleLayout) {
+        // Purple to Yellow transition
+        setTransitionDirection('purple-to-yellow');
+        setShowColorTransition(true);
+        setTimeout(() => setShowColorTransition(false), 500);
+      } else if (!wasPurpleLayout && isPurpleLayout) {
+        // Yellow to Purple transition
+        setTransitionDirection('yellow-to-purple');
+        setShowColorTransition(true);
+        setTimeout(() => setShowColorTransition(false), 500);
+      }
+    }
 
     const isLeavingFromPurpleToPurple =
       prevTab && isPurpleLayout && pagesWithPurpleLayout.includes(prevTab);
@@ -109,6 +130,21 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   return (
     <div id="wrap" className="w-full h-full">
       <BackgroundMusic />
+      {showColorTransition && (
+        <div
+          className={`absolute inset-0 z-50 transition-opacity duration-500 ${
+            transitionDirection === 'purple-to-yellow'
+              ? 'bg-gradient-to-b from-purple-900 to-yellow-500'
+              : 'bg-gradient-to-b from-yellow-500 to-purple-900'
+          }`}
+          style={{
+            animation:
+              transitionDirection === 'purple-to-yellow'
+                ? 'fadeOutToYellow 0.5s forwards'
+                : 'fadeOutToPurple 0.5s forwards',
+          }}
+        />
+      )}
       <div
         data-testid="app-layout"
         id="content"

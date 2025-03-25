@@ -19,6 +19,25 @@ body {
   color: white;
 }
 
+/* Background transition animations */
+@keyframes fadeOutToYellow {
+  0% { opacity: 1; background: linear-gradient(to bottom, var(--bg-gradient)); }
+  50% { opacity: 0.7; }
+  100% { 
+    opacity: 0; 
+    background: linear-gradient(to bottom, var(--theme-yellow), var(--theme-orange-light), var(--theme-orange));
+  }
+}
+
+@keyframes fadeOutToPurple {
+  0% { 
+    opacity: 1; 
+    background: linear-gradient(to bottom, var(--theme-yellow), var(--theme-orange-light), var(--theme-orange));
+  }
+  50% { opacity: 0.7; }
+  100% { opacity: 0; background: linear-gradient(to bottom, var(--bg-gradient)); }
+}
+
 /* Font utility classes */
 
 

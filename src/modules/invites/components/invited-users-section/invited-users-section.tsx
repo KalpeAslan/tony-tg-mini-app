@@ -52,12 +52,12 @@ const InvitedUserItem = ({ user }: { user: Invite }) => {
         <p className="font-roboto italic text-lg font-bold">
           {user.rewardAmount ? formatNumber(+user.rewardAmount) : '0'}
         </p>
-        <Image
+        {/* <Image
           src="/invites/coin.png"
           alt={user.invitee?.telegramUsername || 'Unknown User'}
           width={40}
           height={40}
-        />
+        /> */}
       </div>
     </div>
   );
