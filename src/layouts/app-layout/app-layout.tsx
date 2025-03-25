@@ -1,13 +1,14 @@
 'use client';
 
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { Navigation } from '@/modules/core';
+import { Navigation, SoundFloatingButton } from '@/modules/core';
 import { EPages } from '@/lib/types';
 import { viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
+import { BackgroundMusic } from '@/lib/components';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -107,6 +108,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <div id="wrap" className="w-full h-full">
+      <BackgroundMusic />
       <div
         data-testid="app-layout"
         id="content"
@@ -126,9 +128,10 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
           </motion.div>
         </AnimatePresence>
 
+        <SoundFloatingButton />
         {/* Bottom navigation */}
         <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
-          <div className="fixed bottom-5 left-0 right-0">
+          <div className="fixed bottom-5 left-0 right-0 px-6">
             <Navigation activeTab={activeTab} className="" />
           </div>
         </div>

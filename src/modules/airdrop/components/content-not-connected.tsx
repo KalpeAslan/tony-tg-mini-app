@@ -4,9 +4,18 @@ import { Button } from '@/components';
 import Image from 'next/image';
 import { FC } from 'react';
 import { useWallet } from '@/modules/core';
+import { Sound } from '@/lib/constants';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 export const ContentNotConnected: FC = () => {
   const { connect } = useWallet();
+
+  const { play } = useAudioPlayer(Sound.CLICK);
+
+  const handleConnect = () => {
+    play();
+    connect();
+  };
 
   return (
     <div className="flex flex-col items-center justify-center py-2 px-4">
@@ -33,7 +42,7 @@ export const ContentNotConnected: FC = () => {
       </p>
 
       <div className="w-full flex flex-col items-center gap-2">
-        <Button onClick={connect}>link $ton wallet</Button>
+        <Button onClick={handleConnect}>link $ton wallet</Button>
         <p className="text-sm font-bold text-white opacity-50 font-roboto mt-3">
           Wallet Not Connected
         </p>

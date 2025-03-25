@@ -6,6 +6,9 @@ import { Icon } from '@/components/ui/icon';
 import clsx from 'clsx';
 import { IconName } from '@/components/ui';
 import { useRouter } from 'next/navigation';
+import { Sound } from '@/lib/constants';
+import { useAudioPlayer } from 'react-use-audio-player';
+
 interface NavigationProps {
   activeTab: EPages;
   className?: string;
@@ -14,8 +17,11 @@ interface NavigationProps {
 export function Navigation({ activeTab, className }: NavigationProps) {
   const router = useRouter();
 
+  const { play } = useAudioPlayer(Sound.CLICK);
+
   const handleTabClick = (tab: EPages) => {
     if (tab !== activeTab) {
+      play();
       router.push(tab);
     }
   };

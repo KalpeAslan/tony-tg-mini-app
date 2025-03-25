@@ -32,6 +32,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
+    "react-use-audio-player": "^4.0.2",
     "react-virtualized-auto-sizer": "^1.0.25",
     "swiper": "^11.2.6",
     "tailwind-merge": "^2.5.5",

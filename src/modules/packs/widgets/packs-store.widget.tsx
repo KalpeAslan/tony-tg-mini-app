@@ -8,6 +8,8 @@ import { useQuery } from '@tanstack/react-query';
 import { BoostsApi, BostItem } from '@/modules/core';
 import { useState } from 'react';
 import { PackItem } from '../components';
+import { Sound } from '@/lib/constants';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 export function PacksStoreWidget() {
   const { data: boostsData } = useQuery({
@@ -17,7 +19,10 @@ export function PacksStoreWidget() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(null);
 
+  const { play } = useAudioPlayer(Sound.CLICK);
+
   const handleSlideChange = (swiper: SwiperClass) => {
+    play();
     setActiveIndex(swiper.activeIndex);
   };
 

@@ -39,11 +39,6 @@ export default function ShackPage() {
           />
         </div>
       </div>
-
-      {/* Main content (shown after animation) */}
-      <div className={`${styles.mainContent} ${animationComplete ? styles.visible : ''}`}>
-        <h1>Main card</h1>
-      </div>
     </div>
   );
 }

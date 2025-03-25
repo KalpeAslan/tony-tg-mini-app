@@ -3,6 +3,8 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
+import { Sound } from '@/lib/constants';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 interface ButtonProps {
   children: ReactNode;
@@ -56,9 +58,11 @@ export function Button({
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';
+  const { play } = useAudioPlayer(Sound.CLICK);
 
   const handleInteraction = () => {
     if (!disabled && onClick) {
+      play();
       onClick();
     }
   };
@@ -69,8 +73,8 @@ export function Button({
       onTouchStart={e => e.currentTarget.classList.add('touch-active')}
       onTouchEnd={e => {
         e.currentTarget.classList.remove('touch-active');
-        handleInteraction();
       }}
+      onClick={handleInteraction}
       disabled={disabled}
     >
       {loading ? (
