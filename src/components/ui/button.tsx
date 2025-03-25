@@ -3,9 +3,8 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { ButtonVariant, ButtonSize } from '@/lib/types';
+import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-import { useAudioPlayer } from 'react-use-audio-player';
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   onClick?: () => void;
@@ -59,7 +58,7 @@ export function Button({
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';
-  const { play } = useAudioPlayer(Sound.CLICK);
+  const { play } = useSound(Sound.CLICK);
 
   const handleInteraction = () => {
     if (!disabled && onClick) {

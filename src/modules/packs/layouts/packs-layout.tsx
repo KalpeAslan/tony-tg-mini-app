@@ -3,15 +3,15 @@
 import { SectionMessage } from '@/components/ui';
 import { FC, PropsWithChildren } from 'react';
 import { TActiveTab } from '../models';
+import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-import { useAudioPlayer } from 'react-use-audio-player';
 interface PacksLayoutProps extends PropsWithChildren {
   activeTab: TActiveTab;
   onTabClick: (tab: TActiveTab) => void;
 }
 
 export const PacksLayout: FC<PacksLayoutProps> = ({ children, activeTab, onTabClick }) => {
-  const { play } = useAudioPlayer(Sound.CLICK);
+  const { play } = useSound(Sound.CLICK);
 
   const handleTabClick = (tab: TActiveTab) => {
     play();

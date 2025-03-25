@@ -4,13 +4,13 @@ import { Button } from '@/components';
 import Image from 'next/image';
 import { FC } from 'react';
 import { useWallet } from '@/modules/core';
+import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-import { useAudioPlayer } from 'react-use-audio-player';
 
 export const ContentNotConnected: FC = () => {
   const { connect } = useWallet();
 
-  const { play } = useAudioPlayer(Sound.CLICK);
+  const { play } = useSound(Sound.CLICK);
 
   const handleConnect = () => {
     play();

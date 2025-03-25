@@ -14,7 +14,7 @@ export const PacksList = ({ activeBoosts }: PacksListProps) => {
   ));
 
   return (
-    <div className="w-full max-w-[390px]">
+    <div className="w-full max-w-[390px] pb-[100px]">
       <div className={styles.header} />
       <div className="flex flex-col">{activeBoosts.length ? rows : <Row packs={[]} />}</div>
     </div>

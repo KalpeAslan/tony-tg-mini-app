@@ -131,7 +131,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         <SoundFloatingButton />
         {/* Bottom navigation */}
         <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
-          <div className="fixed bottom-5 left-0 right-0 px-6">
+          <div className="fixed bottom-5 left-0 right-0 px-3">
             <Navigation activeTab={activeTab} className="" />
           </div>
         </div>

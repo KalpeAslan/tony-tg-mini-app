@@ -3,13 +3,12 @@
 import { FC, PropsWithChildren } from 'react';
 import { Button } from '@/components';
 import { InviteFriendsButton, useWallet } from '@/modules/core';
+import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-import { useAudioPlayer } from 'react-use-audio-player';
-
 export const ContentConnected: FC = () => {
   const { disconnect } = useWallet();
 
-  const { play } = useAudioPlayer(Sound.CLICK);
+  const { play } = useSound(Sound.CLICK);
 
   const handleDisconnect = () => {
     play();
