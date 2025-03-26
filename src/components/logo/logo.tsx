@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LogoProps {
@@ -7,7 +8,11 @@ interface LogoProps {
 export function Logo({ isConnected }: LogoProps) {
   return (
     <div className="relative flex flex-col items-center justify-center w-full text-tony-light">
-      <img src="/tony-eyes.png" alt="Eyes" className="max-h-[200px]" />
+      <div
+        className={cn('relative  h-full w-full', isConnected ? 'min-h-[180px]' : 'min-h-[200px]')}
+      >
+        <img src="/tony-eyes.png" alt="Eyes" className="absolute" />
+      </div>
 
       <AnimatePresence>
         {!isConnected ? (
