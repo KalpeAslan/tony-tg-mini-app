@@ -49,9 +49,9 @@ const InvitedUserItem = ({ user }: { user: Invite }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <p className="font-roboto italic text-lg font-bold">
+        {/* <p className="font-roboto italic text-lg font-bold">
           {user.rewardAmount ? formatNumber(+user.rewardAmount) : '0'}
-        </p>
+        </p> */}
         {/* <Image
           src="/invites/coin.png"
           alt={user.invitee?.telegramUsername || 'Unknown User'}

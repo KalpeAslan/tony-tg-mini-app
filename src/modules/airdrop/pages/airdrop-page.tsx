@@ -16,12 +16,8 @@ export function AirdropPage() {
       <div
         className={cn(
           'rounded-3xl w-full flex flex-col items-center text-center',
-          'border-white-translucent overflow-hidden'
+          'border-white-translucent overflow-hidden bg-card'
         )}
-        style={{
-          background:
-            'linear-gradient(15deg, rgba(80,29,124,0.9878545168067226) 63%, rgba(80,29,124,0.6209077380952381) 100%)',
-        }}
       >
         {isConnected ? <ContentConnected /> : <ContentNotConnected />}
       </div>

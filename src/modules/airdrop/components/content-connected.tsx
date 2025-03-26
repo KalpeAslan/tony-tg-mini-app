@@ -48,14 +48,8 @@ export const ContentConnected: FC = () => {
 
 const WalletStatus: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div
-      className="h-[150px] flex flex-col justify-center items-center text-center text-white"
-      style={{
-        background:
-          'linear-gradient(0deg, var(--bg-accent), var(--bg-accent)),linear-gradient(32.35deg, rgba(255, 255, 255, 0) 42%, rgba(255, 255, 255, 0.35) 100%)',
-      }}
-    >
-      <p className="font-roboto text-sm">Wallet Status</p>
+    <div className="h-[120px] flex flex-col justify-center items-center text-center text-white bg-info">
+      <p className="font-roboto text-sm">Wallet Airdrop Status</p>
       <p className="text-7xl">{children}</p>
     </div>
   );
