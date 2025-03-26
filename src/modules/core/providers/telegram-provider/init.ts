@@ -37,7 +37,7 @@ import {
     // themeParams.bindCssVars();
   
     // Add Eruda if needed.
-    import('eruda')
-      .then((lib) => lib.default.init())
-      .catch(console.error);
+    // import('eruda')
+    //   .then((lib) => lib.default.init())
+    //   .catch(console.error);
   }
