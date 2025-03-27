@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
 import { BackgroundMusic } from '@/lib/components';
+import styles from './app-layout.module.css';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -24,12 +25,14 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   const [transitionDirection, setTransitionDirection] = useState<
     'purple-to-yellow' | 'yellow-to-purple' | null
   >(null);
+  const [showShackTransition, setShowShackTransition] = useState(false);
 
   const activeTab = usePathname() as EPages;
   console.log('activeTab', activeTab);
 
   const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
   const isStarsPage = pagesWithStars.includes(activeTab);
+  const isShackPage = activeTab === EPages.Shack;
 
   // Handle viewport setup
   useEffect(() => {
@@ -63,17 +66,28 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     const prevTab = localStorage.getItem('prevTab') as EPages | null;
 
+    // Handle shack page transition
+    if (prevTab) {
+      const wasShackPage = prevTab === EPages.Shack;
+
+      if (!wasShackPage && isShackPage) {
+        setShowShackTransition(true);
+        // setTimeout(() => setShowShackTransition(false), 800);
+      } else if (wasShackPage && !isShackPage) {
+        setShowShackTransition(true);
+        // setTimeout(() => setShowShackTransition(false), 800);
+      }
+    }
+
     // Handle color transition animation
     if (prevTab) {
       const wasPurpleLayout = pagesWithPurpleLayout.includes(prevTab as EPages);
 
       if (wasPurpleLayout && !isPurpleLayout) {
-        // Purple to Yellow transition
         setTransitionDirection('purple-to-yellow');
         setShowColorTransition(true);
         setTimeout(() => setShowColorTransition(false), 500);
       } else if (!wasPurpleLayout && isPurpleLayout) {
-        // Yellow to Purple transition
         setTransitionDirection('yellow-to-purple');
         setShowColorTransition(true);
         setTimeout(() => setShowColorTransition(false), 500);
@@ -94,7 +108,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         console.log('Moving bg RIGHT');
         setBgTransform(`translateX(${starsMovePercent}%)`);
       } else {
-        // Resetting bg position - different tabs
         setBgTransform('translateX(0)');
       }
     } else {
@@ -117,61 +130,15 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     if (comeFromNonStarsToStarsPage) {
       setShowStars(true);
-      // setBgTransform('translateX(0) scale(15)');
-      setTimeout(() => {
-        // setBgTransform('translateX(0) scale(1)');
-      }, 0);
+      setTimeout(() => {}, 0);
     }
 
-    // Store current tab for next navigation
     localStorage.setItem('prevTab', activeTab);
   };
 
   return (
-    <div id="wrap" className="w-full h-full">
-      <BackgroundMusic />
-      {showColorTransition && (
-        <div
-          className={`absolute inset-0 z-50 transition-opacity duration-500 ${
-            transitionDirection === 'purple-to-yellow'
-              ? 'bg-gradient-to-b from-purple-900 to-yellow-500'
-              : 'bg-gradient-to-b from-yellow-500 to-purple-900'
-          }`}
-          style={{
-            animation:
-              transitionDirection === 'purple-to-yellow'
-                ? 'fadeOutToYellow 0.5s forwards'
-                : 'fadeOutToPurple 0.5s forwards',
-          }}
-        />
-      )}
-      <div
-        data-testid="app-layout"
-        id="content"
-        className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
-      >
-        {/* Main content with Framer Motion */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            className="w-full flex items-center justify-center h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
-
-        <SoundFloatingButton />
-        {/* Bottom navigation */}
-        <div className="w-full min-h-[var(--navigation-height)] relative pb-4">
-          <div className="fixed bottom-5 left-0 right-0 px-3">
-            <Navigation activeTab={activeTab} className="" />
-          </div>
-        </div>
-      </div>
+    <div id="wrap" className="w-full h-full relative">
+      {/* Background Stars Layer - Lowest z-index */}
       {showStars && (
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div
@@ -186,6 +153,77 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
           />
         </div>
       )}
+
+      {/* Main Content Layer - Middle z-index */}
+      <div
+        data-testid="app-layout"
+        id="content"
+        className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
+      >
+        <BackgroundMusic />
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            className="w-full flex items-center justify-center h-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
+
+        <SoundFloatingButton />
+        <div className="w-full min-h-[var(--navigation-height)] relative pb-4 z-[var(--navigation-z-index)]">
+          <div className="fixed bottom-5 left-0 right-0 px-3">
+            <Navigation activeTab={activeTab} className="" />
+          </div>
+        </div>
+
+        {/* Transition Layers - Highest z-index */}
+        <div className="absolute inset-0 z-20 pointer-events-none">
+          {/* Color Transition */}
+          {showColorTransition && (
+            <div
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                transitionDirection === 'purple-to-yellow'
+                  ? 'bg-gradient-to-b from-purple-900 to-yellow-500'
+                  : 'bg-gradient-to-b from-yellow-500 to-purple-900'
+              }`}
+              style={{
+                animation:
+                  transitionDirection === 'purple-to-yellow'
+                    ? 'fadeOutToYellow 0.5s forwards'
+                    : 'fadeOutToPurple 0.5s forwards',
+              }}
+            />
+          )}
+
+          {/* Shack Transition */}
+          <AnimatePresence>
+            {showShackTransition && (
+              <>
+                <motion.div
+                  className={styles.shackTop}
+                  initial={{ y: '-100%' }}
+                  animate={{ y: isShackPage ? '0%' : '-100%' }}
+                  exit={{ y: '-100%' }}
+                  transition={{ duration: 0.8, ease: 'easeInOut' }}
+                />
+                <motion.div
+                  className={styles.shackBottom}
+                  initial={{ y: '100%' }}
+                  animate={{ y: isShackPage ? '0%' : '100%' }}
+                  exit={{ y: '100%' }}
+                  transition={{ duration: 0.8, ease: 'easeInOut' }}
+                />
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 };

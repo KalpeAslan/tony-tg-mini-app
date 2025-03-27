@@ -51,6 +51,8 @@
   --navigation-width: 100%;
   --nav-text-color: #860C0C;
 
+  --navigation-z-index: 51;
+  --shack-z-index: 50;
 }
 
 /* Dark mode overrides if needed */
