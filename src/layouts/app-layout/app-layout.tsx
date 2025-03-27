@@ -75,7 +75,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         // setTimeout(() => setShowShackTransition(false), 800);
       } else if (wasShackPage && !isShackPage) {
         setShowShackTransition(true);
-        // setTimeout(() => setShowShackTransition(false), 800);
+        setTimeout(() => setShowShackTransition(false), 800);
       }
     }
 
