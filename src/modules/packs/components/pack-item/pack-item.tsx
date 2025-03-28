@@ -21,15 +21,16 @@ export const PackItem: FC<PackItemProps> = ({ boost }) => {
   const { userData } = useMe();
 
   const handleClickBuy = (currency: Currency) => async () => {
-    // Check if wallet is connected
-    if (!isConnected) {
-      connect();
-      return;
-    }
-
+   
     setLoading(true);
     try {
       if (currency === 'ton') {
+         // Check if wallet is connected
+         if (!isConnected) {
+          connect();
+          return;
+        }
+
         await purchaseWithTon(String(boost.id));
       } else {
         await purchaseWithStars(String(boost.id));
