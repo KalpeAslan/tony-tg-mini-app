@@ -4,11 +4,9 @@ export interface BostPrice {
 }
   
 export interface BostItem {
-    id: number;
-    name: string;
-    price: BostPrice;
-    type: string;
-    image: string;
+    bostId: number;
+    count: number;
+    userId: string;
 }
 
 
