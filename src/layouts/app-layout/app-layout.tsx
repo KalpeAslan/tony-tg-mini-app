@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
 import { BackgroundMusic } from '@/lib/components';
+import { useSound } from '@/lib/hooks/useSound';
+import { Sound } from '@/lib/constants';
 import styles from './app-layout.module.css';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
@@ -26,6 +28,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     'purple-to-yellow' | 'yellow-to-purple' | null
   >(null);
   const [showShackTransition, setShowShackTransition] = useState(false);
+  const { play: playShackDoorClose } = useSound(Sound.SHACK_DOOR_CLOSE);
 
   const activeTab = usePathname() as EPages;
   console.log('activeTab', activeTab);
@@ -72,9 +75,11 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
       if (!wasShackPage && isShackPage) {
         setShowShackTransition(true);
+        playShackDoorClose();
         // setTimeout(() => setShowShackTransition(false), 800);
       } else if (wasShackPage && !isShackPage) {
         setShowShackTransition(true);
+        playShackDoorClose();
         setTimeout(() => setShowShackTransition(false), 800);
       }
     }

@@ -6,7 +6,7 @@
     right: 0;
     top: 0;
     height: 50vh;
-    background-image: url('/shack/shack_top.jpeg');
+    background-image: url('/shack/shack_top.JPG');
     background-size: cover;
     background-position: center;
     z-index: var(--shack-z-index);
@@ -18,7 +18,7 @@
     right: 0;
     bottom: 0;
     height: 50vh;
-    background-image: url('/shack/shack_bottom.jpeg');
+    background-image: url('/shack/shack_bottom.JPG');
     background-size: cover;
     background-position: center;
     z-index: var(--shack-z-index);
