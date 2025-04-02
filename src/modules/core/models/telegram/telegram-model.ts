@@ -50,3 +50,38 @@ export interface TelegramReferralLinkResponse {
   error?: string;
 }
 
+/**
+ * Interface for leaderboard entry
+ */
+export interface LeaderboardEntry {
+  userId: string;
+  position: number;
+  totalBosts: number;
+  totalValue: number;
+  totalUsers: number;
+}
+
+/**
+ * Interface for global leaderboard response
+ */
+export interface TelegramGlobalLeaderboardResponse {
+  success: boolean;
+  leaderboard: LeaderboardEntry[];
+  error?: string;
+}
+
+/**
+ * Interface for user position in leaderboard response
+ */
+export interface TelegramLeaderboardPositionResponse {
+  success: boolean;
+  position?: {
+    userId: string;
+    position: number;
+    totalBosts: number;
+    totalValue: number;
+    totalUsers: number;
+  };
+  error?: string;
+}
+

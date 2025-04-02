@@ -1,14 +1,32 @@
 import { Icon } from '@/components/ui';
 import Image from 'next/image';
 import { formatNumber } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { TelegramApi } from '@/modules/core/models/telegram/telegram-api';
+import { Loader } from '@/components/loader';
+
 interface LeaderboardProps {
   name: string;
   photoUrl: string;
   myPosition: number;
-  allPositions: number;
 }
 
-export const Leaderboard = ({ name, photoUrl, myPosition, allPositions }: LeaderboardProps) => {
+export const Leaderboard = ({ name, photoUrl, myPosition }: LeaderboardProps) => {
+  const { data: globalData, isLoading } = useQuery({
+    queryKey: ['globalLeaderboard'],
+    queryFn: () => TelegramApi.leaderboard.getGlobal(),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center p-4">
+        <Loader />
+      </div>
+    );
+  }
+
+  const totalUsers = globalData?.leaderboard?.length;
+
   return (
     <div
       className="w-full rounded-3xl p-4 flex flex-col gap-4 border-white-translucent text-center"
@@ -28,7 +46,7 @@ export const Leaderboard = ({ name, photoUrl, myPosition, allPositions }: Leader
           <p className="font-bold font-roboto text-xs">Pack Leaderboard:</p>
           <p className="text-base">
             you ARE <span className="font-roboto color-yellow">{formatNumber(myPosition)}</span> out
-            of <span className="font-roboto color-yellow">{formatNumber(allPositions)}</span>
+            of <span className="font-roboto color-yellow">{totalUsers}</span>
           </p>
         </div>
       </div>
