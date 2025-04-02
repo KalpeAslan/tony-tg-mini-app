@@ -1,9 +1,9 @@
 import styles from './packs-list.module.css';
-import { BostItem } from '@/modules/core';
 import { Row } from './parts/row';
+import { UserActiveBoost } from '@/modules/core';
 
 interface PacksListProps {
-  activeBoosts: BostItem[];
+  activeBoosts: UserActiveBoost[];
 }
 
 export const PacksList = ({ activeBoosts }: PacksListProps) => {

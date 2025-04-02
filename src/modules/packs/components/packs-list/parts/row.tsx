@@ -1,11 +1,11 @@
 import { SectionMessage } from '@/components';
 import { FC } from 'react';
 import Image from 'next/image';
-import { BostItem } from '@/modules/core';
+import { UserActiveBoost } from '@/modules/core';
 import styles from './row.module.css';
 
 interface RowProps {
-  packs: BostItem[];
+  packs: UserActiveBoost[];
 }
 
 const maxPackBlock = 64;
@@ -46,7 +46,7 @@ export const Row: FC<RowProps> = ({ packs }) => {
                     zIndex: 3
                   }}
                 >
-                  <Image src={'/packs/card-small.png'} alt={pack.bostId.toString()} width={100} height={100} />
+                  <Image src={pack.imageUrl || '/packs/card-small.png'} alt={pack.bostId.toString()} width={100} height={100} />
                 </div>
               )}
             </div>
