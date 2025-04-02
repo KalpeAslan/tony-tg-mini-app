@@ -4,4 +4,6 @@
     background: url('/packs/krishka.png') no-repeat center center;
     background-size: contain;
     height: 35px;
+    position: relative;
+    bottom: -15px;
 }
