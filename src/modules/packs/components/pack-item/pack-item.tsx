@@ -92,7 +92,7 @@ export const PackItem: FC<PackItemProps> = ({ boost }) => {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       {/* Tony Device */}
       <div className="flex justify-center">
-        <TonyDevice size="l" />
+        <TonyDevice size="l" img={boost.imageUrl} />
       </div>
 
       {/* Currency indicators */}
@@ -132,7 +132,7 @@ export const PackItem: FC<PackItemProps> = ({ boost }) => {
         </div>
       </div>
 
-      <Task key={boost.id} title={boost.name} description={boost.description} img={boost.imageUrl} />
+      <Task key={boost.id} title={boost.name} description={boost.description} img={''} />
     </div>
   );
 };

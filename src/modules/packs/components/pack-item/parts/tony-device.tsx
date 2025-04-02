@@ -10,12 +10,13 @@ const sizes: Record<size, { width: number; height: number }> = {
 
 interface TonyDeviceProps {
   size: size;
+  img: string | null;
 }
 
-export const TonyDevice: FC<TonyDeviceProps> = ({ size = 's' }) => {
+export const TonyDevice: FC<TonyDeviceProps> = ({ size = 's', img }) => {
   return (
     <Image
-      src="/packs/tony-card.png"
+      src={img || '/packs/tony-card.png'}
       alt="Tony Device"
       width={sizes[size].width}
       height={sizes[size].height}
