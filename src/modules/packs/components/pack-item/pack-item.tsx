@@ -132,7 +132,7 @@ export const PackItem: FC<PackItemProps> = ({ boost }) => {
         </div>
       </div>
 
-      <Task key={boost.id} title={boost.name} description={boost.description} img={''} />
+      <Task key={boost.id} title={boost.name} description={boost.description} img={boost.imageUrl || '/packs/tony-card.png'} />
     </div>
   );
 };

@@ -38,7 +38,7 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
     return img;
   };
   return (
-    <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl px-2">
+    <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl p-2">
       <div className="flex-shrink-0 w-[84px] h-full flex items-center justify-center">
         {renderImage()}
       </div>
