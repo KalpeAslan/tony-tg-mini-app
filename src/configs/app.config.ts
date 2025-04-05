@@ -10,6 +10,10 @@ export class AppConfig {
   get tonAddress(): string {
     return process.env.NEXT_PUBLIC_TON_ADDRESS as string;
   }
+
+  get pacmanUrl(): string {
+    return process.env.NEXT_PUBLIC_PACMAN_URL as string;
+  }
 }
 
 export const appConfig = new AppConfig();

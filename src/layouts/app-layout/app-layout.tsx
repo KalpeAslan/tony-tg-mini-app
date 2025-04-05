@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 import { BackgroundMusic } from '@/lib/components';
 import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-import styles from './app-layout.module.css';
+// import styles from './app-layout.module.css';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -207,7 +207,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
           )}
 
           {/* Shack Transition */}
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {showShackTransition && (
               <>
                 <motion.div
@@ -226,7 +226,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
                 />
               </>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
         </div>
       </div>
     </div>

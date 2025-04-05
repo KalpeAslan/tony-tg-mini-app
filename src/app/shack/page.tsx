@@ -1,7 +1,5 @@
-'use client';
+import { ShackPage } from '@/modules/shack';
 
-import styles from './shack.module.css';
-
-export default function ShackPage() {
-  return <div className={styles.shackContainer}></div>;
+export default function Page() {
+  return <ShackPage />;
 }
