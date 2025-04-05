@@ -12,7 +12,7 @@ export class AppConfig {
   }
 
   get pacmanUrl(): string {
-    return process.env.NEXT_PUBLIC_PACMAN_URL as string;
+    return process.env.NEXT_PUBLIC_PACMAN_IFRAME_URL as string;
   }
 }
 
