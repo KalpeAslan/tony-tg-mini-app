@@ -47,7 +47,8 @@ const InvitedUserItem = ({ user }: { user: Invite }) => {
         <p className="font-roboto text-lg">{user.invitee?.telegramUsername}</p>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 italic text-base">
+        {user.invitee?.isPremium ? 'Premium' : 'Regular'}
         {/* <p className="font-roboto italic text-lg font-bold">
           {user.rewardAmount ? formatNumber(+user.rewardAmount) : '0'}
         </p> */}
