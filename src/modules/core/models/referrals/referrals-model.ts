@@ -44,7 +44,7 @@ export interface Level {
  */
 export interface InvitesResponse {
   success: boolean;
-  invites?: {
+  invites: {
     invites: Invite[];
     myLevel: Level;
   };

@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-
+import dayjs from 'dayjs';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -19,4 +19,9 @@ export function formatNumber(number: number): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
+}
+
+
+export function formatDate(date: Date): string {
+  return dayjs(date).format('DD-MM-YYYY');
 }

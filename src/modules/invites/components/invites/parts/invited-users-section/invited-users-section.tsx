@@ -40,19 +40,6 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
             </TableCell>
             <TableCell className="italic text-base">
               {user.invitee?.isPremium ? 'Premium' : 'Regular'}
-              {user.rewardAmount && (
-                <>
-                  <p className="font-roboto italic text-lg font-bold">
-                    {user.rewardAmount}
-                  </p>
-                  <Image
-                    src="/invites/coin.png"
-                    alt={user.invitee?.telegramUsername || 'Unknown User'}
-                    width={40}
-                    height={40}
-                  />
-                </>
-              )}
             </TableCell>
           </TableRow>
         ))}

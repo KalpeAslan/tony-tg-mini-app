@@ -29,15 +29,52 @@ export interface TelegramAuthResponse {
   error?: string;
 }
 
+
+
+export interface TelegramMe {
+  id:                string;
+  photoUrl:          null;
+  firstName:         string;
+  lastName:          string;
+  isPremium:         boolean;
+  telegramId:        string;
+  telegramUsername:  string;
+  referralCode:      string;
+  referrerId:        null;
+  createdAt:         Date;
+  updatedAt:         Date;
+  wallet:            Wallet;
+  sentInvites:       SentInvite[];
+  receivedInvites:   any[];
+  referralPurchases: any[];
+}
+
+export interface SentInvite {
+  id:               string;
+  inviterId:        string;
+  inviteeId:        string;
+  isAccepted:       boolean;
+  telegramUsername: string;
+  rewardAmount:     number | null;
+  status:           string;
+  createdAt:        Date;
+  updatedAt:        Date;
+}
+
+export interface Wallet {
+  id:        string;
+  balance:   number;
+  userId:    string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /**
  * Interface for Telegram Me endpoint response
  */
 export interface TelegramMeResponse {
   success: boolean;
-  user?: {
-    id: string;
-    email: string;
-  };
+  user?: TelegramMe;
   error?: string;
 }
 

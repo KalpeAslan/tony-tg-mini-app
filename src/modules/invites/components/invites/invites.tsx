@@ -1,17 +1,16 @@
+import { FC } from 'react';
 import { InvitedUsersSection } from './parts/invited-users-section/invited-users-section';
+import { InviteFriendsButton, InvitesResponse, WalletApi } from '@/modules/core';
 import { useQuery } from '@tanstack/react-query';
-import { WalletApi, ReferralsApi, InviteFriendsButton } from '@/modules/core';
-import { Task as TaskComponent } from '@/components/task';
 
-export const Invites = () => {
+interface InvitesProps {
+  invitesData: InvitesResponse;
+}
+
+export const Invites: FC<InvitesProps> = ({ invitesData }) => {
   const { data: rewardsInfo } = useQuery({
     queryKey: ['walletRewardsInfo'],
     queryFn: () => WalletApi.wallets.rewards.info(),
-  });
-
-  const { data: invitesData } = useQuery({
-    queryKey: ['referralsInvites'],
-    queryFn: () => ReferralsApi.invites.getInvites(),
   });
 
   return (
