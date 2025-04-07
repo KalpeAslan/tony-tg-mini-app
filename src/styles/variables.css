@@ -53,6 +53,8 @@
 
   --navigation-z-index: 51;
   --shack-z-index: 50;
+
+  --exp-color: #FFBB30;
 }
 
 /* Dark mode overrides if needed */

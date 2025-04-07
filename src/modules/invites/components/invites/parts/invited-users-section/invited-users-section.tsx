@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 import { Invite } from '@/modules/core';
+import { Table, TableRow, TableCell } from '../../../table/table';
 
 interface InvitedUsersSectionProps {
   referralPercent: number;
@@ -24,41 +25,38 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
         </p>
       </div>
 
-      <div className="flex flex-col gap-2 overflow-y-auto max-h-[300px]">
+      <Table>
         {invitedUsers.map(user => (
-          <InvitedUserItem key={user.id} user={user} />
+          <TableRow key={user.id}>
+            <TableCell>
+              <Image
+                src={user.invitee?.photoUrl || ''}
+                alt={user.telegramUsername || ''}
+                width={50}
+                height={50}
+                className="rounded-full border-white-translucent"
+              />
+              <p className="font-roboto text-lg">{user.invitee?.telegramUsername}</p>
+            </TableCell>
+            <TableCell className="italic text-base">
+              {user.invitee?.isPremium ? 'Premium' : 'Regular'}
+              {user.rewardAmount && (
+                <>
+                  <p className="font-roboto italic text-lg font-bold">
+                    {user.rewardAmount}
+                  </p>
+                  <Image
+                    src="/invites/coin.png"
+                    alt={user.invitee?.telegramUsername || 'Unknown User'}
+                    width={40}
+                    height={40}
+                  />
+                </>
+              )}
+            </TableCell>
+          </TableRow>
         ))}
-      </div>
-    </div>
-  );
-};
-
-const InvitedUserItem = ({ user }: { user: Invite }) => {
-  return (
-    <div className="flex w-full justify-between align-center p-4 border-t border-tony-whiteBorderMedium">
-      <div className="flex items-center gap-2">
-        <Image
-          src={user.invitee?.photoUrl || ''}
-          alt={user.telegramUsername || ''}
-          width={50}
-          height={50}
-          className="rounded-full border-white-translucent"
-        />
-        <p className="font-roboto text-lg">{user.invitee?.telegramUsername}</p>
-      </div>
-
-      <div className="flex items-center gap-2 italic text-base">
-        {user.invitee?.isPremium ? 'Premium' : 'Regular'}
-        {/* <p className="font-roboto italic text-lg font-bold">
-          {user.rewardAmount ? formatNumber(+user.rewardAmount) : '0'}
-        </p> */}
-        {/* <Image
-          src="/invites/coin.png"
-          alt={user.invitee?.telegramUsername || 'Unknown User'}
-          width={40}
-          height={40}
-        /> */}
-      </div>
+      </Table>
     </div>
   );
 };

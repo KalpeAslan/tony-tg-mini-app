@@ -33,6 +33,8 @@ export const Invites = () => {
           <InviteFriendsButton className="flex items-center text-3xl" />
         </div> */}
 
+        <InviteFriendsButton className="flex items-center text-3xl" />
+
         <InvitedUsersSection
           referralPercent={rewardsInfo?.referralPercent || 0}
           invitedUsers={invitesData?.invites?.invites || []}

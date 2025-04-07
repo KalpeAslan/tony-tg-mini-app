@@ -4,9 +4,10 @@ interface TaskProps {
   title: string;
   description?: string | ReactNode;
   img?: string | ReactNode;
+  imgSize?: number;
 }
 
-export const Task: FC<TaskProps> = ({ title, description, img }) => {
+export const Task: FC<TaskProps> = ({ title, description, img, imgSize = 84 }) => {
   const highlightNumbers = (text: string): ReactNode => {
     if (!text) return text;
 
@@ -17,7 +18,7 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
       // Check if the part is a number
       if (/^\d+$/.test(part)) {
         return (
-          <span key={index} style={{ color: '#FFD900' }}>
+          <span key={index} className='color-yellow'>
             {part}
           </span>
         );
@@ -33,7 +34,7 @@ export const Task: FC<TaskProps> = ({ title, description, img }) => {
   const renderImage = () => {
     if (!img) return null;
     if (typeof img === 'string') {
-      return <img src={img} alt={title} className="w-[84px] h-[84px] object-cover" />;
+      return <img src={img} alt={title} className={'object-cover'} style={{ width: imgSize, height: imgSize }} />;
     }
     return img;
   };

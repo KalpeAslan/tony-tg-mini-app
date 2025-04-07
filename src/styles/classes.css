@@ -36,7 +36,7 @@
   
 
   .color-yellow {
-    color: #FFD900;
+    color: var(--text-highlight);
   }
 
 
