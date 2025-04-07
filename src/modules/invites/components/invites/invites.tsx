@@ -17,7 +17,7 @@ export const Invites = () => {
   return (
     <>
       <div className="w-full h-full pb-[100px] flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
+        {/* <div className="flex flex-col gap-2">
           <TaskComponent
             title="Invite dudes"
             description={`Earn ${rewardsInfo?.regularReward || ''} Tony Coins by inviting friends through you referral link`}
@@ -31,11 +31,11 @@ export const Invites = () => {
           />
 
           <InviteFriendsButton className="flex items-center text-3xl" />
-        </div>
+        </div> */}
 
         <InvitedUsersSection
           referralPercent={rewardsInfo?.referralPercent || 0}
-          invitedUsers={invitesData?.invites || []}
+          invitedUsers={invitesData?.invites?.invites || []}
         />
       </div>
     </>

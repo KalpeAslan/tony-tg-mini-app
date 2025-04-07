@@ -19,17 +19,24 @@ export interface Invite {
  * Interface for User with invite relationships
  */
 export interface Invitee {
-  id:               string;
-  photoUrl:         string;
-  firstName:        string;
-  lastName:         string;
-  isPremium:        boolean;
-  telegramId:       string;
+  id: string;
+  photoUrl: string;
+  firstName: string;
+  lastName: string;
+  isPremium: boolean;
+  telegramId: string;
   telegramUsername: string;
-  referralCode:     string;
-  referrerId:       string;
-  createdAt:        Date;
-  updatedAt:        Date;
+  referralCode: string;
+  referrerId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Level {
+  experience: number;
+  experienceToNextLevel: number;
+  level: number;
+  progressPercentage: number;
 }
 
 /**
@@ -37,6 +44,9 @@ export interface Invitee {
  */
 export interface InvitesResponse {
   success: boolean;
-  invites?: Invite[];
+  invites?: {
+    invites: Invite[];
+    myLevel: Level;
+  };
   error?: string;
-} 
+}
