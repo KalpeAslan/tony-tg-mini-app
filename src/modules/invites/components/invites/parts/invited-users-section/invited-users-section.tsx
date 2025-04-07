@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import { formatNumber } from '@/lib/utils';
 import { FC } from 'react';
-import { Invite } from '@/modules/core/models/referrals';
+import { Invite } from '@/modules/core';
 
 interface InvitedUsersSectionProps {
   referralPercent: number;

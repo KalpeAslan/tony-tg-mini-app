@@ -1,2 +1,4 @@
 export * from './balance-section';
-export * from './invited-users-section';
+export * from './leaderboard';
+export * from './invites';
+export * from './progress';

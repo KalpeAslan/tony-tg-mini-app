@@ -23,36 +23,36 @@ const nextConfig = {
   },
   // Enable standalone output mode for Docker
   output: 'standalone',
-  async rewrites() {
-    const destination = process.env.NEXT_PUBLIC_PACMAN_URL;
-    return {
-      beforeFiles: [
-        // These rewrites are checked after headers/redirects
-        // and before all files including _next/public files which
-        // allows overriding page files
-        {
-          source: '/pacman-game',
-          destination: process.env.NEXT_PUBLIC_PACMAN_URL,
-        },
-      ],
-      afterFiles: [
-        // These rewrites are checked after pages/public files
-        // are checked but before dynamic routes
-        {
-          source: '/pacman-game',
-          destination: process.env.NEXT_PUBLIC_PACMAN_URL,
-        },
-      ],
-      fallback: [
-        // These rewrites are checked after both pages/public files
-        // and dynamic routes are checked
-        {
-          source: '/:path*',
-          destination: `${destination}/:path*`,
-        },
-      ],
-    }
-  },
+  // async rewrites() {
+  //   const destination = process.env.NEXT_PUBLIC_PACMAN_URL;
+  //   return {
+  //     beforeFiles: [
+  //       // These rewrites are checked after headers/redirects
+  //       // and before all files including _next/public files which
+  //       // allows overriding page files
+  //       {
+  //         source: '/pacman-game',
+  //         destination: process.env.NEXT_PUBLIC_PACMAN_URL,
+  //       },
+  //     ],
+  //     afterFiles: [
+  //       // These rewrites are checked after pages/public files
+  //       // are checked but before dynamic routes
+  //       {
+  //         source: '/pacman-game',
+  //         destination: process.env.NEXT_PUBLIC_PACMAN_URL,
+  //       },
+  //     ],
+  //     fallback: [
+  //       // These rewrites are checked after both pages/public files
+  //       // and dynamic routes are checked
+  //       {
+  //         source: '/:path*',
+  //         destination: `${destination}/:path*`,
+  //       },
+  //     ],
+  //   }
+  // },
 };
 
 mergeConfig(nextConfig, userConfig);
