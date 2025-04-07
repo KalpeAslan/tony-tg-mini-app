@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { DailyMissions, BigOneTimers } from './parts';
+import { DailyMissions, BigOneTimers, Banner } from './parts';
 import { Mission } from '../../models/mission.model';
-import Image from 'next/image';
+import { Button } from '@/components';
 
 // Mock data for demonstration
 const mockDailyMissions: Mission[] = [
@@ -60,22 +60,22 @@ export const Missions: FC = () => {
         imgSize={84}
       /> */}
 
-      <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl p-6 h-[137px] relative">
-        <div>
-          <p className="text-2xl font-roboto">Complete missions</p>
-          <p className="text-sm font-roboto">
-            Earn <span className='color-yellow'>EXP</span> from completing <span className='color-yellow'>Check-Ins</span> and <span className='color-yellow'>Daily Missions</span>!
-          </p>
+      <Banner />
+
+      <div className="flex flex-row gap-2 w-full items-center">
+        <div
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.590095413165266) 99%)',
+          }}
+          className="border-white-translucent border-2 font-roboto font-bold italic rounded-full p-2 flex flex-col text-center w-full"
+        >
+          <p className="text-xs">You Are On a Streak!</p>
+          <p className="text-2xl">5 Days</p>
         </div>
-        <div className="w-[157px]">
-          <Image
-            className="absolute right-0 bottom-0"
-            src="/invites/tony-task.png"
-            alt="tony-task"
-            width={157}
-            height={157}
-          />
-        </div>
+        <Button fullWidth variant="green">
+          <p className="text-2xl font-bold">Daily Check In</p>
+        </Button>
       </div>
 
       <DailyMissions missions={mockDailyMissions} />
