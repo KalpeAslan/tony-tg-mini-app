@@ -9,8 +9,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
 import { BackgroundMusic } from '@/lib/components';
+import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
-// import styles from './app-layout.module.css';
+import styles from './app-layout.module.css';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -27,6 +28,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     'purple-to-yellow' | 'yellow-to-purple' | null
   >(null);
   const [showShackTransition, setShowShackTransition] = useState(false);
+  const { play: playShackDoorClose } = useSound(Sound.SHACK_DOOR_CLOSE);
 
   const activeTab = usePathname() as EPages;
   console.log('activeTab', activeTab);
@@ -72,11 +74,13 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
       const wasShackPage = prevTab === EPages.Shack;
 
       if (!wasShackPage && isShackPage) {
-        // setShowShackTransition(true);
+        setShowShackTransition(true);
+        playShackDoorClose();
         // setTimeout(() => setShowShackTransition(false), 800);
       } else if (wasShackPage && !isShackPage) {
-        // setShowShackTransition(true);
-        // setTimeout(() => setShowShackTransition(false), 800);
+        setShowShackTransition(true);
+        playShackDoorClose();
+        setTimeout(() => setShowShackTransition(false), 800);
       }
     }
 
@@ -203,7 +207,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
           )}
 
           {/* Shack Transition */}
-          {/* <AnimatePresence>
+          <AnimatePresence>
             {showShackTransition && (
               <>
                 <motion.div
@@ -222,7 +226,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
                 />
               </>
             )}
-          </AnimatePresence> */}
+          </AnimatePresence>
         </div>
       </div>
     </div>
