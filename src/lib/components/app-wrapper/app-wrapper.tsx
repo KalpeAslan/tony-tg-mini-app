@@ -13,7 +13,7 @@ export const AppWrapper: FC<PropsWithChildren> = ({ children }) => {
     <div className={'flex items-center justify-center h-screen'}>
         <video
           src="/loader.MP4"
-          className={'absolute cover'}
+          className={'absolute top-0 left-0 w-full h-full object-cover'}
           autoPlay
           loop
           muted

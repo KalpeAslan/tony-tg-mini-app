@@ -147,7 +147,9 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     if (!matches)
       return (
-        <div className="w-full min-h-[var(--navigation-height)] relative pb-4 z-[var(--navigation-z-index)] absolute bottom-0">
+        <div className={`min-h-[var(--navigation-height)] fixed bottom-0 z-[var(--navigation-z-index)]`} style={{
+          width: 360
+        }}>
           <Navigation activeTab={activeTab} className="" />
         </div>
       );
@@ -185,7 +187,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         id="content"
         className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
       >
-        <BackgroundMusic />
+        {/* <BackgroundMusic /> */}
 
         <AnimatePresence mode="wait">
           <motion.div
