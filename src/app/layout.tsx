@@ -6,6 +6,7 @@ import { IconDefs } from '@/components/ui/icons';
 import { TelegramProvider } from '@/modules/core';
 import { TgAuthProvider } from '@/modules/core';
 import { AppLayout } from '@/layouts';
+import { AppWrapper } from '@/lib/components';
 export const metadata: Metadata = {
   title: 'Tony Wallet',
   description: 'Your gateway to the Tony ecosystem',
@@ -50,7 +51,11 @@ export default function RootLayout({
               <TelegramProvider>
                 <IconDefs />
                 <TgAuthProvider>
-                  <AppLayout>{children}</AppLayout>
+                  <AppWrapper>
+                    <AppLayout>
+                      {children}
+                    </AppLayout>
+                  </AppWrapper>
                 </TgAuthProvider>
               </TelegramProvider>
             </QueryProvider>

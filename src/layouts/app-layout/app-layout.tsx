@@ -10,8 +10,9 @@ import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
 import { BackgroundMusic } from '@/lib/components';
 import { useSound } from '@/lib/hooks/useSound';
-import { Sound } from '@/lib/constants';
+import { Sound, UIConstant } from '@/lib/constants';
 import styles from './app-layout.module.css';
+import { useMediaQuery } from 'usehooks-ts';
 
 const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
@@ -141,6 +142,25 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     localStorage.setItem('prevTab', activeTab);
   };
 
+  const renderNavigation = () => {
+    const matches = useMediaQuery(`(max-width: ${UIConstant.MAX_MOBILE_WIDTH}px)`);
+
+    if (!matches)
+      return (
+        <div className="w-full min-h-[var(--navigation-height)] relative pb-4 z-[var(--navigation-z-index)] absolute bottom-0">
+          <Navigation activeTab={activeTab} className="" />
+        </div>
+      );
+
+    return (
+      <div className="w-full min-h-[var(--navigation-height)] relative pb-4 z-[var(--navigation-z-index)]">
+        <div className="fixed bottom-5 left-0 right-0 px-3">
+          <Navigation activeTab={activeTab} className="" />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div id="wrap" className="w-full h-full relative">
       {/* Background Stars Layer - Lowest z-index */}
@@ -181,11 +201,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         </AnimatePresence>
 
         <SoundFloatingButton />
-        <div className="w-full min-h-[var(--navigation-height)] relative pb-4 z-[var(--navigation-z-index)]">
-          <div className="fixed bottom-5 left-0 right-0 px-3">
-            <Navigation activeTab={activeTab} className="" />
-          </div>
-        </div>
+        {renderNavigation()}
 
         {/* Transition Layers - Highest z-index */}
         <div className="absolute inset-0 z-20 pointer-events-none">

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
 const musicFiles = ["/music/Tony's Home.mp3", '/music/Ton Tony.mp3', '/music/TapTapTap.mp3'];
