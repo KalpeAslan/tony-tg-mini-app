@@ -89,7 +89,7 @@ export const Missions: FC = () => {
           loading={isCheckingIn}
           disabled={!checkInData?.canCheckIn}
         >
-          <p className="text-3xl font-bold">Daily Check In</p>
+          <p className="text-3xl font-bold whitespace-nowrap">Daily Check In</p>
         </Button>
       </div>
 
