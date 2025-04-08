@@ -21,9 +21,8 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
           dudes
         </p>
         <p className="font-roboto text-lg">
-          Earn <span className="text-[var(--exp-color)]">{referralPercent}%</span> from each one of you dudes shack 
-          and an additional <span className="text-[var(--exp-color)]">{appConfig.additionalExpForInviteWhichBoughtPack}%</span> from each
-          pack they purchase!
+          Earn <span className="text-[var(--exp-color)]">10 EXP</span> from each one of the
+           dudes you invite  and <span className="text-[var(--exp-color)]">30 EXP</span> from dudes with Telegram Premium!
         </p>
       </div>
 

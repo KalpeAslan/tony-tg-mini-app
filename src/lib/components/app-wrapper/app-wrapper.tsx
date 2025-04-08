@@ -9,22 +9,9 @@ export const AppWrapper: FC<PropsWithChildren> = ({ children }) => {
 
   if (matches) return <>{children}</>;
 
-  return (
-    <div className={'flex items-center justify-center h-screen'}>
-        <video
-          src="/loader.MP4"
-          className={'absolute top-0 left-0 w-full h-full object-cover'}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
-        />
-      <div className={'relative w-[390px] h-full overflow-hidden border-white-translucent rounded-lg'}>
-        {children}
-      </div>
-    </div>
-  );
+  return <div className='flex items-center justify-center h-screen w-full bg-black'>
+    <h1 className='text-2xl font-bold'>
+    my guy… please exit full screen
+    </h1>
+  </div>
 };
