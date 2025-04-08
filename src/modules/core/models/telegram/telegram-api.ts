@@ -14,7 +14,7 @@ export const TelegramApi = {
   auth: {
     webApp: async (data: TelegramAuthWebAppRequest): Promise<TelegramAuthResponse> => {
       try {
-        data.initData = mockInitData
+        // data.initData = mockInitData
         const response = await axiosInstance.post('/telegram/auth/web-app', data);
         return response.data;
       } catch (error) {

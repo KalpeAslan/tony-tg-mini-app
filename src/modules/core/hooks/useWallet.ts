@@ -51,7 +51,6 @@ export const useWallet = () => {
         ],
       };
       
-      console.log('transaction', transaction);
       await tonConnectUI.sendTransaction(transaction);
       return true;
     } catch (error) {
@@ -62,12 +61,39 @@ export const useWallet = () => {
     }
   };
   
+  const sendTonTxDaily = async (address: string, amount: number) => {
+    try {
+      setLoading(true);
+      const nanoTons = Math.pow(10, 9);
+
+      const transaction: SendTransactionRequest = {
+        validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+        messages: [
+          {
+            address: address,
+            amount: (amount * nanoTons).toString(),
+          },
+        ],
+      };
+      
+      await tonConnectUI.sendTransaction(transaction);
+      return true;
+    } catch (error) {
+      console.error(`Error sending TON transaction: ${error}`, error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
   return {
     isConnected,
     userFriendlyAddress,
     loading,
     connect,
     disconnect,
-    sendTonTransaction
+    sendTonTransaction,
+    sendTonTxDaily
   };
 }; 

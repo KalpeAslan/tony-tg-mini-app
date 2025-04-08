@@ -42,7 +42,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
       />
       <NavItem
         icon="invites"
-        label="INVITES"
+        label="LEVELS"
         isActive={activeTab === EPages.Invites}
         onClick={() => handleTabClick(EPages.Invites)}
       />

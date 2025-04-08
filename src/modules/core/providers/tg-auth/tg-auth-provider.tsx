@@ -4,7 +4,7 @@ import { useSignal } from '@telegram-apps/sdk-react';
 import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { TelegramAuthResponse, TelegramApi, BoostsApi, ReferralsApi } from '../../models';
+import { TelegramAuthResponse, TelegramApi, BoostsApi, ReferralsApi, DailyCheckInApi } from '../../models';
 import { FullLoader } from '@/components/ui';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
@@ -56,6 +56,13 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     enabled: isAuthenticated,
   });
 
+  // Daily Check-In Query
+  const { isLoading: isDailyCheckInLoading } = useQuery({
+    queryKey: ['dailyCheckIn'],
+    queryFn: () => DailyCheckInApi.checkIn.get(),
+    enabled: isAuthenticated,
+  });
+
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({
     mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
@@ -104,7 +111,8 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     isPositionLoading || 
     isBoostsLoading || 
     isActiveBoostsLoading || 
-    isInvitesLoading;
+    isInvitesLoading ||
+    isDailyCheckInLoading;
 
   const showLoader = isLoading || isPending || !isAuthenticated_ || showMinLoader;
 
