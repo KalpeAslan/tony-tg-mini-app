@@ -6,9 +6,11 @@ interface TableProps {
   maxHeight?: string;
 }
 
-export const Table: FC<TableProps> = ({ children, className = '', maxHeight = '300px' }) => {
+export const Table: FC<TableProps> = ({ children, className = '', maxHeight }) => {
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
+    <div className={`table-t flex flex-col gap-2 overflow-y-auto ${className}`} style={{
+      maxHeight: maxHeight
+    }}>
       {children}
     </div>
   );

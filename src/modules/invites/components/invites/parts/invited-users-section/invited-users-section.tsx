@@ -26,7 +26,7 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
         </p>
       </div>
 
-      <Table>
+      <Table maxHeight="250px">
         {invitedUsers.map(user => (
           <TableRow key={user.id}>
             <TableCell>
