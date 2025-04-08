@@ -29,7 +29,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
   return (
     <div
       className={clsx(
-        'bg-card border-white-translucent rounded-full flex justify-around text-center',
+        'bg-card border-white-translucent rounded-3xl flex justify-around text-center',
         'items-center shadow-lg w-[var(--navigation-width)] h-[var(--navigation-height)]',
         className
       )}

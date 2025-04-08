@@ -14,6 +14,10 @@ export class AppConfig {
   get pacmanUrl(): string {
     return process.env.NEXT_PUBLIC_PACMAN_IFRAME_URL as string;
   }
+
+  get additionalExpForInviteWhichBoughtPack(): number {
+    return 5;
+  }
 }
 
 export const appConfig = new AppConfig();

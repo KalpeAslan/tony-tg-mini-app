@@ -22,14 +22,14 @@ export const Progress: React.FC<ProgressProps> = ({
 
       {/* Current level indicator */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold font-roboto border-white-translucent border-2">
+        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold font-roboto border-white-translucent">
           {currentLevel}
         </div>
       </div>
 
       {/* Next level indicator */}
       <div className="absolute right-4 top-1/2 -translate-y-1/2">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold font-roboto border-white-translucent border-2">
+        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold font-roboto border-white-translucent">
           {nextLevel}
         </div>
       </div>

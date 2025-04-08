@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { Invite } from '@/modules/core';
 import { Table, TableRow, TableCell } from '../../../table/table';
+import { appConfig } from '@/configs';
 
 interface InvitedUsersSectionProps {
   referralPercent: number;
@@ -16,11 +17,12 @@ export const InvitedUsersSection: FC<InvitedUsersSectionProps> = ({
     <div className="w-full border-white-translucent rounded-3xl bg-card overflow-hidden">
       <div className="w-full p-4 flex flex-col gap-4">
         <p className="text-3xl uppercase">
-          you have invited: <span className="font-bold font-roboto">{invitedUsers.length}</span>{' '}
+          you have invited: <span className="font-bold font-roboto color-yellow">{invitedUsers.length}</span>{' '}
           dudes
         </p>
         <p className="font-roboto text-lg">
-          Earn {referralPercent}% from each one of you dudes shack and an additional 5% from each
+          Earn <span className="text-[var(--exp-color)]">{referralPercent}%</span> from each one of you dudes shack 
+          and an additional <span className="text-[var(--exp-color)]">{appConfig.additionalExpForInviteWhichBoughtPack}%</span> from each
           pack they purchase!
         </p>
       </div>

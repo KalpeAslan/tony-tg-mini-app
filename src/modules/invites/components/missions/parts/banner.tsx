@@ -4,7 +4,7 @@ export const Banner = () => {
   return (
     <div className="bg-card flex w-full min-h-[105px] border-white-translucent rounded-3xl p-6 h-[137px] relative">
       <div>
-        <p className="text-2xl font-roboto">Complete missions</p>
+        <p className="text-2xl">Complete missions</p>
         <p className="text-sm font-roboto">
           Earn <span className="color-yellow">EXP</span> from completing{' '}
           <span className="color-yellow">Check-Ins</span> and{' '}

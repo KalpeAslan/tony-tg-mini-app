@@ -74,7 +74,7 @@ export const Missions: FC = () => {
           <p className="text-2xl">5 Days</p>
         </div>
         <Button fullWidth variant="green">
-          <p className="text-2xl font-bold">Daily Check In</p>
+          <p className="text-3xl font-bold">Daily Check In</p>
         </Button>
       </div>
 

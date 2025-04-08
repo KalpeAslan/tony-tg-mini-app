@@ -3,8 +3,8 @@
 import { useSignal } from '@telegram-apps/sdk-react';
 import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { TelegramAuthResponse, TelegramApi } from '../../models';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { TelegramAuthResponse, TelegramApi, BoostsApi, ReferralsApi } from '../../models';
 import { FullLoader } from '@/components/ui';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
@@ -12,15 +12,49 @@ import { useMe } from '../../hooks';
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
   const [showMinLoader, setShowMinLoader] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { refetchUserData, isLoading, isAuthenticated } = useMe();
+  const { refetchUserData, isLoading: isUserLoading } = useMe();
 
   // Set minimum loader time
   useTimeout(() => {
     setShowMinLoader(false);
   }, 1000);
 
-  // Query for fetching user data
+  // Global Leaderboard Query
+  const { isLoading: isGlobalLeaderboardLoading } = useQuery({
+    queryKey: ['globalLeaderboard'],
+    queryFn: () => TelegramApi.leaderboard.getGlobal(),
+    enabled: isAuthenticated,
+  });
+
+  // User Position Query
+  const { isLoading: isPositionLoading } = useQuery({
+    queryKey: ['leaderboardPosition'],
+    queryFn: () => TelegramApi.leaderboard.getPosition(),
+    enabled: isAuthenticated,
+  });
+
+  // All Boosts Query
+  const { isLoading: isBoostsLoading } = useQuery({
+    queryKey: ['boosts'],
+    queryFn: BoostsApi.boosts.getAll,
+    enabled: isAuthenticated,
+  });
+
+  // User Active Boosts Query
+  const { isLoading: isActiveBoostsLoading } = useQuery({
+    queryKey: ['userActiveBoosts'],
+    queryFn: () => BoostsApi.boosts.getUserActive(),
+    enabled: isAuthenticated,
+  });
+
+  // Referral Invites Query
+  const { isLoading: isInvitesLoading } = useQuery({
+    queryKey: ['referralsInvites'],
+    queryFn: () => ReferralsApi.invites.getInvites(),
+    enabled: isAuthenticated,
+  });
 
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({
@@ -38,8 +72,9 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
           isPremium: data.user?.isPremium,
         });
 
-        // After successful authentication, fetch user data
+        // After successful authentication, fetch user data and set authenticated state
         refetchUserData();
+        setIsAuthenticated(true);
       }
     },
     onError: error => {
@@ -60,8 +95,16 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [initDataRaw]);
 
   const isDev = process.env.NODE_ENV === 'development';
-
   const isAuthenticated_ = isDev ? true : isAuthenticated;
+
+  // Check if any query is still loading
+  const isLoading = 
+    isUserLoading || 
+    isGlobalLeaderboardLoading || 
+    isPositionLoading || 
+    isBoostsLoading || 
+    isActiveBoostsLoading || 
+    isInvitesLoading;
 
   const showLoader = isLoading || isPending || !isAuthenticated_ || showMinLoader;
 
