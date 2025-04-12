@@ -17,6 +17,7 @@ export enum EPages {
   Invites = '/invites',
   Airdrop = '/',
   Packs = '/packs',
+  Arcade = '/arcade',
 }
 
 // Layout types
