@@ -5,7 +5,7 @@ export default class Ghost {
     this.originalVelocity = velocity;
     this.velocity = { ...this.originalVelocity };
     this.tileLength = tileLength;
-    this.radius = (this.tileLength * 3) / 8;
+    this.radius = 24;
     this.colour = colour;
     this.prevCollisions = [];
     this.speed = this.tileLength / 8;
@@ -23,7 +23,7 @@ export default class Ghost {
     this.down = new Image();
     this.down.src = `./images/${this.colour}-ghost-down.png`;
     this.scaredBlue = new Image();
-    this.scaredBlue.src = `./images/scared-ghost-blue.png`;
+    this.scaredBlue.src = `./images/${this.colour}-scared-ghost-blue.png`;
     this.eyesUp = new Image();
     this.eyesUp.src = `./images/eyes-up.png`;
     this.eyesLeft = new Image();
@@ -37,8 +37,10 @@ export default class Ghost {
   draw(ctx) {
     ctx.drawImage(
       this.image,
-      this.position.x - this.radius * 2,
-      this.position.y - this.radius * 2
+      this.position.x - this.radius,
+      this.position.y - this.radius,
+      48,
+      48
     );
   }
 

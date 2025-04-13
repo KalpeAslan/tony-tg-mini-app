@@ -30,6 +30,9 @@ export default class PacMan {
     this.isLevellingUp = false;
     this.munchOne = munchOne;
     this.munchTwo = munchTwo;
+
+    this.image = new Image();
+    this.image.src = '/images/pacman-mouth-close';
   }
 
   draw(ctx) {
@@ -50,6 +53,14 @@ export default class PacMan {
     ctx.fill();
     ctx.closePath();
     ctx.restore();
+
+    // ctx.drawImage(
+    //   this.image,
+    //   this.position.x - this.radius,
+    //   this.position.y - this.radius,
+    //   48,
+    //   48
+    // );
   }
 
   update(ctx) {

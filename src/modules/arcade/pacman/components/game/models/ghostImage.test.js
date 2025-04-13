@@ -61,7 +61,7 @@ describe("Ghost", () => {
       ghost.changeScaredState();
       ghost.assignSprite();
       expect(ghost.image.src).toBe(
-        "http://localhost/images/scared-ghost-blue.png"
+        "http://localhost/images/scared-ghost-blue.png" // TODO: must be with scared prefix
       );
     });
 

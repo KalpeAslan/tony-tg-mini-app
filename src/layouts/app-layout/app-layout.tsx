@@ -8,13 +8,12 @@ import { useTheme as useNextTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
-import { BackgroundMusic } from '@/lib/components';
 import { useSound } from '@/lib/hooks/useSound';
 import { Sound, UIConstant } from '@/lib/constants';
 import styles from './app-layout.module.css';
 import { useMediaQuery } from 'usehooks-ts';
 
-const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack];
+const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack, EPages.Arcade];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
 
 const starsMovePercent = 10;
