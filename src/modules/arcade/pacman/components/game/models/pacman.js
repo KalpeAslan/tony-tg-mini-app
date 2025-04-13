@@ -28,67 +28,57 @@ export default class PacMan {
     this.isEating = false;
     this.isShrinking = false;
     this.isLevellingUp = false;
+    this.isDead = false;
     this.munchOne = munchOne;
     this.munchTwo = munchTwo;
 
-    this.image = new Image();
-    this.image.src = '/images/pacman-mouth-close';
+    // Load images
+    this.mouthOpen = new Image();
+    this.mouthOpen.src = '/images/pacman-mouth-open.png';
+    this.mouthClosed = new Image();
+    this.mouthClosed.src = '/images/pacman-mouth-close.png';
+    this.dead = new Image();
+    this.dead.src = '/images/pacman-dead.png';
+
+    this.currentImage = this.mouthClosed;
   }
 
   draw(ctx) {
-    ctx.save();
-    ctx.translate(this.position.x, this.position.y);
-    ctx.rotate(this.rotation);
-    ctx.translate(-this.position.x, -this.position.y);
-    ctx.beginPath();
-    ctx.arc(
-      this.position.x,
-      this.position.y,
-      this.radius * 2,
-      this.radians,
-      Math.PI * 2 - this.radians
-    );
-    ctx.lineTo(this.position.x - this.tileLength / 4, this.position.y);
-    ctx.fillStyle = "yellow";
-    ctx.fill();
-    ctx.closePath();
-    ctx.restore();
+    if (this.isDead) {
+      this.currentImage = this.dead;
+    } else if (this.isEating) {
+      this.currentImage = this.mouthOpen;
+    } else {
+      this.currentImage = this.mouthClosed;
+    }
 
-    // ctx.drawImage(
-    //   this.image,
-    //   this.position.x - this.radius,
-    //   this.position.y - this.radius,
-    //   48,
-    //   48
-    // );
+    ctx.drawImage(
+      this.currentImage,
+      this.position.x - (this.radius * 3),
+      this.position.y - (this.radius * 3),
+      this.radius * 6,
+      this.radius * 6
+    );
   }
 
   update(ctx) {
-    this.checkRotation();
     this.draw(ctx);
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     if (this.velocity.x !== 0 || this.velocity.y !== 0) {
       this.chomp();
-    } else {
-      this.radians = Math.PI / 4;
     }
   }
 
   chomp() {
-    if (this.radians < Math.PI / 36 || this.radians > Math.PI / 4) {
-      if (this.isEating)
-        this.openRate < 0 ? this.munchOne.play() : this.munchTwo.play();
-      this.openRate = -this.openRate;
+    if (!this.isDead) {
+      this.isEating = !this.isEating;
+      if (this.isEating) {
+        this.munchOne.play();
+      } else {
+        this.munchTwo.play();
+      }
     }
-    this.radians += this.openRate;
-  }
-
-  checkRotation() {
-    if (this.velocity.x > 0) this.rotation = 0;
-    else if (this.velocity.x < 0) this.rotation = Math.PI;
-    else if (this.velocity.y > 0) this.rotation = Math.PI / 2;
-    else if (this.velocity.y < 0) this.rotation = (Math.PI * 3) / 2;
   }
 
   shrink(ctx) {
@@ -96,11 +86,15 @@ export default class PacMan {
     this.radians += this.shrinkRate;
   }
 
+  die() {
+    this.isDead = true;
+    this.isEating = false;
+  }
+
   reset() {
     this.position = { ...this.originalPosition };
     this.velocity = { ...this.originalVelocity };
-    this.radians = Math.PI / 4;
-    this.openRate = Math.PI / 36;
-    this.rotation = 0;
+    this.isDead = false;
+    this.isEating = false;
   }
 }
