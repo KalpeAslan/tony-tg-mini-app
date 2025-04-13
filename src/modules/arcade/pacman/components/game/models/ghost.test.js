@@ -61,7 +61,7 @@ describe("Ghost", () => {
       expect(ghost.down.src).toBe("http://localhost/images/red-ghost-down.png");
       expect(ghost.scaredBlue).toBeInstanceOf(Image);
       expect(ghost.scaredBlue.src).toBe(
-        "http://localhost/images/scared-ghost-blue.png"
+        "http://localhost/images/scared-ghost-blue.png" // TODO: must be with scared prefix
       );
       expect(ghost.eyesUp).toBeInstanceOf(Image);
       expect(ghost.eyesUp.src).toBe("http://localhost/images/eyes-up.png");
