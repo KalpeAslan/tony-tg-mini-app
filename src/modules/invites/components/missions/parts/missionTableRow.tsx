@@ -17,7 +17,6 @@ export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTa
     play();
     if (!mission.isCompleted && !isCompleting) {
       onComplete();
-    } else if (mission.url) {
       window.open(mission.url, '_blank');
     }
   };
