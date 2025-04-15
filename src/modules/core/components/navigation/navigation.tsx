@@ -59,7 +59,7 @@ export function Navigation({ activeTab, className }: NavigationProps) {
         onClick={() => handleTabClick(EPages.Packs)}
       />
       <NavItem
-        icon="tony-packs"
+        icon="arcade"
         label="ARCADE"
         isActive={activeTab === EPages.Arcade}
         onClick={() => handleTabClick(EPages.Arcade)}

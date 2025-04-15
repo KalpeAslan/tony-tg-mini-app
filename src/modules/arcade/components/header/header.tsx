@@ -18,7 +18,7 @@ export const ArcadeHeader = ({ tickets, playsLeft, timeUntilNextPlay }: ArcadeHe
   const { push } = useRouter();
 
   return (
-    <div className="w-full px-4 pt-12">
+    <div className="w-full px-4 pt-[100px]">
       <div className="flex gap-8 items-center w-full h-[55px]">
         <BackButton onClick={() => push(EPages.Invites)} />
         <div className="flex gap-2 items-center w-full">
