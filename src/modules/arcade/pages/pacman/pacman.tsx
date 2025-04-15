@@ -1,5 +1,8 @@
+import { ArcadeLayout } from "../../layouts/arcade-layout";
 import { PacmanMain } from "../../pacman";
 
 export function PacmanPage() {
-  return <PacmanMain />;
+  return <ArcadeLayout>
+    <PacmanMain />
+  </ArcadeLayout>;
 }

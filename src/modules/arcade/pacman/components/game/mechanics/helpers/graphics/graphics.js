@@ -29,12 +29,15 @@ export default class Graphics {
   }
 
   static drawPacmanIcon(ctx, position) {
-    ctx.beginPath();
-    ctx.arc(position.x, position.y, 15, Math.PI / 4, (Math.PI * 7) / 4);
-    ctx.lineTo(position.x - 5, position.y);
-    ctx.fillStyle = "yellow";
-    ctx.fill();
-    ctx.closePath();
+    const icon = new Image();
+    icon.src = '/images/pacman-mouth-close.png';
+    ctx.drawImage(
+      icon,
+      position.x - 15,
+      position.y - 15,
+      30,
+      30
+    );
   }
 
   static runLevelUpAnimation(

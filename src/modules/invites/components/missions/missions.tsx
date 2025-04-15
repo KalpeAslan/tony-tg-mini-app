@@ -3,7 +3,7 @@ import { DailyMissions, BigOneTimers, Banner } from './parts';
 import { Mission } from '../../models/mission.model';
 import { Button } from '@/components';
 import { useDailyCheckIn } from '../../hooks';
-
+import { SectionMessage } from '@/lib/components';
 // Mock data for demonstration
 const mockDailyMissions: Mission[] = [
   {
@@ -72,16 +72,7 @@ export const Missions: FC = () => {
       <Banner />
 
       <div className="flex flex-row gap-2 w-full items-center">
-        <div
-          style={{
-            background:
-              'linear-gradient(90deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.590095413165266) 99%)',
-          }}
-          className="border-white-translucent border-2 font-roboto font-bold italic rounded-full p-2 flex flex-col text-center w-full"
-        >
-          <p className="text-xs">You Are On a Streak!</p>
-          <p className="text-2xl">{checkInData?.streak || 0} Days</p>
-        </div>
+        <SectionMessage message="You Are On a Streak!" value={checkInData?.streak || 0} />
         <Button 
           fullWidth 
           variant="green" 

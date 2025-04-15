@@ -59,6 +59,17 @@ export default class GhostCollision {
     Animator.displayPleaseWait(ctx);
     if (variables.player) await saveScore(variables);
     resetAfterGameOver(assets, variables);
+    
+    // Dispatch game ended event
+    const gameEndedEvent = new CustomEvent('gameEnded', {
+      detail: {
+        score: variables.score,
+        level: variables.level,
+        player: variables.player
+      }
+    });
+    window.dispatchEvent(gameEndedEvent);
+    
     variables.reactRoot.render(<Leaderboard variables={variables} />);
   }
 
