@@ -37,7 +37,7 @@ export default function Game({ player, callback = playGame }: GameProps) {
         ></canvas>
       </div>
       <br></br>
-      <div className="dpad">
+      <div className="dpad flex justify-center items-center">
         <img
           src="./images/dpad.png"
           alt="dpad"

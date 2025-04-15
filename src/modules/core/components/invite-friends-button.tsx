@@ -6,14 +6,16 @@ import { FC } from 'react';
 
 interface InviteFriendsButtonProps {
   className?: string;
+  onSuccess?: () => void;
 }
 
-export const InviteFriendsButton: FC<InviteFriendsButtonProps> = ({ className }) => {
+export const InviteFriendsButton: FC<InviteFriendsButtonProps> = ({ className, onSuccess }) => {
   const getReferralLinkMutation = useMutation({
     mutationFn: TelegramApi.telegram.getReferralLink,
     onSuccess: data => {
       if (data.success && data.referralLink) {
         shareURL(data.referralLink);
+        onSuccess && onSuccess();
       }
     },
     onError: error => {
