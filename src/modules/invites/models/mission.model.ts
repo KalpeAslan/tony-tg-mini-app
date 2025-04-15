@@ -1,8 +1,17 @@
 export interface Mission {
-  name: string;
+  id: number;
+  title: string;
   description: string;
-  type: string;
-  exp: number;
-  url: string;
-  isDone: boolean;
-} 
+  expReward: number;
+  type: 'daily' | 'one-time';
+  isCompleted: boolean;
+  socialPlatform: string;
+  actionType: string;
+  url?: string;
+}
+
+export interface CompleteMissionRequest {
+  missionId: number;
+}
+
+export type MissionResponse = Mission[];

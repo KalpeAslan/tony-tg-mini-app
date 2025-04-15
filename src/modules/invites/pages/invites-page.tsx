@@ -26,6 +26,7 @@ export function InvitesPage() {
 
   const { userData } = useMe();
   const { myPosition, totalPositions } = useLeaderboard();
+  console.log('invitesData', invitesData);
 
   return (
     <div className="w-full h-full items-center justify-start gap-4 flex flex-col pt-[100px]">
@@ -34,7 +35,7 @@ export function InvitesPage() {
         ownPosition={myPosition}
         totalPositions={totalPositions}
       />
-      <Progress level={invitesData?.invites?.myLevel!} />
+      <Progress level={invitesData?.invites?.myLevel! || {}} />
       <div className="flex flex-row gap-2 w-full">
         <div
           className={cn(

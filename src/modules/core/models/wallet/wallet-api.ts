@@ -15,13 +15,19 @@ export const WalletApi = {
     rewards: {
       info: async (): Promise<WalletRewardsInfoResponse> => {
         try {
-          const response = await axiosInstance.get('/wallets/rewards/info');
-          return response.data;
+          // const response = await axiosInstance.get('/wallets/rewards/info');
+          // return response.data;
+          return {
+            success: true,
+            premiumReward: 333333,
+            regularReward: 33333,
+            referralPercent: 5,
+          };
         } catch (error) {
           console.error('Error fetching wallet rewards info:', error);
           throw error;
         }
-      }
-    }
-  }
-}; 
+      },
+    },
+  },
+};

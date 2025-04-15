@@ -6,17 +6,21 @@ import { Sound } from '@/lib/constants';
 
 interface MissionTableRowProps {
   mission: Mission;
+  onComplete: () => void;
+  isCompleting: boolean;
 }
 
-export const MissionTableRow = ({ mission }: MissionTableRowProps) => {
-
+export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTableRowProps) => {
   const { play } = useSound(Sound.CLICK);
-
 
   const handleClick = () => {
     play();
-    window.open(mission.url, '_blank');
-  }
+    if (!mission.isCompleted && !isCompleting) {
+      onComplete();
+    } else if (mission.url) {
+      window.open(mission.url, '_blank');
+    }
+  };
 
   return (
     <TableRow>
@@ -25,18 +29,25 @@ export const MissionTableRow = ({ mission }: MissionTableRowProps) => {
           <div className="flex flex-col items-center justify-center text-center gap-2 pr-4">
             <Icon size={45} name="mission-icon" />
             <TableCell className="text-right">
-              <span className="text-xs text-[var(--exp-color)] whitespace-nowrap">+{mission.exp} EXP</span>
+              <span className="text-xs text-[var(--exp-color)] whitespace-nowrap">
+                +{mission.expReward} EXP
+              </span>
             </TableCell>
           </div>
           <div>
-            <p className="text-lg italic font-bold mb-2">{mission.name}</p>
+            <p className="text-lg italic font-bold mb-2">{mission.title}</p>
             <p className="text-sm">{mission.description}</p>
           </div>
         </div>
       </TableCell>
       <TableCell className="text-right">
-        <div onClick={handleClick} className='rounded-full border-white-translucent h-[42px] w-[42px] flex items-center justify-center'>
-          <Icon size={16} name="play" />
+        <div
+          onClick={handleClick}
+          className={`rounded-full border-white-translucent h-[42px] w-[42px] flex items-center justify-center ${
+            isCompleting ? 'opacity-50 cursor-not-allowed' : mission.isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+          }`}
+        >
+          <Icon size={16} name={mission.isCompleted ? 'checkMark' : 'play'} />
         </div>
       </TableCell>
     </TableRow>

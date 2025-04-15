@@ -5,9 +5,15 @@ import { MissionTableRow } from './missionTableRow';
 
 interface BigOneTimersProps {
   missions: Mission[];
+  onCompleteMission: (missionId: number) => void;
+  isCompletingMission: boolean;
 }
 
-export const BigOneTimers: FC<BigOneTimersProps> = ({ missions }) => {
+export const BigOneTimers: FC<BigOneTimersProps> = ({ 
+  missions, 
+  onCompleteMission,
+  isCompletingMission 
+}) => {
   return (
     <div className="w-full border-white-translucent rounded-3xl bg-card overflow-hidden">
       <div className="w-full p-4 flex flex-col gap-4">
@@ -17,8 +23,13 @@ export const BigOneTimers: FC<BigOneTimersProps> = ({ missions }) => {
       </div>
 
       <Table>
-        {missions.map((mission, index) => (
-          <MissionTableRow key={index} mission={mission} />
+        {missions.map((mission) => (
+          <MissionTableRow 
+            key={mission.id} 
+            mission={mission} 
+            onComplete={() => onCompleteMission(mission.id)}
+            isCompleting={isCompletingMission}
+          />
         ))}
       </Table>
     </div>

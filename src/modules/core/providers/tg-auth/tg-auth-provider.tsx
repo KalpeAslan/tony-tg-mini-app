@@ -8,6 +8,7 @@ import { TelegramAuthResponse, TelegramApi, BoostsApi, ReferralsApi, DailyCheckI
 import { FullLoader } from '@/components/ui';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
+import { MissionApi } from '@/modules/invites/api/mission-api';
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
@@ -63,6 +64,42 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     enabled: isAuthenticated,
   });
 
+  // Missions Query
+  const { isLoading: isMissionsLoading } = useQuery({
+    queryKey: ['missions'],
+    queryFn: () => MissionApi.getAll(),
+    enabled: isAuthenticated,
+  });
+
+  // User Missions Query
+  const { isLoading: isUserMissionsLoading } = useQuery({
+    queryKey: ['userMissions'],
+    queryFn: () => MissionApi.getUserCompleted(),
+    enabled: isAuthenticated,
+  });
+
+  // Daily Missions Query
+  const { isLoading: isDailyMissionsLoading } = useQuery({
+    queryKey: ['dailyMissions'],
+    queryFn: () => MissionApi.getDaily(),
+    enabled: isAuthenticated,
+  });
+
+  // One-Time Missions Query
+  const { isLoading: isOneTimeMissionsLoading } = useQuery({
+    queryKey: ['oneTimeMissions'],
+    queryFn: () => MissionApi.getOneTime(),
+    enabled: isAuthenticated,
+  });
+
+  // User Daily Completed Missions Query
+  const { isLoading: isUserDailyCompletedLoading } = useQuery({
+    queryKey: ['userDailyCompletedMissions'],
+    queryFn: () => MissionApi.getUserDailyCompleted(),
+    enabled: isAuthenticated,
+  });
+
+  console.log('isAuthenticated', isAuthenticated);
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({
     mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
@@ -107,6 +144,11 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   // Check if any query is still loading
   const isLoading = 
     isUserLoading || 
+    isMissionsLoading ||
+    isUserMissionsLoading ||
+    isDailyMissionsLoading ||
+    isOneTimeMissionsLoading ||
+    isUserDailyCompletedLoading ||
     isGlobalLeaderboardLoading || 
     isPositionLoading || 
     isBoostsLoading || 
