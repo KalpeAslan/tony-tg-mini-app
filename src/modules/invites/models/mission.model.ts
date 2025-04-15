@@ -14,4 +14,4 @@ export interface CompleteMissionRequest {
   missionId: number;
 }
 
-export type MissionResponse = Mission[];
+export type MissionResponse = Mission;

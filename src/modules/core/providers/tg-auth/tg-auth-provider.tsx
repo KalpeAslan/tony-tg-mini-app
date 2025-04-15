@@ -4,7 +4,13 @@ import { useSignal } from '@telegram-apps/sdk-react';
 import { initData } from '@telegram-apps/sdk-react';
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { TelegramAuthResponse, TelegramApi, BoostsApi, ReferralsApi, DailyCheckInApi } from '../../models';
+import {
+  TelegramAuthResponse,
+  TelegramApi,
+  BoostsApi,
+  ReferralsApi,
+  DailyCheckInApi,
+} from '../../models';
 import { FullLoader } from '@/components/ui';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
@@ -71,13 +77,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     enabled: isAuthenticated,
   });
 
-  // User Missions Query
-  const { isLoading: isUserMissionsLoading } = useQuery({
-    queryKey: ['userMissions'],
-    queryFn: () => MissionApi.getUserCompleted(),
-    enabled: isAuthenticated,
-  });
-
   // Daily Missions Query
   const { isLoading: isDailyMissionsLoading } = useQuery({
     queryKey: ['dailyMissions'],
@@ -89,13 +88,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { isLoading: isOneTimeMissionsLoading } = useQuery({
     queryKey: ['oneTimeMissions'],
     queryFn: () => MissionApi.getOneTime(),
-    enabled: isAuthenticated,
-  });
-
-  // User Daily Completed Missions Query
-  const { isLoading: isUserDailyCompletedLoading } = useQuery({
-    queryKey: ['userDailyCompletedMissions'],
-    queryFn: () => MissionApi.getUserDailyCompleted(),
     enabled: isAuthenticated,
   });
 
@@ -142,17 +134,15 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const isAuthenticated_ = isDev ? true : isAuthenticated;
 
   // Check if any query is still loading
-  const isLoading = 
-    isUserLoading || 
+  const isLoading =
+    isUserLoading ||
     isMissionsLoading ||
-    isUserMissionsLoading ||
     isDailyMissionsLoading ||
     isOneTimeMissionsLoading ||
-    isUserDailyCompletedLoading ||
-    isGlobalLeaderboardLoading || 
-    isPositionLoading || 
-    isBoostsLoading || 
-    isActiveBoostsLoading || 
+    isGlobalLeaderboardLoading ||
+    isPositionLoading ||
+    isBoostsLoading ||
+    isActiveBoostsLoading ||
     isInvitesLoading ||
     isDailyCheckInLoading;
 

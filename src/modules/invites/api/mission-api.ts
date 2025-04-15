@@ -41,24 +41,4 @@ export const MissionApi = {
       throw error;
     }
   },
-
-  getUserCompleted: async (): Promise<MissionResponse> => {
-    try {
-      const response = await axiosInstance.get('/missions/user/completed');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching user completed missions:', error);
-      throw error;
-    }
-  },
-
-  getUserDailyCompleted: async (): Promise<MissionResponse> => {
-    try {
-      const response = await axiosInstance.get('/missions/user/daily-completed');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching user daily completed missions:', error);
-      throw error;
-    }
-  }
 }; 

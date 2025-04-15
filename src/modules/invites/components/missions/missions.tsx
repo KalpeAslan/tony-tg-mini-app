@@ -4,11 +4,10 @@ import { SectionMessage } from '@/lib/components';
 import { Button } from '@/components';
 import { useDailyCheckIn } from '../../hooks';
 import { useMissions } from '../../hooks/use-missions';
-
+import { Mission } from '../../models/mission.model';
 export const Missions: FC = () => {
   const { checkInData, handleCheckIn, isCheckingIn } = useDailyCheckIn();
-  const { dailyMissions, oneTimeMissions, isLoading, completeMission, isCompletingMission } =
-    useMissions();
+  const { dailyMissions, oneTimeMissions, completeMission, isCompletingMission } = useMissions();
 
   const handleDailyCheckIn = async () => {
     if (checkInData?.canCheckIn) {
@@ -16,9 +15,6 @@ export const Missions: FC = () => {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
 
   return (
     <div className="flex flex-col gap-4 w-full pb-[120px] pt-4">
@@ -45,12 +41,12 @@ export const Missions: FC = () => {
       </div>
 
       <DailyMissions
-        missions={dailyMissions}
+        missions={dailyMissions as Mission[] || []}
         onCompleteMission={completeMission}
         isCompletingMission={isCompletingMission}
       />
       <BigOneTimers
-        missions={oneTimeMissions}
+        missions={oneTimeMissions as Mission[] || []}
         onCompleteMission={completeMission}
         isCompletingMission={isCompletingMission}
       />

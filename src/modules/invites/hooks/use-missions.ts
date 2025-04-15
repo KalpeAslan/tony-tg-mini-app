@@ -10,12 +10,6 @@ export const useMissions = () => {
     queryFn: () => MissionApi.getAll(),
   });
 
-  // User Missions Query
-  const { isLoading: isUserMissionsLoading } = useQuery({
-    queryKey: ['userMissions'],
-    queryFn: () => MissionApi.getUserCompleted(),
-  });
-
   // Daily Missions Query
   const { data: dailyMissions, isLoading: isDailyMissionsLoading } = useQuery({
     queryKey: ['dailyMissions'],
@@ -26,12 +20,6 @@ export const useMissions = () => {
   const { data: oneTimeMissions, isLoading: isOneTimeMissionsLoading } = useQuery({
     queryKey: ['oneTimeMissions'],
     queryFn: () => MissionApi.getOneTime(),
-  });
-
-  // User Daily Completed Missions Query
-  const { isLoading: isUserDailyCompletedLoading } = useQuery({
-    queryKey: ['userDailyCompletedMissions'],
-    queryFn: () => MissionApi.getUserDailyCompleted(),
   });
 
   const completeMissionMutation = useMutation({
@@ -49,7 +37,7 @@ export const useMissions = () => {
   return {
     dailyMissions: dailyMissions || [],
     oneTimeMissions: oneTimeMissions || [],
-    isLoading: isMissionsLoading || isUserMissionsLoading || isDailyMissionsLoading || isOneTimeMissionsLoading || isUserDailyCompletedLoading,
+    isLoading: isMissionsLoading || isDailyMissionsLoading || isOneTimeMissionsLoading,
     completeMission: completeMissionMutation.mutate,
     isCompletingMission: completeMissionMutation.isPending,
   };
