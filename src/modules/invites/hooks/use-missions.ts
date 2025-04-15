@@ -39,6 +39,10 @@ export const useMissions = () => {
     onSuccess: () => {
       // Invalidate all mission queries to refetch the data
       queryClient.invalidateQueries({ queryKey: ['missions'] });
+      queryClient.invalidateQueries({ queryKey: ['userMissions'] });
+      queryClient.invalidateQueries({ queryKey: ['dailyMissions'] });
+      queryClient.invalidateQueries({ queryKey: ['oneTimeMissions'] });
+      queryClient.invalidateQueries({ queryKey: ['userDailyCompletedMissions'] });
     },
   });
 
