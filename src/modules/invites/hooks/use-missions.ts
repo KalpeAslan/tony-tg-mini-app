@@ -5,10 +5,10 @@ export const useMissions = () => {
   const queryClient = useQueryClient();
 
   // Missions Query
-  const { data: missions, isLoading: isMissionsLoading } = useQuery({
-    queryKey: ['missions'],
-    queryFn: () => MissionApi.getAll(),
-  });
+  // const { data: missions, isLoading: isMissionsLoading } = useQuery({
+  //   queryKey: ['missions'],
+  //   queryFn: () => MissionApi.getAll(),
+  // });
 
   // Daily Missions Query
   const { data: dailyMissions, isLoading: isDailyMissionsLoading } = useQuery({
@@ -26,18 +26,17 @@ export const useMissions = () => {
     mutationFn: (missionId: number) => MissionApi.complete({ missionId }),
     onSuccess: () => {
       // Invalidate all mission queries to refetch the data
-      queryClient.invalidateQueries({ queryKey: ['missions'] });
-      queryClient.invalidateQueries({ queryKey: ['userMissions'] });
+      // queryClient.invalidateQueries({ queryKey: ['missions'] });
       queryClient.invalidateQueries({ queryKey: ['dailyMissions'] });
       queryClient.invalidateQueries({ queryKey: ['oneTimeMissions'] });
-      queryClient.invalidateQueries({ queryKey: ['userDailyCompletedMissions'] });
+      queryClient.invalidateQueries({ queryKey: ['referralsInvites'] });
     },
   });
 
   return {
     dailyMissions: dailyMissions || [],
     oneTimeMissions: oneTimeMissions || [],
-    isLoading: isMissionsLoading || isDailyMissionsLoading || isOneTimeMissionsLoading,
+    isLoading: isDailyMissionsLoading || isOneTimeMissionsLoading,
     completeMission: completeMissionMutation.mutate,
     isCompletingMission: completeMissionMutation.isPending,
   };

@@ -1,13 +1,23 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { DailyMissions, BigOneTimers, Banner } from './parts';
 import { SectionMessage } from '@/lib/components';
 import { Button } from '@/components';
 import { useDailyCheckIn } from '../../hooks';
 import { useMissions } from '../../hooks/use-missions';
 import { Mission } from '../../models/mission.model';
+import Confetti from 'react-confetti';
+
+
 export const Missions: FC = () => {
   const { checkInData, handleCheckIn, isCheckingIn } = useDailyCheckIn();
   const { dailyMissions, oneTimeMissions, completeMission, isCompletingMission } = useMissions();
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const handleCompleteMission = (missionId: number) => {
+    completeMission(missionId);
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 5000);
+  }
 
   const handleDailyCheckIn = async () => {
     if (checkInData?.canCheckIn) {
@@ -39,15 +49,20 @@ export const Missions: FC = () => {
           <p className="text-3xl font-bold whitespace-nowrap">Daily Check In</p>
         </Button>
       </div>
+      {showConfetti && (
+        <div className="fixed inset-0 z-50 pointer-events-none">
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+        </div>
+      )}
 
       <DailyMissions
         missions={dailyMissions as Mission[] || []}
-        onCompleteMission={completeMission}
+        onCompleteMission={handleCompleteMission}
         isCompletingMission={isCompletingMission}
       />
       <BigOneTimers
         missions={oneTimeMissions as Mission[] || []}
-        onCompleteMission={completeMission}
+        onCompleteMission={handleCompleteMission}
         isCompletingMission={isCompletingMission}
       />
     </div>
