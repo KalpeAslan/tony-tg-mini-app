@@ -1,12 +1,14 @@
 import { Sound } from '@/lib/constants';
 import { useSound } from '@/lib/hooks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
+import { Howl } from 'howler';
 import { ArcadeApi } from '../../models/arcade-api';
 import Game from '../../pacman/components/game/game';
 
 export const GameController: FC = () => {
   const queryClient = useQueryClient();
+  const titleThemeRef = useRef<Howl | null>(null);
 
   const { data: stats } = useQuery({
     queryKey: ['stats'],
@@ -20,6 +22,28 @@ export const GameController: FC = () => {
   const [showGame, setShowGame] = useState(false);
 
   const { play: playClick } = useSound(Sound.CLICK);
+
+  useEffect(() => {
+    titleThemeRef.current = new Howl({
+      src: ['/audio/title_theme.wav'],
+      loop: true,
+      volume: 0.7,
+    });
+
+    return () => {
+      if (titleThemeRef.current) {
+        titleThemeRef.current.stop();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showGame && titleThemeRef.current) {
+      titleThemeRef.current.play();
+    } else if (showGame && titleThemeRef.current) {
+      titleThemeRef.current.stop();
+    }
+  }, [showGame]);
 
   const handleDirection = (direction: string) => {
     console.log('handleDirection', direction);

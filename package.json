@@ -21,6 +21,7 @@
     "@ton/ton": "^15.2.1",
     "@tonconnect/sdk": "^3.0.7",
     "@tonconnect/ui-react": "^2.0.5",
+    "@types/howler": "^2.2.12",
     "axios": "^1.8.3",
     "buffer": "^6.0.3",
     "clsx": "^2.1.1",

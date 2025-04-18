@@ -12,7 +12,7 @@ import TonConnect from '@tonconnect/sdk';
 import { appConfig } from '@/configs/app.config';
 
 const Root: FC<PropsWithChildren> = ({ children }) => {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = true;
   const tonConnectRef = useRef<TonConnect | null>(null);
 
   console.log('isDev', isDev);

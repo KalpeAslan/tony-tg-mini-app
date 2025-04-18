@@ -20,6 +20,7 @@ export default class GhostCollision {
       cancelAnimationFrame(variables.animationId);
       assets.audioPlayer.stopGhostAudio();
       assets.audioPlayer.playPacmanDeath();
+      assets.characters.pacman.die();
       assets.characters.pacman.isShrinking = true;
       Graphics.runDeathAnimation(variables, ctx, assets);
     } else if (ghost.isScared) {

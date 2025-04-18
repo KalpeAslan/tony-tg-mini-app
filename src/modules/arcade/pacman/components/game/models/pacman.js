@@ -5,11 +5,11 @@ export default class PacMan {
     { position, velocity },
     tileLength,
     munchOne = new Howl({
-      src: "./audio/munch_one.wav",
+      src: "/audio/munch_one.wav",
       volume: 0.1,
     }),
     munchTwo = new Howl({
-      src: "./audio/munch_two.wav",
+      src: "/audio/munch_two.wav",
       volume: 0.1,
     })
   ) {
@@ -74,9 +74,9 @@ export default class PacMan {
     if (!this.isDead) {
       this.isEating = !this.isEating;
       if (this.isEating) {
-        this.munchOne.play();
+        // this.munchOne.play();
       } else {
-        this.munchTwo.play();
+        // this.munchTwo.play();
       }
     }
   }

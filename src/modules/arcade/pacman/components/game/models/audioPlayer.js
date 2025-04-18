@@ -43,54 +43,54 @@ export default class AudioPlayer {
   }
 
   playGhostSiren() {
-    // this.ghostScared.pause();
-    // this.ghostRetreating.pause();
-    // this.ghostSiren.play();
+    this.ghostScared.pause();
+    this.ghostRetreating.pause();
+    this.ghostSiren.play();
   }
 
   playGhostScared() {
-    // this.ghostSiren.pause();
-    // this.ghostRetreating.pause();
-    // this.ghostScared.play();
+    this.ghostSiren.pause();
+    this.ghostRetreating.pause();
+    this.ghostScared.play();
   }
 
   playGhostRetreating() {
-    // this.ghostSiren.pause();
-    // this.ghostScared.pause();
-    // this.ghostRetreating.play();
+    this.ghostSiren.pause();
+    this.ghostScared.pause();
+    this.ghostRetreating.play();
   }
 
   stopGhostAudio() {
-    // this.#pauseGhostAudio();
-    // this.ghostAudioWantsToPlay = false;
+    this.#pauseGhostAudio();
+    this.ghostAudioWantsToPlay = false;
   }
 
   playPacmanDeath() {
-    // this.pacmanDeath.play();
-    // this.pacmanDeath.wantsToPlay = true;
+    this.pacmanDeath.play();
+    this.pacmanDeath.wantsToPlay = true;
   }
 
   playLevelUp() {
-    // this.levelUp.play();
-    // this.levelUp.wantsToPlay = true;
+    this.levelUp.play();
+    this.levelUp.wantsToPlay = true;
   }
 
   playPacmanDeathAndLevelUpIfWantTo() {
-    // if (this.pacmanDeath.wantsToPlay === true) this.pacmanDeath.play();
-    // if (this.levelUp.wantsToPlay === true) this.levelUp.plays();
+    if (this.pacmanDeath.wantsToPlay === true) this.pacmanDeath.play();
+    if (this.levelUp.wantsToPlay === true) this.levelUp.plays();
   }
 
   pauseAll() {
-    // this.#pauseGhostAudio();
-    // this.pacmanDeath.pause();
-    // this.levelUp.pause();
+    this.#pauseGhostAudio();
+    this.pacmanDeath.pause();
+    this.levelUp.pause();
   }
 
   // private
 
   #pauseGhostAudio() {
-    // this.ghostSiren.pause();
-    // this.ghostScared.pause();
-    // this.ghostRetreating.pause();
+    this.ghostSiren.pause();
+    this.ghostScared.pause();
+    this.ghostRetreating.pause();
   }
 }
