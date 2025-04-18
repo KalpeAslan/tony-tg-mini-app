@@ -7,6 +7,7 @@ export default class EventListener {
     window.addEventListener(
       "keydown",
       (variables.directionEventListener = ({ key }) => {
+        console.log("key", key);
         if (key === "ArrowUp") {
           variables.lastKeyPressed = "up";
         } else if (key === "ArrowLeft") {

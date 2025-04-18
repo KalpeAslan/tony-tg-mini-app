@@ -61,6 +61,10 @@ export const assets = Factory.makeAssets(map, variables);
 export default function playGame(player, reactRoot) {
   variables.animationId = requestAnimationFrame(playGame);
   const board = document.querySelector("#board");
+  if (!board) {
+    console.log("board not found");
+    return;
+  }
   const ctx = board.getContext("2d");
   if (variables.start === true) {
     Game.finishSetup(variables, player, reactRoot, assets, ctx);

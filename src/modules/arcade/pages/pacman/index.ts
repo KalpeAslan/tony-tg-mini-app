@@ -1,1 +1,1 @@
-export * from './pacman'; 
+export * from './pacmanPage'; 

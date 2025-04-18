@@ -12,10 +12,10 @@ export default function Game({ player, callback = playGame }: GameProps) {
     callback(player);
   }, [callback, player]);
 
-  const handleDirection = (direction: string) => {
-    const arrow = new KeyboardEvent("keydown", { key: direction });
-    window.dispatchEvent(arrow);
-  };
+  // const handleDirection = (direction: string) => {
+  //   const arrow = new KeyboardEvent("keydown", { key: direction });
+  //   window.dispatchEvent(arrow);
+  // };
 
   return (
     <div>
@@ -37,7 +37,7 @@ export default function Game({ player, callback = playGame }: GameProps) {
         ></canvas>
       </div>
       <br></br>
-      <div className="dpad flex justify-center items-center">
+      {/* <div className="dpad flex justify-center items-center">
         <img
           src="./images/dpad.png"
           alt="dpad"
@@ -80,7 +80,7 @@ export default function Game({ player, callback = playGame }: GameProps) {
             onClick={() => handleDirection("ArrowDown")}
           ></area>
         </map>
-      </div>
+      </div> */}
     </div>
   );
 }

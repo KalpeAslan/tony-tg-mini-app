@@ -70,7 +70,7 @@ export default class GhostCollision {
     });
     window.dispatchEvent(gameEndedEvent);
     
-    variables.reactRoot.render(<Leaderboard variables={variables} />);
+    // variables.reactRoot.render(<Leaderboard variables={variables} />);
   }
 
   static async saveScore(

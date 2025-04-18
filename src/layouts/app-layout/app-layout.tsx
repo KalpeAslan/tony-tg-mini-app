@@ -13,7 +13,12 @@ import { Sound, UIConstant } from '@/lib/constants';
 import styles from './app-layout.module.css';
 import { useMediaQuery } from 'usehooks-ts';
 
-const pagesWithPurpleLayout: EPages[] = [EPages.Airdrop, EPages.Invites, EPages.Shack, EPages.Arcade];
+const pagesWithPurpleLayout: EPages[] = [
+  EPages.Airdrop,
+  EPages.Invites,
+  EPages.Shack,
+  EPages.Arcade,
+];
 const pagesWithStars: EPages[] = [EPages.Airdrop, EPages.Invites];
 
 const starsMovePercent = 10;
@@ -140,15 +145,17 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     localStorage.setItem('prevTab', activeTab);
   };
+  const matches = useMediaQuery(`(max-width: ${UIConstant.MAX_MOBILE_WIDTH}px)`);
 
   const renderNavigation = () => {
-    const matches = useMediaQuery(`(max-width: ${UIConstant.MAX_MOBILE_WIDTH}px)`);
-
     if (!matches)
       return (
-        <div className={`min-h-[var(--navigation-height)] fixed bottom-0 z-[var(--navigation-z-index)]`} style={{
-          width: 360
-        }}>
+        <div
+          className={`min-h-[var(--navigation-height)] fixed bottom-0 z-[var(--navigation-z-index)]`}
+          style={{
+            width: 360,
+          }}
+        >
           <Navigation activeTab={activeTab} className="" />
         </div>
       );
@@ -160,6 +167,13 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         </div>
       </div>
     );
+  };
+
+  const renderSoundFloatingButton = () => {
+    const isArcadePage = activeTab === EPages.Arcade;
+
+    if (isArcadePage) return null;
+    return <SoundFloatingButton />;
   };
 
   return (
@@ -201,7 +215,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
           </motion.div>
         </AnimatePresence>
 
-        <SoundFloatingButton />
+        {renderSoundFloatingButton()}
         {renderNavigation()}
 
         {/* Transition Layers - Highest z-index */}

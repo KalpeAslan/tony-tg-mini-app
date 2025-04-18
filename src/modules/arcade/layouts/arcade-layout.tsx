@@ -29,14 +29,14 @@ export const ArcadeLayout = ({ children }: ArcadeLayoutProps) => {
     queryKey: ['arcade', 'nextPlay'],
     queryFn: async () => {
       const response = await ArcadeApi.nextPlay.get();
-      return response.nextPlay;
+      return response;
     },
     refetchInterval: 60000, // Refetch every minute
   });
 
   // Calculate total seconds for countdown
-  const totalSeconds = stats?.timeUntilNextPlay 
-    ? (stats.timeUntilNextPlay.hours * 3600) + (stats.timeUntilNextPlay.minutes * 60)
+  const totalSeconds = stats?.timeUntilNextPlay
+    ? stats.timeUntilNextPlay.hours * 3600 + stats.timeUntilNextPlay.minutes * 60
     : 0;
 
   const [count, { startCountdown, stopCountdown, resetCountdown }] = useCountdown({
@@ -61,20 +61,23 @@ export const ArcadeLayout = ({ children }: ArcadeLayoutProps) => {
 
   return (
     <div className="flex flex-col gap-4 w-full h-full">
-      <div className="absolute top-0 left-0 w-full">
-        <ArcadeHeader 
+      <div className="fixed z-9999 top-0 left-0 w-full">
+        <ArcadeHeader
           tickets={stats?.tickets ?? 0}
           playsLeft={stats?.playsLeft ?? 0}
-          timeUntilNextPlay={stats?.tickets === 0 ? { 
-            hours: stats?.timeUntilNextPlay?.hours ?? 0, 
-            minutes: stats?.timeUntilNextPlay?.minutes ?? 0 
-          } : undefined}
+          timeUntilNextPlay={
+            stats?.tickets === 0
+              ? {
+                  hours: stats?.timeUntilNextPlay?.hours ?? 0,
+                  minutes: stats?.timeUntilNextPlay?.minutes ?? 0,
+                }
+              : undefined
+          }
         />
       </div>
-      {children && React.isValidElement<ArcadeChildProps>(children) 
-        ? React.cloneElement(children, { arcadeStats: stats, nextPlayTime })
-        : children
-      }
+      {children && React.isValidElement<ArcadeChildProps>(children)
+        ? React.cloneElement(children, { arcadeStats: stats, nextPlayTime: nextPlayTime?.nextPlay })
+        : children}
     </div>
   );
 };
