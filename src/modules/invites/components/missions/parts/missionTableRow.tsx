@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from '../../table';
 import { Mission } from '../../../models/mission.model';
-import { Icon } from '@/components';
+import { Icon } from '@/lib/components';
 import { useSound } from '@/lib/hooks';
 import { Sound } from '@/lib/constants';
 

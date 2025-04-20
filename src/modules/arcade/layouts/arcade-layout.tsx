@@ -54,14 +54,9 @@ export const ArcadeLayout = ({ children }: ArcadeLayoutProps) => {
     }
   }, [stats?.tickets, totalSeconds, startCountdown, stopCountdown, resetCountdown]);
 
-  // Calculate hours, minutes and seconds from count
-  const hours = Math.floor(count / 3600);
-  const minutes = Math.floor((count % 3600) / 60);
-  const seconds = count % 60;
-
   return (
     <div className="flex flex-col gap-4 w-full h-full">
-      <div className="fixed z-9999 top-0 left-0 w-full">
+      <div className="fixed z-max top-0 left-0 w-full">
         <ArcadeHeader
           tickets={stats?.tickets ?? 0}
           playsLeft={stats?.playsLeft ?? 0}

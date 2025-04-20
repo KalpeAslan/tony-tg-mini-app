@@ -1,4 +1,4 @@
-import { SectionMessage } from '@/components';
+import { SectionMessageOld as SectionMessage } from '@/lib/components';
 import { FC } from 'react';
 import Image from 'next/image';
 import { UserActiveBoost } from '@/modules/core';

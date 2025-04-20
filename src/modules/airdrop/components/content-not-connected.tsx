@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components';
+import { Button } from '@/lib/components';
 import Image from 'next/image';
 import { FC } from 'react';
 import { useWallet } from '@/modules/core';

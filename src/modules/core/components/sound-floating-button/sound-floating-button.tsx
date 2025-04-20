@@ -1,6 +1,6 @@
 'use client';
 import { useBoolean } from 'usehooks-ts';
-import { Button, Icon } from '@/components';
+import { Button, Icon } from '@/lib/components';
 import { useState, useEffect, useRef } from 'react';
 
 export const SoundFloatingButton = () => {

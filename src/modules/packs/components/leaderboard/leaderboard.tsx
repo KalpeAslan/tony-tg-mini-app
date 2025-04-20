@@ -1,6 +1,6 @@
 import { PackLeaderboard, Avatar } from '@/lib/components';
 import { useLeaderboard } from '@/modules/core/hooks';
-import { Loader } from '@/components/loader';
+import { Loader } from '@/lib/components';
 
 interface LeaderboardProps {
   name: string;

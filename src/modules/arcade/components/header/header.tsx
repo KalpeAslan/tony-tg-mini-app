@@ -1,7 +1,6 @@
 'use client';
 
-import { Icon } from '@/components/ui/icon';
-import { SectionMessage, BackButton } from '@/lib/components';
+import { SectionMessage, BackButton, Icon } from '@/lib/components';
 import { EPages } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 

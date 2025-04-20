@@ -1,7 +1,6 @@
 import { appConfig } from '@/configs/app.config';
 import { TonyDevice } from './parts';
-import { Task } from '@/components/task';
-import { Button } from '@/components/ui';
+import { Button, Task } from '@/lib/components';
 import { formatNumber } from '@/lib/utils';
 import { BostItem as PackItemType, useMe, useWallet } from '@/modules/core';
 import { PaymentsApi, TonPaymentInvoiceResponse } from '@/modules/core/models/payments';

@@ -2,9 +2,8 @@
 
 import type React from 'react';
 import { EPages } from '@/lib/types';
-import { Icon } from '@/components/ui/icon';
+import { Icon, IconName } from '@/lib/components';
 import clsx from 'clsx';
-import { IconName } from '@/components/ui';
 import { useRouter } from 'next/navigation';
 import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';

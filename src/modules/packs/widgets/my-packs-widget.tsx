@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { initData, useSignal } from '@telegram-apps/sdk-react';
 import { Leaderboard } from '../components';
 import { BoostsApi } from '@/modules/core/models/bosts/bosts-api';
-import { Loader } from '@/components/loader';
+import { Loader } from '@/lib/components';
 import { TelegramApi } from '@/modules/core/models/telegram/telegram-api';
 
 export function MyPacksWidget() {

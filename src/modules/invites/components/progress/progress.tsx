@@ -11,7 +11,7 @@ export const Progress: React.FC<ProgressProps> = ({
   const nextLevel = currentLevel + 1;
 
   return (
-    <div className="relative w-full border-white-translucent border-2 rounded-full overflow-hidden py-8 z-9999" style={{
+    <div className="relative w-full border-white-translucent border-2 rounded-full overflow-hidden py-8 z-max" style={{
         background: `linear-gradient(90deg, rgba(255,255,255,0) 38%, rgba(255,255,255,1) 120%)`
     }}>
       {/* Progress fill */}

@@ -10,7 +10,7 @@ interface SectionMessageProps extends PropsWithChildren, HTMLAttributes<HTMLDivE
   fullWidth?: boolean;
 }
 
-export const SectionMessage: FC<SectionMessageProps> = ({
+export const SectionMessageOld: FC<SectionMessageProps> = ({
   radius = 'sm',
   color = 'default',
   size = 'sm',

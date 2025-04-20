@@ -11,7 +11,7 @@ import {
   ReferralsApi,
   DailyCheckInApi,
 } from '../../models';
-import { FullLoader } from '@/components/ui';
+import { FullLoader } from '@/lib/components';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
 import { MissionApi } from '@/modules/invites/api/mission-api';

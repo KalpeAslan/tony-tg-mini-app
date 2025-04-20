@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { DailyMissions, BigOneTimers, Banner } from './parts';
-import { SectionMessage } from '@/lib/components';
-import { Button } from '@/components';
+import { SectionMessage, Button } from '@/lib/components';
 import { useDailyCheckIn } from '../../hooks';
 import { useMissions } from '../../hooks/use-missions';
 import { Mission } from '../../models/mission.model';

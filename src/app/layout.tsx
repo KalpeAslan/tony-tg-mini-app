@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider as NextThemeProvider, QueryProvider } from '@/providers';
-import { ErrorBoundary } from '@/components/error/ErrorBoundary';
-import { IconDefs } from '@/components/ui/icons';
+import { ErrorBoundary, IconDefs} from '@/lib/components';
 import { TelegramProvider } from '@/modules/core';
 import { TgAuthProvider } from '@/modules/core';
 import { AppLayout } from '@/layouts';

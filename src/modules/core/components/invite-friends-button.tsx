@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/lib/components';
 import { shareURL } from '@telegram-apps/sdk-react';
 import { TelegramApi } from '../models/telegram/telegram-api';
 import { useMutation } from '@tanstack/react-query';

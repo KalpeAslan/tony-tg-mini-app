@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionMessage } from '@/components/ui';
+import { SectionMessageOld as SectionMessage } from '@/lib/components';
 import { FC, PropsWithChildren } from 'react';
 import { TActiveTab } from '../models';
 import { useSound } from '@/lib/hooks/useSound';

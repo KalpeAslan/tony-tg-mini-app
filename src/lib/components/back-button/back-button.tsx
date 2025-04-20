@@ -1,5 +1,5 @@
 import { SectionMessage } from '../section-message';
-import { Icon } from '@/components';
+import { Icon } from '../ui/icon';
 
 
 interface BackButtonProps {

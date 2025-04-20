@@ -1,9 +1,9 @@
 'use client';
 
-import { Logo } from '@/components/logo/logo';
 import { ContentNotConnected, ContentConnected } from '../components';
 import { useWallet } from '@/modules/core';
 import { cn } from '@/lib/utils';
+import { Logo } from '@/lib/components';
 
 export function AirdropPage() {
   const { isConnected } = useWallet();

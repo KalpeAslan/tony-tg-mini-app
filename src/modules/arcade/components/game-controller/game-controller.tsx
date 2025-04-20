@@ -1,14 +1,18 @@
-import { Sound } from '@/lib/constants';
-import { useSound } from '@/lib/hooks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useState, useRef } from 'react';
 import { Howl } from 'howler';
 import { ArcadeApi } from '../../models/arcade-api';
 import Game from '../../pacman/components/game/game';
+import { Buttons } from './parts';
+import { useSound } from '@/lib/hooks';
+import { Sound } from '@/lib/constants';
+import { ModalBackdrop } from '@/lib/components';
+import { OutOfPlay } from '../out-of-play';
 
 export const GameController: FC = () => {
   const queryClient = useQueryClient();
   const titleThemeRef = useRef<Howl | null>(null);
+  const [showOutOfPlays, setShowOutOfPlays] = useState(false);
 
   const { data: stats } = useQuery({
     queryKey: ['stats'],
@@ -20,8 +24,6 @@ export const GameController: FC = () => {
   });
 
   const [showGame, setShowGame] = useState(false);
-
-  const { play: playClick } = useSound(Sound.CLICK);
 
   useEffect(() => {
     titleThemeRef.current = new Howl({
@@ -45,13 +47,6 @@ export const GameController: FC = () => {
     }
   }, [showGame]);
 
-  const handleDirection = (direction: string) => {
-    console.log('handleDirection', direction);
-    playClick();
-    const arrow = new KeyboardEvent('keydown', { key: direction });
-    window.dispatchEvent(arrow);
-  };
-
   const startGameMutation = useMutation({
     mutationFn: () => ArcadeApi.game.start(),
     onSuccess: () => {
@@ -63,8 +58,13 @@ export const GameController: FC = () => {
       console.error('Error starting game:', error);
     },
   });
+  const { play: playClick } = useSound(Sound.CLICK);
 
-  const handleSubmit = () => {
+  const handleStartGame = () => {
+    if (stats?.playsLeft === 0) {
+      setShowOutOfPlays(true);
+      return;
+    }
     playClick();
     startGameMutation.mutate();
   };
@@ -95,8 +95,10 @@ export const GameController: FC = () => {
     if (showGame) {
       return (
         <div
-          className="max-w-[300px] max-h-[300px] w-full h-full absolute top-[100px] left-[65px]"
+          className="max-w-[300px] max-h-[300px] w-full h-full absolute"
           style={{
+            top: '10.7%', // 100px/932px ≈ 10.7%
+            left: '15.1%', // 65px/430px ≈ 15.1%
             transform: 'scaleY(0.8)',
           }}
         >
@@ -107,8 +109,11 @@ export const GameController: FC = () => {
 
     return (
       <div
-        onClick={handleSubmit}
-        className="max-w-[300px] max-h-[300px] w-full h-full absolute top-[270px] left-[100px]"
+        className="max-w-[300px] max-h-[300px] w-full h-full absolute"
+        style={{
+          top: '29%', // 270px/932px ≈ 29%
+          left: '23.3%', // 100px/430px ≈ 23.3%
+        }}
       >
         <p>Bro! Click on Power Button to start Game</p>
       </div>
@@ -117,30 +122,36 @@ export const GameController: FC = () => {
 
   return (
     <div
-      className="w-full h-full fixed top-0 left-0 bg-cover bg-center bg-no-repeat"
+      className="w-full h-full fixed top-0 left-0 bg-cover bg-center bg-no-repeat overflow-y-scroll"
       style={{
         backgroundImage: 'url(/arcade/game-controller.png)',
       }}
     >
       <span
-        onClick={handleSubmit}
-        className="w-[30px] h-[30px] absolute bottom-[417px] right-[60px]"
+        onClick={handleStartGame}
+        className="w-[30px] h-[30px] absolute z-max"
+        style={{
+          bottom: '44.7%', // 417px/932px ≈ 44.7%
+          right: '14%', // 60px/430px ≈ 14%
+        }}
       />
       {renderGameContent()}
-      <div className="absolute bottom-[155px] left-[80px]">
-        <img src="/arcade/game-controller-button.png" useMap="#image-map" />
-
-        <map name="image-map">
-          <area onClick={() => handleDirection('ArrowUp')} coords="5,3,72,94" shape="rect" />
-          <area onClick={() => handleDirection('ArrowLeft')} coords="85,5,247,95" shape="rect" />
-          <area onClick={() => handleDirection('ArrowDown')} coords="6,104,109,197" shape="rect" />
-          <area
-            onClick={() => handleDirection('ArrowRight')}
-            coords="138,101,244,198"
-            shape="rect"
-          />
-        </map>
+      <div
+        className="absolute"
+        style={{
+          bottom: '16.6%', // 155px/932px ≈ 16.6%
+          left: '20.6%', // 80px/430px ≈ 20.6%
+          transform: 'scale(1)',
+          transformOrigin: 'bottom left',
+        }}
+      >
+        <Buttons />
       </div>
+      {showOutOfPlays && (
+        <ModalBackdrop onClose={() => setShowOutOfPlays(false)}>
+          <OutOfPlay onClose={() => setShowOutOfPlays(false)} />
+        </ModalBackdrop>
+      )}
     </div>
   );
 };

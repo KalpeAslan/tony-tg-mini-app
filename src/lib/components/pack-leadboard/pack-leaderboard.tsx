@@ -1,5 +1,6 @@
-import { Icon } from '@/components/ui/icon';
 import { formatNumber } from '@/lib/utils';
+import { Icon } from '@/lib/components';
+
 
 interface PackLeaderboardProps {
   ownPosition: number;

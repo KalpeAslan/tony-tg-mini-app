@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, PropsWithChildren } from 'react';
-import { Button } from '@/components';
+import { Button } from '@/lib/components';
 import { InviteFriendsButton, useWallet } from '@/modules/core';
 import { useSound } from '@/lib/hooks/useSound';
 import { Sound } from '@/lib/constants';
