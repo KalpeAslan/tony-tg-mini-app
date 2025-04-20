@@ -275,7 +275,11 @@ const handleViewport = async (cb: () => void) => {
   }
 
   try {
-    await viewport.requestFullscreen();
+    // Only request fullscreen if width is less than or equal to MAX_MOBILE_WIDTH (mobile devices)
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= UIConstant.MAX_MOBILE_WIDTH) {
+      await viewport.requestFullscreen();
+    }
   } catch (error) {
     console.error('Error requesting fullscreen:', error);
   }
