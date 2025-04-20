@@ -8,17 +8,29 @@ interface MissionTableRowProps {
   mission: Mission;
   onComplete: () => void;
   isCompleting: boolean;
+  setPendingConfetti?: () => void;
 }
 
-export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTableRowProps) => {
+export const MissionTableRow = ({ 
+  mission, 
+  onComplete, 
+  isCompleting,
+  setPendingConfetti 
+}: MissionTableRowProps) => {
   const { play } = useSound(Sound.CLICK);
 
   const handleClick = () => {
     play();
+    
     if (!mission.isCompleted && !isCompleting) {
+      if (setPendingConfetti) {
+        setPendingConfetti();
+      }
+      
       onComplete();
-      window.open(mission.url, '_blank');
     }
+    
+    window.open(mission.url, '_blank');
   };
 
   return (

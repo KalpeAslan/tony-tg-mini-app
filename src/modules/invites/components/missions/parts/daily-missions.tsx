@@ -7,12 +7,14 @@ interface DailyMissionsProps {
   missions: Mission[];
   onCompleteMission: (missionId: number) => void;
   isCompletingMission: boolean;
+  setPendingConfetti?: () => void;
 }
 
 export const DailyMissions: FC<DailyMissionsProps> = ({ 
   missions, 
   onCompleteMission,
-  isCompletingMission 
+  isCompletingMission,
+  setPendingConfetti
 }) => {
   return (
     <div className="w-full border-white-translucent rounded-3xl bg-card overflow-hidden">
@@ -29,6 +31,7 @@ export const DailyMissions: FC<DailyMissionsProps> = ({
             mission={mission} 
             onComplete={() => onCompleteMission(mission.id)}
             isCompleting={isCompletingMission}
+            setPendingConfetti={setPendingConfetti}
           />
         ))}
       </Table>

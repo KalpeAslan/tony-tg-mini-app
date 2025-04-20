@@ -7,12 +7,14 @@ interface BigOneTimersProps {
   missions: Mission[];
   onCompleteMission: (missionId: number) => void;
   isCompletingMission: boolean;
+  setPendingConfetti?: () => void;
 }
 
 export const BigOneTimers: FC<BigOneTimersProps> = ({ 
   missions, 
   onCompleteMission,
-  isCompletingMission 
+  isCompletingMission,
+  setPendingConfetti
 }) => {
   return (
     <div className="w-full border-white-translucent rounded-3xl bg-card overflow-hidden">
@@ -29,6 +31,7 @@ export const BigOneTimers: FC<BigOneTimersProps> = ({
             mission={mission} 
             onComplete={() => onCompleteMission(mission.id)}
             isCompleting={isCompletingMission}
+            setPendingConfetti={setPendingConfetti}
           />
         ))}
       </Table>
