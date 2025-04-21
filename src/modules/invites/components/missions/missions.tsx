@@ -10,7 +10,7 @@ export const Missions: FC = () => {
   const { dailyMissions, oneTimeMissions, completeMission, isCompletingMission } = useMissions();
 
   const handleCompleteMission = (missionId: number) => {
-    // completeMission(missionId);
+    completeMission(missionId);
   };
 
   const handleDailyCheckIn = async () => {
