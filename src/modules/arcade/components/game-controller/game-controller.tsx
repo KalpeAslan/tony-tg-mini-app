@@ -139,7 +139,7 @@ export const GameController: FC = () => {
       <div
         className="absolute"
         style={{
-          bottom: '16.6%', // 155px/932px ≈ 16.6%
+          bottom: '11.6%', // 155px/932px ≈ 11.6%
           left: '20.6%', // 80px/430px ≈ 20.6%
           transform: 'scale(1)',
           transformOrigin: 'bottom left',
