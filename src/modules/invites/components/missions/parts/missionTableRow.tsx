@@ -3,34 +3,33 @@ import { Mission } from '../../../models/mission.model';
 import { Icon } from '@/lib/components';
 import { useSound } from '@/lib/hooks';
 import { Sound } from '@/lib/constants';
-
+import { useState } from 'react';
+import Confetti from 'react-confetti';
 interface MissionTableRowProps {
   mission: Mission;
   onComplete: () => void;
   isCompleting: boolean;
-  setPendingConfetti?: () => void;
 }
 
-export const MissionTableRow = ({ 
-  mission, 
-  onComplete, 
-  isCompleting,
-  setPendingConfetti 
-}: MissionTableRowProps) => {
+export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTableRowProps) => {
   const { play } = useSound(Sound.CLICK);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  // setShowConfetti(true);
+  // setTimeout(() => setShowConfetti(false), 5000);
 
   const handleClick = () => {
     play();
-    
+
     if (!mission.isCompleted && !isCompleting) {
-      if (setPendingConfetti) {
-        setPendingConfetti();
-      }
-      
       onComplete();
     }
-    
-    window.open(mission.url, '_blank');
+
+    setShowConfetti(true);
+    setTimeout(() => {
+      window.open(mission.url, '_blank');
+      setShowConfetti(false);
+    }, 1000);
   };
 
   return (
@@ -55,12 +54,22 @@ export const MissionTableRow = ({
         <div
           onClick={handleClick}
           className={`rounded-full border-white-translucent h-[42px] w-[42px] flex items-center justify-center ${
-            isCompleting ? 'opacity-50 cursor-not-allowed' : mission.isCompleted ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            isCompleting
+              ? 'opacity-50 cursor-not-allowed'
+              : mission.isCompleted
+                ? 'opacity-50 cursor-not-allowed'
+                : 'cursor-pointer'
           }`}
         >
           <Icon size={16} name={mission.isCompleted ? 'checkMark' : 'play'} />
         </div>
       </TableCell>
+
+      {showConfetti && (
+        <div className="fixed inset-0 z-50 pointer-events-none">
+          <Confetti gravity={0.700} numberOfPieces={935} width={window.innerWidth} height={window.innerHeight} />
+        </div>
+      )}
     </TableRow>
   );
 };
