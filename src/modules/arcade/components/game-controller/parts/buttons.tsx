@@ -1,11 +1,16 @@
 import { Sound } from "@/lib/constants";
 import { useSound } from "@/lib/hooks";
-import { useState, useMemo } from "react";
+import { useState, useMemo, FC } from "react";
 import styles from "./buttons.module.css";
 import { computeComponentDimensions } from "../helpers";
 import { useWindowSize } from "usehooks-ts";
 
-export const Buttons = () => {
+
+interface ButtonsProps {
+  isAviablePlay: boolean
+}
+
+export const Buttons: FC<ButtonsProps> = ({ isAviablePlay }) => {
   const { play: playClick } = useSound(Sound.CLICK);
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -13,7 +18,9 @@ export const Buttons = () => {
   const { width: componentWidth, height: componentHeight } = useMemo(() => computeComponentDimensions(windowWidth, windowHeight), [windowWidth, windowHeight]);
 
   const handleDirection = (direction: string) => {
+
     playClick();
+    if (!isAviablePlay) return;
     setActiveButton(direction);
     const arrow = new KeyboardEvent('keydown', { key: direction });
     window.dispatchEvent(arrow);

@@ -178,7 +178,7 @@ export const GameController: FC = () => {
           transformOrigin: 'bottom center',
         }}
       >
-        <Buttons />
+        <Buttons isAviablePlay={!!stats?.playsLeft && stats.playsLeft > 0} />
       </div>
       {showOutOfPlays && (
         <ModalBackdrop onClose={() => setShowOutOfPlays(false)}>
