@@ -125,12 +125,12 @@ export default class GhostCollision {
     assets.characters.pacman.lives = 2;
     variables.lastKeyPressed = "";
     variables.level = 1;
-    window.removeEventListener("keydown", variables.directionEventListener);
-    window.removeEventListener(
-      "visibilitychange",
-      variables.visibilityEventListener
-    );
-    window.removeEventListener("keydown", variables.pauseEventListener);
+    // window.removeEventListener("keydown", variables.directionEventListener);
+    // window.removeEventListener(
+    //   "visibilitychange",
+    //   variables.visibilityEventListener
+    // );
+    // window.removeEventListener("keydown", variables.pauseEventListener);
   }
 
   static resetAfterDeath(assets, variables, callbackOne = playGame) {

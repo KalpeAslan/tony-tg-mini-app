@@ -13,6 +13,38 @@ export const GameController: FC = () => {
   const queryClient = useQueryClient();
   const titleThemeRef = useRef<Howl | null>(null);
   const [showOutOfPlays, setShowOutOfPlays] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      setScreenWidth(window.innerWidth);
+      setScreenHeight(window.innerHeight);
+    };
+    
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Calculate position percentages dynamically based on screen size
+  const calculateButtonPosition = () => {
+    // Base values for 390x844 screen
+    const baseWidth = 390;
+    const baseHeight = 844;
+    const baseBottomPercentage = 11.6;
+    
+    // Adjust bottom percentage based on screen height ratio
+    const heightRatio = screenHeight / baseHeight;
+    const adjustedBottomPercentage = Math.max(
+      Math.min(baseBottomPercentage * (1 / heightRatio), 20), // Don't go above 20%
+      5 // Don't go below 5%
+    );
+    
+    return {
+      bottom: `${adjustedBottomPercentage}%`,
+    };
+  };
 
   const { data: stats } = useQuery({
     queryKey: ['stats'],
@@ -112,10 +144,11 @@ export const GameController: FC = () => {
         className="max-w-[300px] max-h-[300px] w-full h-full absolute"
         style={{
           top: '29%', // 270px/932px ≈ 29%
-          left: '23.3%', // 100px/430px ≈ 23.3%
+          left: '50%',
+          transform: 'translateX(-50%)',
         }}
       >
-        <p>Bro! Click on Power Button to start Game</p>
+        <p className="text-center">Bro! Click on Power Button to start Game</p>
       </div>
     );
   };
@@ -131,18 +164,18 @@ export const GameController: FC = () => {
         onClick={handleStartGame}
         className="w-[30px] h-[30px] absolute z-max"
         style={{
-          bottom: '44.7%', // 417px/932px ≈ 44.7%
-          right: '14%', // 60px/430px ≈ 14%
+          bottom: '44%', // 417px/932px ≈ 44.7%
+          right: '14.5%', // 60px/430px ≈ 14%
         }}
       />
       {renderGameContent()}
       <div
         className="absolute"
         style={{
-          bottom: '11.6%', // 155px/932px ≈ 11.6%
-          left: '20.6%', // 80px/430px ≈ 20.6%
-          transform: 'scale(1)',
-          transformOrigin: 'bottom left',
+          ...calculateButtonPosition(),
+          left: '50%',
+          transform: 'translateX(-50%)',
+          transformOrigin: 'bottom center',
         }}
       >
         <Buttons />

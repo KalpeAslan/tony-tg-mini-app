@@ -1,10 +1,16 @@
 import { Sound } from "@/lib/constants";
 import { useSound } from "@/lib/hooks";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import styles from "./buttons.module.css";
+import { computeComponentDimensions } from "../helpers";
+import { useWindowSize } from "usehooks-ts";
 
 export const Buttons = () => {
   const { play: playClick } = useSound(Sound.CLICK);
   const [activeButton, setActiveButton] = useState<string | null>(null);
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
+
+  const { width: componentWidth, height: componentHeight } = useMemo(() => computeComponentDimensions(windowWidth, windowHeight), [windowWidth, windowHeight]);
 
   const handleDirection = (direction: string) => {
     playClick();
@@ -17,31 +23,36 @@ export const Buttons = () => {
   };
 
   return (
-    <div className="w-[250px] h-[250px] flex items-center justify-center">
-      <div className="relative w-full h-full flex flex-col items-center">
+    <div 
+      className="flex items-center justify-center"
+      style={{ 
+        width: `${componentWidth}px`, 
+        height: `${componentHeight}px` 
+      }}
+    >
+      <div className="relative w-full h-full flex flex-col items-center justify-center">
         {/* Top button */}
         <div className="flex justify-center">
           <button 
-            className={`w-20 h-20 rounded-full bg-transparent bg-center bg-no-repeat bg-contain border-none cursor-pointer transition-transform duration-150 ${activeButton === 'ArrowUp' ? 'scale-90' : ''}`}
+            className={`${styles.button} ${activeButton === 'ArrowUp' ? styles.buttonActive : ''}`}
             onClick={() => handleDirection('ArrowUp')}
             style={{ backgroundImage: "url('/arcade/buttons/top.png')" }}
           />
         </div>
         
         {/* Middle row with left and right buttons */}
-        <div className="flex w-full justify-center -mt-2">
+        <div className="flex w-full justify-center -mt-2 gap-8">
           <button 
-            className={`w-20 h-20 rounded-3xl bg-transparent bg-center bg-no-repeat bg-contain border-none cursor-pointer transition-transform duration-150 ${activeButton === 'ArrowLeft' ? 'scale-90' : ''}`}
+            className={`${styles.button} ${activeButton === 'ArrowLeft' ? styles.buttonActive : ''}`}
             onClick={() => handleDirection('ArrowLeft')}
             style={{ backgroundImage: "url('/arcade/buttons/left.png')" }}
           />
           
           <button 
-            className={`w-20 h-20 rounded-3xl bg-transparent bg-center bg-no-repeat bg-contain border-none cursor-pointer transition-transform duration-150 ${activeButton === 'ArrowRight' ? 'scale-90' : ''}`}
+            className={`${styles.button} ${activeButton === 'ArrowRight' ? styles.buttonActive : ''}`}
             onClick={() => handleDirection('ArrowRight')}
             style={{ 
-              backgroundImage: "url('/arcade/buttons/left.png')",
-              transform: "rotate(180deg)"
+              backgroundImage: "url('/arcade/buttons/right.png')",
             }}
           />
         </div>
@@ -49,7 +60,7 @@ export const Buttons = () => {
         {/* Bottom button */}
         <div className="flex justify-center -mt-2">
           <button 
-            className={`w-20 h-20 rounded-3xl bg-transparent bg-center bg-no-repeat bg-contain border-none cursor-pointer transition-transform duration-150 ${activeButton === 'ArrowDown' ? 'scale-90' : ''}`}
+            className={`${styles.button} ${activeButton === 'ArrowDown' ? styles.buttonActive : ''}`}
             onClick={() => handleDirection('ArrowDown')}
             style={{ backgroundImage: "url('/arcade/buttons/bottom.png')" }}
           />
