@@ -30,7 +30,7 @@ export const Missions: FC = () => {
   const handleCompleteMission = async (missionId: number) => {
     try {
       console.log('Completing mission:', missionId);
-      // await completeMission(missionId); // Mark mission as completed
+      await completeMission(missionId); // Mark mission as completed
       setTimeout(() => {
         localStorage.setItem('completedMissionId', missionId.toString()); // Save for closed tab case
         setPendingMissionId(missionId); // Set for open tab case
