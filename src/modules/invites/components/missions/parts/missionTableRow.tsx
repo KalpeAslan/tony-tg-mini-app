@@ -3,8 +3,6 @@ import { Mission } from '../../../models/mission.model';
 import { Icon } from '@/lib/components';
 import { useSound } from '@/lib/hooks';
 import { Sound } from '@/lib/constants';
-import { useState } from 'react';
-import Confetti from 'react-confetti';
 interface MissionTableRowProps {
   mission: Mission;
   onComplete: () => void;
@@ -13,7 +11,6 @@ interface MissionTableRowProps {
 
 export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTableRowProps) => {
   const { play } = useSound(Sound.CLICK);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   // setShowConfetti(true);
   // setTimeout(() => setShowConfetti(false), 5000);
@@ -25,11 +22,7 @@ export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTa
       onComplete();
     }
 
-    setShowConfetti(true);
-    setTimeout(() => {
-      window.open(mission.url, '_blank');
-      setShowConfetti(false);
-    }, 1000);
+    window.open(mission.url, '_blank');
   };
 
   return (
@@ -64,12 +57,6 @@ export const MissionTableRow = ({ mission, onComplete, isCompleting }: MissionTa
           <Icon size={16} name={mission.isCompleted ? 'checkMark' : 'play'} />
         </div>
       </TableCell>
-
-      {showConfetti && (
-        <div className="fixed inset-0 z-50 pointer-events-none">
-          <Confetti gravity={0.700} numberOfPieces={935} width={window.innerWidth} height={window.innerHeight} />
-        </div>
-      )}
     </TableRow>
   );
 };
