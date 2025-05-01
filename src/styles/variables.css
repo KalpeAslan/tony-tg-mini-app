@@ -55,6 +55,8 @@
   --shack-z-index: 50;
 
   --exp-color: #FFBB30;
+
+  --max-mobile-width: 430px;
 }
 
 /* Dark mode overrides if needed */

@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { Navigation, SoundFloatingButton } from '@/modules/core';
+import { Navigation, SoundFloatingButton, useMobileContext } from '@/modules/core';
 import { EPages } from '@/lib/types';
 import { viewport } from '@telegram-apps/sdk-react';
 import { useTheme as useNextTheme } from 'next-themes';
@@ -12,6 +12,7 @@ import { useSound } from '@/lib/hooks/useSound';
 import { Sound, UIConstant } from '@/lib/constants';
 import styles from './app-layout.module.css';
 import { useMediaQuery } from 'usehooks-ts';
+import { cn } from '@/lib/utils';
 
 const pagesWithPurpleLayout: EPages[] = [
   EPages.Airdrop,
@@ -36,7 +37,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   const { play: playShackDoorClose } = useSound(Sound.SHACK_DOOR_CLOSE);
 
   const activeTab = usePathname() as EPages;
-  console.log('activeTab', activeTab);
 
   const isPurpleLayout = pagesWithPurpleLayout.includes(activeTab);
   const isStarsPage = pagesWithStars.includes(activeTab);
@@ -45,7 +45,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   // Handle viewport setup
   useEffect(() => {
     handleViewport(() => {
-      makeStick(isPurpleLayout);
+      makeStick();
       setIsInitialized(true);
       if (!isStarsPage) {
         setShowStars(false);
@@ -54,7 +54,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    console.log('isPurpleLayout', isPurpleLayout);
     handleBgColor(isPurpleLayout);
     handleBackgroundAnimation();
   }, [activeTab, isInitialized, isPurpleLayout]);
@@ -64,9 +63,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
     console.log('isPurpleLayout', isPurpleLayout);
     if (isPurpleLayout) {
       setTheme('dark');
-      console.log('setting theme to dark');
     } else {
-      console.log('setting theme to light');
       setTheme('light');
     }
 
@@ -145,10 +142,11 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     localStorage.setItem('prevTab', activeTab);
   };
-  const matches = useMediaQuery(`(max-width: ${UIConstant.MAX_MOBILE_WIDTH}px)`);
+
+  const { isMobile } = useMobileContext();
 
   const renderNavigation = () => {
-    if (!matches)
+    if (!isMobile)
       return (
         <div
           className={`min-h-[var(--navigation-height)] fixed bottom-0 z-[var(--navigation-z-index)]`}
@@ -198,7 +196,9 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
       <div
         data-testid="app-layout"
         id="content"
-        className="w-full z-10 h-full max-w-screen overflow-x-hidden relative flex flex-col items-center justify-between px-3"
+        className={cn('w-full z-10 h-full overflow-x-hidden relative flex flex-col items-center justify-between px-3', {
+          [styles.desktop]: !isMobile,
+        })}
       >
         {/* <BackgroundMusic /> */}
 

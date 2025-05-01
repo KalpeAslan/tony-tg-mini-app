@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider as NextThemeProvider, QueryProvider } from '@/providers';
-import { ErrorBoundary, IconDefs} from '@/lib/components';
-import { TelegramProvider } from '@/modules/core';
+import { ErrorBoundary, IconDefs } from '@/lib/components';
+import { MobileProvider, TelegramProvider } from '@/modules/core';
 import { TgAuthProvider } from '@/modules/core';
 import { AppLayout } from '@/layouts';
-import { AppWrapper } from '@/lib/components';
 export const metadata: Metadata = {
   title: 'Tony Wallet',
   description: 'Your gateway to the Tony ecosystem',
@@ -50,11 +49,9 @@ export default function RootLayout({
               <TelegramProvider>
                 <IconDefs />
                 <TgAuthProvider>
-                  <AppWrapper>
-                    <AppLayout>
-                      {children}
-                    </AppLayout>
-                  </AppWrapper>
+                  <MobileProvider>
+                    <AppLayout>{children}</AppLayout>
+                  </MobileProvider>
                 </TgAuthProvider>
               </TelegramProvider>
             </QueryProvider>

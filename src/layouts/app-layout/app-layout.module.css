@@ -23,3 +23,8 @@
     background-position: center;
     z-index: var(--shack-z-index);
   }
+
+  .desktop {
+    max-width: var(--max-mobile-width);
+    margin: 0 auto;
+  }
