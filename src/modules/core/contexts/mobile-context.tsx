@@ -1,8 +1,7 @@
 'use client';
 
-import { UIConstant } from '@/lib/constants';
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useMediaQuery } from 'usehooks-ts';
+import { isMobile } from 'react-device-detect';
 
 interface MobileContextType {
   isMobile: boolean;
@@ -11,8 +10,6 @@ interface MobileContextType {
 const MobileContext = createContext<MobileContextType | undefined>(undefined);
 
 export function MobileProvider({ children }: { children: ReactNode }) {
-  const isMobile = useMediaQuery(`(max-width: ${UIConstant.MAX_MOBILE_WIDTH}px)`);
-
   return (
     <MobileContext.Provider value={{ isMobile }}>
       {children}

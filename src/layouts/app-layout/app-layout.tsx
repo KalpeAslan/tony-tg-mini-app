@@ -9,9 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { makeStick, handleBgColor } from './utils';
 import { usePathname } from 'next/navigation';
 import { useSound } from '@/lib/hooks/useSound';
-import { Sound, UIConstant } from '@/lib/constants';
+import { Sound } from '@/lib/constants';
 import styles from './app-layout.module.css';
-import { useMediaQuery } from 'usehooks-ts';
 import { cn } from '@/lib/utils';
 
 const pagesWithPurpleLayout: EPages[] = [
@@ -35,6 +34,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   >(null);
   const [showShackTransition, setShowShackTransition] = useState(false);
   const { play: playShackDoorClose } = useSound(Sound.SHACK_DOOR_CLOSE);
+  const { isMobile } = useMobileContext();
 
   const activeTab = usePathname() as EPages;
 
@@ -44,13 +44,16 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
   // Handle viewport setup
   useEffect(() => {
-    handleViewport(() => {
-      makeStick();
-      setIsInitialized(true);
-      if (!isStarsPage) {
-        setShowStars(false);
-      }
-    });
+    handleViewport(
+      () => {
+        makeStick();
+        setIsInitialized(true);
+        if (!isStarsPage) {
+          setShowStars(false);
+        }
+      },
+      isMobile
+    );
   }, []);
 
   useEffect(() => {
@@ -142,8 +145,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 
     localStorage.setItem('prevTab', activeTab);
   };
-
-  const { isMobile } = useMobileContext();
 
   const renderNavigation = () => {
     if (!isMobile)
@@ -264,7 +265,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-const handleViewport = async (cb: () => void) => {
+const handleViewport = async (cb: () => void, isMobile: boolean) => {
   if (viewport.mount.isAvailable()) {
     try {
       await viewport.mount();
@@ -275,9 +276,8 @@ const handleViewport = async (cb: () => void) => {
   }
 
   try {
-    // Only request fullscreen if width is less than or equal to MAX_MOBILE_WIDTH (mobile devices)
-    const windowWidth = window.innerWidth;
-    if (windowWidth <= UIConstant.MAX_MOBILE_WIDTH) {
+    // Request fullscreen only on mobile devices
+    if (isMobile) {
       await viewport.requestFullscreen();
     }
   } catch (error) {
