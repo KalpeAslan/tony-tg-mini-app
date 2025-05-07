@@ -55,6 +55,7 @@ export const useWallet = () => {
         // Generate payment link with the transaction details
         const text = JSON.stringify({ bostId, userId });
         const paymentLink = genratePaymentLink(address, amount, text);
+        console.log('paymentLink', paymentLink);
         window.open(paymentLink, '_blank');
         return true;
       }
