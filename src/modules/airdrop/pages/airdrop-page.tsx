@@ -9,7 +9,7 @@ export function AirdropPage() {
   const { isConnected } = useWallet();
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center min-h-[900px]">
       <Logo isConnected={isConnected} />
 
       {/* Main card */}

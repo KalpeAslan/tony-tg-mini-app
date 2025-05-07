@@ -9,7 +9,10 @@ export function Logo({ isConnected }: LogoProps) {
   return (
     <div className="relative flex flex-col items-center justify-center w-full text-tony-light">
       <div
-        className={cn('relative  h-full w-full', isConnected ? 'min-h-[180px]' : 'min-h-[200px]')}
+        className={cn(
+          'relative  h-full w-full max-h-[300px]',
+          isConnected ? 'min-h-[180px]' : 'min-h-[200px]'
+        )}
       >
         <img src="/tony-eyes.png" alt="Eyes" className="absolute" />
       </div>
