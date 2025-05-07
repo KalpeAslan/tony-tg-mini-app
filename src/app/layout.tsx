@@ -25,14 +25,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
             // VConsole will be exported to \`window.VConsole\` by default.
             var vConsole = new window.VConsole();
           `,
           }}
-        />
+        /> */}
         <script
           async
           src="https://telegram.org/js/telegram-widget.js?22"
