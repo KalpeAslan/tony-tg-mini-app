@@ -54,6 +54,7 @@ export const useWallet = () => {
         const accessToken = storageService.getAccessToken();
         const initDataRaw = storageService.getTelegramMockedData();
         const link = generateSiteLink(accessToken!, initDataRaw!);
+        console.log('link', link);
         openLink(link, {
           tryInstantView: true,
           tryBrowser: 'google-chrome',
@@ -92,6 +93,7 @@ export const useWallet = () => {
         const accessToken = storageService.getAccessToken();
         const initDataRaw = storageService.getTelegramMockedData();
         const link = generateSiteLink(accessToken!, initDataRaw!);
+        console.log('link', link);
         openLink(link, {
           tryInstantView: true,
           tryBrowser: 'google-chrome',
