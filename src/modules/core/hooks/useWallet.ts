@@ -4,6 +4,7 @@ import { useTonConnectUI, useTonAddress } from '@tonconnect/ui-react';
 import { useState } from 'react';
 import { SendTransactionRequest } from '@tonconnect/sdk';
 import { beginCell } from '@ton/ton';
+import { useLaunchParams } from '@telegram-apps/sdk-react';
 /**
  * Custom hook for wallet-related operations
  */
@@ -11,6 +12,8 @@ export const useWallet = () => {
   const [tonConnectUI] = useTonConnectUI();
   const userFriendlyAddress = useTonAddress();
   const [loading, setLoading] = useState(false);
+  const lp = useLaunchParams();
+  const isIOS = lp.platform === 'ios';
   
   // Check if wallet is connected
   const isConnected = !!userFriendlyAddress;
@@ -29,7 +32,6 @@ export const useWallet = () => {
   
   // Send TON transaction
   const sendTonTransaction = async (address: string, amount: number, bostId: string, userId: string) => {
-
     try {
       setLoading(true);
       const nanoTons = Math.pow(10, 9);
@@ -38,8 +40,16 @@ export const useWallet = () => {
        .storeUint(0, 32)
        .storeStringTail(JSON.stringify({bostId, userId}))
        .endCell();
-       console.log('')
       
+      // For iOS, we need to generate a payment link instead of direct transaction
+      if (isIOS) {
+        // Generate payment link with the transaction details
+        const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}&text=${encodeURIComponent(JSON.stringify({bostId, userId}))}`;
+        window.open(paymentLink, '_blank');
+        return true;
+      }
+
+      // For other platforms, proceed with direct transaction
       const transaction: SendTransactionRequest = {
         validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
         messages: [
@@ -66,6 +76,13 @@ export const useWallet = () => {
       setLoading(true);
       const nanoTons = Math.pow(10, 9);
 
+      // For iOS, we need to generate a payment link instead of direct transaction
+      if (isIOS) {
+        const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}`;
+        window.open(paymentLink, '_blank');
+        return true;
+      }
+
       const transaction: SendTransactionRequest = {
         validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
         messages: [
@@ -86,7 +103,6 @@ export const useWallet = () => {
     }
   }
 
-
   return {
     isConnected,
     userFriendlyAddress,
@@ -94,6 +110,7 @@ export const useWallet = () => {
     connect,
     disconnect,
     sendTonTransaction,
-    sendTonTxDaily
+    sendTonTxDaily,
+    isIOS
   };
 }; 

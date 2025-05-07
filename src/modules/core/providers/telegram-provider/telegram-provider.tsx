@@ -24,13 +24,14 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
 
   const lp = useLaunchParams();
   const debug = isDev || lp.startParam === 'debug';
+  const isIOS = lp.platform === 'ios';
 
   // Initialize the library.
   useClientOnce(() => {
     init(debug);
 
-    // Initialize TonConnect
-    if (!tonConnectRef.current) {
+    // Initialize TonConnect only for non-iOS platforms
+    if (!isIOS && !tonConnectRef.current) {
       tonConnectRef.current = new TonConnect({
         manifestUrl: 'https://tony.it.com/tonconnect-manifest.json',
       });

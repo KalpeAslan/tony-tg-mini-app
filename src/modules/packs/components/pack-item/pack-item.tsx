@@ -14,18 +14,17 @@ interface PackItemProps {
 type Currency = 'ton' | 'stars';
 
 export const PackItem: FC<PackItemProps> = ({ boost }) => {
-  const { isConnected, loading: walletLoading, sendTonTransaction, connect } = useWallet();
+  const { isConnected, loading: walletLoading, sendTonTransaction, connect, isIOS } = useWallet();
   const [loading, setLoading] = useState(false);
 
   const { userData } = useMe();
 
   const handleClickBuy = (currency: Currency) => async () => {
-   
     setLoading(true);
     try {
       if (currency === 'ton') {
-         // Check if wallet is connected
-         if (!isConnected) {
+        // For iOS, we don't need to check wallet connection since we'll redirect to web
+        if (!isIOS && !isConnected) {
           connect();
           return;
         }
