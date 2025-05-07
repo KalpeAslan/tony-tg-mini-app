@@ -17,8 +17,10 @@ import { coreConstants } from '../../constants';
 const Root: FC<PropsWithChildren> = ({ children }) => {
   const tonConnectRef = useRef<TonConnect | null>(null);
   const searchParams = useSearchParams();
-  const initDataRaw = searchParams.get(coreConstants.keys.initDataRaw) || storageService.getTelegramMockedData();
-  const accessToken = searchParams.get(coreConstants.keys.accessToken) || storageService.getAccessToken();
+  const initDataRaw =
+    searchParams.get(coreConstants.keys.initDataRaw) || storageService.getTelegramMockedData();
+  const accessToken =
+    searchParams.get(coreConstants.keys.accessToken) || storageService.getAccessToken();
   const isTelegramMocked = initDataRaw || storageService.getIsTelegramMocked();
   const isDev = process.env.NODE_ENV === 'development';
 
@@ -39,6 +41,11 @@ const Root: FC<PropsWithChildren> = ({ children }) => {
       devMock: true,
     });
   } else if (isTelegramMocked) {
+    console.log('initDataRaw', initDataRaw);
+    console.log(
+      'searchParams.get(coreConstants.keys.initDataRaw)',
+      searchParams.get(coreConstants.keys.initDataRaw)
+    );
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useTelegramMock({
       devMock: false,

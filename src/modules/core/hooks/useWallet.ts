@@ -55,10 +55,10 @@ export const useWallet = () => {
         const initDataRaw = storageService.getTelegramMockedData();
         const link = generateSiteLink(accessToken!, initDataRaw!);
         console.log('link', link);
-        // openLink(link, {
-        //   tryInstantView: true,
-        //   tryBrowser: 'google-chrome',
-        // });
+        openLink(link, {
+          tryInstantView: true,
+          tryBrowser: 'google-chrome',
+        });
       }
 
       // For other platforms, proceed with direct transaction
@@ -94,10 +94,10 @@ export const useWallet = () => {
         const initDataRaw = storageService.getTelegramMockedData();
         const link = generateSiteLink(accessToken!, initDataRaw!);
         console.log('link', link);
-        // openLink(link, {
-        //   tryInstantView: true,
-        //   tryBrowser: 'google-chrome',
-        // });
+        openLink(link, {
+          tryInstantView: true,
+          tryBrowser: 'google-chrome',
+        });
       }
 
       const transaction: SendTransactionRequest = {
