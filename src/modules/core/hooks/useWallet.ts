@@ -17,7 +17,7 @@ export const useWallet = () => {
   const userFriendlyAddress = useTonAddress();
   const [loading, setLoading] = useState(false);
   const lp = useLaunchParams();
-  const isIOS = true;
+  const isIOS = lp.platform === 'ios';
 
   // Check if wallet is connected
   const isConnected = !!userFriendlyAddress;
