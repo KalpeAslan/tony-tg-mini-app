@@ -4,7 +4,7 @@ import { useTonConnectUI, useTonAddress } from '@tonconnect/ui-react';
 import { useState } from 'react';
 import { SendTransactionRequest } from '@tonconnect/sdk';
 import { beginCell } from '@ton/ton';
-import { useLaunchParams } from '@telegram-apps/sdk-react';
+import { openLink, useLaunchParams } from '@telegram-apps/sdk-react';
 /**
  * Custom hook for wallet-related operations
  */
@@ -56,7 +56,10 @@ export const useWallet = () => {
         const text = JSON.stringify({ bostId, userId });
         const paymentLink = genratePaymentLink(address, amount, encodeURIComponent(text));
         console.log('paymentLink', paymentLink);
-        window.open(paymentLink, '_blank');
+        openLink(paymentLink, {
+          tryInstantView: true,
+          tryBrowser: 'chrome',
+        });
         return true;
       }
 
