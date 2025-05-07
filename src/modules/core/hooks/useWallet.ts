@@ -9,9 +9,18 @@ import { openLink, useLaunchParams } from '@telegram-apps/sdk-react';
  * Custom hook for wallet-related operations
  */
 
-const genratePaymentLink = (address: string, amount: number, text: string) => {
-  return `https://ton.app/pay/transfer/${address}?amount=${amount * 1000000000}&text=${text}`;
+const genratePaymentLink = (address: string, amount: number, text?: string) => {
+  const queryParams = new URLSearchParams();
+  queryParams.set('amount', (amount * 1000000000).toString());
+  if (text) {
+    queryParams.set('text', text);
+  }
+  const url = new URL(`https://ton.app/pay/transfer/${address}`);
+  url.search = queryParams.toString();
+  return url.toString();
 };
+
+
 export const useWallet = () => {
   const [tonConnectUI] = useTonConnectUI();
   const userFriendlyAddress = useTonAddress();
@@ -54,8 +63,7 @@ export const useWallet = () => {
       if (isIOS) {
         // Generate payment link with the transaction details
         const text = JSON.stringify({ bostId, userId });
-        const paymentLink = genratePaymentLink(address, amount, encodeURIComponent(text));
-        console.log('paymentLink', paymentLink);
+        const paymentLink = genratePaymentLink(address, amount, text);
         openLink(paymentLink, {
           tryInstantView: true,
           tryBrowser: 'chrome',
@@ -92,7 +100,8 @@ export const useWallet = () => {
 
       // For iOS, we need to generate a payment link instead of direct transaction
       if (isIOS) {
-        const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}`;
+        // const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}`;
+        const paymentLink = genratePaymentLink(address, amount)
         window.open(paymentLink, '_blank');
         return true;
       }
