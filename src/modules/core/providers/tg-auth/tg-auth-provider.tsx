@@ -20,6 +20,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
   const [showMinLoader, setShowMinLoader] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log('initDataRaw', initDataRaw);
 
   const { refetchUserData, isLoading: isUserLoading } = useMe();
 
@@ -91,7 +92,6 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     enabled: isAuthenticated,
   });
 
-  console.log('isAuthenticated', isAuthenticated);
   // Create a mutation for the Telegram WebApp authentication
   const { mutate: authenticateTelegram, isPending } = useMutation({
     mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
