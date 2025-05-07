@@ -21,6 +21,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [showMinLoader, setShowMinLoader] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   console.log('initDataRaw', initDataRaw);
+  console.log('initData', initData);
 
   const { refetchUserData, isLoading: isUserLoading } = useMe();
 
