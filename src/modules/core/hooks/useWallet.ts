@@ -5,21 +5,12 @@ import { useState } from 'react';
 import { SendTransactionRequest } from '@tonconnect/sdk';
 import { beginCell } from '@ton/ton';
 import { openLink, useLaunchParams } from '@telegram-apps/sdk-react';
+import { generateSiteLink } from '../utils';
+import { storageService } from '../repository';
+
 /**
  * Custom hook for wallet-related operations
  */
-
-const genratePaymentLink = (address: string, amount: number, text?: string) => {
-  const queryParams = new URLSearchParams();
-  queryParams.set('amount', (amount * 1000000000).toString());
-  if (text) {
-    queryParams.set('text', text);
-  }
-  const url = new URL(`https://ton.app/pay/transfer/${address}`);
-  url.search = queryParams.toString();
-  return url.toString();
-};
-
 
 export const useWallet = () => {
   const [tonConnectUI] = useTonConnectUI();
@@ -59,16 +50,14 @@ export const useWallet = () => {
         .storeStringTail(JSON.stringify({ bostId, userId }))
         .endCell();
 
-      // For iOS, we need to generate a payment link instead of direct transaction
       if (isIOS) {
-        // Generate payment link with the transaction details
-        const text = JSON.stringify({ bostId, userId });
-        const paymentLink = genratePaymentLink(address, amount, text);
-        openLink(paymentLink, {
+        const accessToken = storageService.getAccessToken();
+        const initDataRaw = storageService.getTelegramMockedData();
+        const link = generateSiteLink(accessToken!, initDataRaw!);
+        openLink(link, {
           tryInstantView: true,
-          tryBrowser: 'chrome',
+          tryBrowser: 'google-chrome',
         });
-        return true;
       }
 
       // For other platforms, proceed with direct transaction
@@ -100,10 +89,13 @@ export const useWallet = () => {
 
       // For iOS, we need to generate a payment link instead of direct transaction
       if (isIOS) {
-        // const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}`;
-        const paymentLink = genratePaymentLink(address, amount)
-        window.open(paymentLink, '_blank');
-        return true;
+        const accessToken = storageService.getAccessToken();
+        const initDataRaw = storageService.getTelegramMockedData();
+        const link = generateSiteLink(accessToken!, initDataRaw!);
+        openLink(link, {
+          tryInstantView: true,
+          tryBrowser: 'google-chrome',
+        });
       }
 
       const transaction: SendTransactionRequest = {

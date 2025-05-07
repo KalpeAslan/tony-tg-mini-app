@@ -15,13 +15,14 @@ import { FullLoader } from '@/lib/components';
 import { useTimeout } from 'usehooks-ts';
 import { useMe } from '../../hooks';
 import { MissionApi } from '@/modules/invites/api/mission-api';
+import { storageService } from '../../repository';
+
 
 export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const initDataRaw = useSignal(initData.raw);
   const [showMinLoader, setShowMinLoader] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   console.log('initDataRaw', initDataRaw);
-  console.log('initData', initData);
 
   const { refetchUserData, isLoading: isUserLoading } = useMe();
 
@@ -97,18 +98,8 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { mutate: authenticateTelegram, isPending } = useMutation({
     mutationFn: async (initData: string) => await TelegramApi.auth.webApp({ initData }),
     onSuccess: (data: TelegramAuthResponse) => {
-      console.log('✅ Authentication response received:', { success: data.success });
-      console.log('data', data);
-
       if (data.success && data.access_token) {
-        console.log('🔑 Valid JWT token received');
-        localStorage.setItem('accessToken', data.access_token);
-        console.log('🎉 Authentication successful', {
-          userId: data.user?.id,
-          username: data.user?.telegramUsername,
-          isPremium: data.user?.isPremium,
-        });
-
+        storageService.setAccessToken(data.access_token);
         // After successful authentication, fetch user data and set authenticated state
         refetchUserData();
         setIsAuthenticated(true);
@@ -128,6 +119,7 @@ export const TgAuthProvider: FC<PropsWithChildren> = ({ children }) => {
     if (initDataRaw) {
       console.log('initDataRaw', initDataRaw);
       authenticateTelegram(initDataRaw);
+      storageService.setTelegramMockedData(initDataRaw);
     }
   }, [initDataRaw]);
 

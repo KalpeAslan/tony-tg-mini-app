@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { appConfig } from './app.config';
+import { storageService } from '@/modules/core/repository';
 
 export const axiosInstance = axios.create({
   baseURL: appConfig.apiUrl,
@@ -12,7 +13,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // Add authorization token from localStorage if it exists
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = storageService.getAccessToken();
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }

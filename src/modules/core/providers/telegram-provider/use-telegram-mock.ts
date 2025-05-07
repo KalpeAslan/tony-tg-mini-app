@@ -5,13 +5,35 @@ import {
   mockTelegramEnv,
   parseInitData,
   retrieveLaunchParams,
+  ThemeParams,
 } from '@telegram-apps/sdk-react';
+
+interface Props {
+  devMock?: boolean;
+  initDataRaw?: string;
+}
+
+const themeParams: ThemeParams = {
+  accentTextColor: '#6ab2f2',
+  bgColor: '#17212b',
+  buttonColor: '#5288c1',
+  buttonTextColor: '#ffffff',
+  destructiveTextColor: '#ec3942',
+  headerBgColor: '#17212b',
+  hintColor: '#708499',
+  linkColor: '#6ab3f3',
+  secondaryBgColor: '#232e3c',
+  sectionBgColor: '#17212b',
+  sectionHeaderTextColor: '#6ab3f3',
+  subtitleTextColor: '#708499',
+  textColor: '#f5f5f5',
+};
 
 /**
  * Mocks Telegram environment in development mode.
  */
-export function useTelegramMock(): void {
-  useClientOnce(() => {
+export function useTelegramMock(props: Props): void {
+  const mockDevData = () => {
     if (!sessionStorage.getItem('env-mocked') && isTMA('simple')) {
       return;
     }
@@ -24,15 +46,18 @@ export function useTelegramMock(): void {
       lp = retrieveLaunchParams();
     } catch (e) {
       const initDataRaw = new URLSearchParams([
-        ['user', JSON.stringify({
-          id: 99281932,
-          first_name: 'Andrew',
-          last_name: 'Rogue',
-          username: 'rogue',
-          language_code: 'en',
-          is_premium: true,
-          allows_write_to_pm: true,
-        })],
+        [
+          'user',
+          JSON.stringify({
+            id: 99281932,
+            first_name: 'Andrew',
+            last_name: 'Rogue',
+            username: 'rogue',
+            language_code: 'en',
+            is_premium: true,
+            allows_write_to_pm: true,
+          }),
+        ],
         ['hash', '89d6079ad6762351f38c6dbbc41bb53048019256a9443988af7a48bcad16ba31'],
         ['auth_date', '1716922846'],
         ['start_param', 'debug'],
@@ -42,32 +67,42 @@ export function useTelegramMock(): void {
       ]).toString();
 
       lp = {
-        themeParams: {
-          accentTextColor: '#6ab2f2',
-          bgColor: '#17212b',
-          buttonColor: '#5288c1',
-          buttonTextColor: '#ffffff',
-          destructiveTextColor: '#ec3942',
-          headerBgColor: '#17212b',
-          hintColor: '#708499',
-          linkColor: '#6ab3f3',
-          secondaryBgColor: '#232e3c',
-          sectionBgColor: '#17212b',
-          sectionHeaderTextColor: '#6ab3f3',
-          subtitleTextColor: '#708499',
-          textColor: '#f5f5f5',
-        },
+        themeParams,
         initData: parseInitData(initDataRaw),
         initDataRaw,
         version: '8',
         platform: 'tdesktop',
-      }
+      };
     }
 
     sessionStorage.setItem('env-mocked', '1');
     mockTelegramEnv(lp);
-    console.warn(
-      '⚠️ As long as the current environment was not considered as the Telegram-based one, it was mocked. Take a note, that you should not do it in production and current behavior is only specific to the development process. Environment mocking is also applied only in development mode. So, after building the application, you will not see this behavior and related warning, leading to crashing the application outside Telegram.',
-    );
+  };
+
+  const mockRealData = () => {
+    const initDataRaw = props.initDataRaw;
+    console.log('initDataRaw', initDataRaw);
+    if (!initDataRaw) {
+      return;
+    }
+
+    const lp = {
+      initData: parseInitData(initDataRaw),
+      initDataRaw,
+      version: '8',
+      platform: 'tdesktop',
+      themeParams,
+    };
+
+    sessionStorage.setItem('env-mocked', '1');
+    mockTelegramEnv(lp);
+  };
+
+  useClientOnce(() => {
+    if (!props.devMock) {
+      mockRealData();
+    }
+
+    return mockDevData();
   });
 }

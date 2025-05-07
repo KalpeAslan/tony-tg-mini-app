@@ -18,6 +18,10 @@ export class AppConfig {
   get additionalExpForInviteWhichBoughtPack(): number {
     return 5;
   }
+
+  get siteUrl(): string {
+    return process.env.NEXT_PUBLIC_SITE_URL as string;
+  }
 }
 
 export const appConfig = new AppConfig();

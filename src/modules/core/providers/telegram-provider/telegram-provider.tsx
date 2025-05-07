@@ -1,7 +1,7 @@
 'use client';
 
-import { FC, type PropsWithChildren, useEffect, useRef } from 'react';
-import { useLaunchParams, expandViewport, requestFullscreen } from '@telegram-apps/sdk-react';
+import { FC, type PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { init } from './init';
@@ -10,16 +10,40 @@ import { useClientOnce } from '@/hooks/use-client-once';
 import { useDidMount } from '@/hooks/use-did-mount';
 import TonConnect from '@tonconnect/sdk';
 import { appConfig } from '@/configs/app.config';
+import { storageService } from '@/modules/core/repository';
+import { useSearchParams } from 'next/navigation';
+import { coreConstants } from '../../constants';
 
 const Root: FC<PropsWithChildren> = ({ children }) => {
-  const isDev = process.env.NODE_ENV === 'development';
   const tonConnectRef = useRef<TonConnect | null>(null);
+  const searchParams = useSearchParams();
+  const initDataRaw = searchParams.get(coreConstants.keys.initDataRaw) || storageService.getTelegramMockedData();
+  const accessToken = searchParams.get(coreConstants.keys.accessToken) || storageService.getAccessToken();
+  const isTelegramMocked = initDataRaw || storageService.getIsTelegramMocked();
+  const isDev = process.env.NODE_ENV === 'development';
 
-  console.log('isDev', isDev);
+  useEffect(() => {
+    if (initDataRaw) {
+      // from query params
+      storageService.setTelegramMockedData(initDataRaw);
+    }
+    if (accessToken) {
+      storageService.setAccessToken(accessToken);
+    }
+  }, [initDataRaw, accessToken]);
+
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useTelegramMock();
+    useTelegramMock({
+      devMock: true,
+    });
+  } else if (isTelegramMocked) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useTelegramMock({
+      devMock: false,
+      initDataRaw: initDataRaw || undefined,
+    });
   }
 
   const lp = useLaunchParams();
