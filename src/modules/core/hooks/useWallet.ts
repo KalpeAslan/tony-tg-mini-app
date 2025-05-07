@@ -8,43 +8,53 @@ import { useLaunchParams } from '@telegram-apps/sdk-react';
 /**
  * Custom hook for wallet-related operations
  */
+
+const genratePaymentLink = (address: string, amount: number, text: string) => {
+  return `https://ton.app/pay/transfer/${address}?amount=${amount * 1000000000}&text=${text}`;
+};
 export const useWallet = () => {
   const [tonConnectUI] = useTonConnectUI();
   const userFriendlyAddress = useTonAddress();
   const [loading, setLoading] = useState(false);
   const lp = useLaunchParams();
-  const isIOS = lp.platform === 'ios';
-  
+  const isIOS = true;
+
   // Check if wallet is connected
   const isConnected = !!userFriendlyAddress;
-  
+
   // Connect wallet
   const connect = () => {
     if (!isConnected) {
       tonConnectUI.openModal();
     }
   };
-  
+
   // Disconnect wallet
   const disconnect = () => {
     tonConnectUI.disconnect();
   };
-  
+
   // Send TON transaction
-  const sendTonTransaction = async (address: string, amount: number, bostId: string, userId: string) => {
+  const sendTonTransaction = async (
+    address: string,
+    amount: number,
+    bostId: string,
+    userId: string
+  ) => {
     try {
       setLoading(true);
       const nanoTons = Math.pow(10, 9);
 
       const comment = beginCell()
-       .storeUint(0, 32)
-       .storeStringTail(JSON.stringify({bostId, userId}))
-       .endCell();
-      
+        .storeUint(0, 32)
+        .storeStringTail(JSON.stringify({ bostId, userId }))
+        .endCell();
+
       // For iOS, we need to generate a payment link instead of direct transaction
       if (isIOS) {
         // Generate payment link with the transaction details
-        const paymentLink = `https://ton.app/pay/${address}?amount=${amount * nanoTons}&text=${encodeURIComponent(JSON.stringify({bostId, userId}))}`;
+        const text = JSON.stringify({ bostId, userId });
+        const paymentLink = genratePaymentLink(address, amount, text);
         window.open(paymentLink, '_blank');
         return true;
       }
@@ -60,7 +70,7 @@ export const useWallet = () => {
           },
         ],
       };
-      
+
       await tonConnectUI.sendTransaction(transaction);
       return true;
     } catch (error) {
@@ -70,7 +80,7 @@ export const useWallet = () => {
       setLoading(false);
     }
   };
-  
+
   const sendTonTxDaily = async (address: string, amount: number) => {
     try {
       setLoading(true);
@@ -92,7 +102,7 @@ export const useWallet = () => {
           },
         ],
       };
-      
+
       await tonConnectUI.sendTransaction(transaction);
       return true;
     } catch (error) {
@@ -101,7 +111,7 @@ export const useWallet = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return {
     isConnected,
@@ -111,6 +121,6 @@ export const useWallet = () => {
     disconnect,
     sendTonTransaction,
     sendTonTxDaily,
-    isIOS
+    isIOS,
   };
-}; 
+};
