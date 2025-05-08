@@ -204,10 +204,6 @@ export const SoundFloatingButton = () => {
   const lp = useLaunchParams();
 
   const renderWebButton = () => {
-    if (lp.platform !== 'tdesktop') {
-      return null;
-    }
-
     const accessToken = storageService.getAccessToken();
     const initDataRaw = storageService.getTelegramMockedData();
     const link = generateSiteLink(accessToken!, initDataRaw!);
