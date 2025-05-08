@@ -2,6 +2,9 @@
 import { useBoolean } from 'usehooks-ts';
 import { Button, Icon } from '@/lib/components';
 import { useState, useEffect, useRef } from 'react';
+import { openLink, useLaunchParams } from '@telegram-apps/sdk-react';
+import { storageService } from '../../repository/storage.service';
+import { generateSiteLink } from '../../utils';
 
 export const SoundFloatingButton = () => {
   const { value: isExpanded, toggle, setTrue: expand, setFalse: collapse } = useBoolean(false);
@@ -193,10 +196,34 @@ export const SoundFloatingButton = () => {
         variant="primary"
         aria-label="Sound Controls"
       >
-        <Icon color="white" name={!isPlaying ? 'sound-off' : 'sound-on'} />
+        <Icon color="white" name={'dots'} />
       </Button>
     </div>
   );
+
+  const lp = useLaunchParams();
+
+  const renderWebButton = () => {
+    if (lp.platform !== 'tdesktop') {
+      return null;
+    }
+
+    const accessToken = storageService.getAccessToken();
+    const initDataRaw = storageService.getTelegramMockedData();
+    const link = generateSiteLink(accessToken!, initDataRaw!);
+
+    return (
+      <Button
+        onClick={() => openLink(link, { tryInstantView: true, tryBrowser: 'google-chrome' })}
+        className="rounded-full p-4"
+        size="sm"
+        variant="primary"
+        aria-label="Close"
+      >
+        <Icon name="web" color="white" />
+      </Button>
+    );
+  };
 
   return (
     <div
@@ -213,6 +240,7 @@ export const SoundFloatingButton = () => {
         <div className="flex flex-col-reverse gap-2 animate-fade-in">
           {isPlaying ? renderPlayButton() : renderPauseButton()}
           {renderNextButton()}
+          {renderWebButton()}
           {closeButton}
         </div>
       ) : (
